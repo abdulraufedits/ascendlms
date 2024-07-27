@@ -7,11 +7,19 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Helvetica Now Display', 'sans-serif'],
+        big: ['Helvetica Now Display', 'sans-serif'],
+        small: ['Roboto', 'sans-serif'],
+      },
+      colors: {
+        'primary': '#3C3ACF',
+        "white": "#FEFEFE",
+        "secondary": "#F97FC2",
+        "accent" : "#8FD965",
+        "black" : "#050505",
+        "success": "#46BD84",
+        "red" : "#CF3A3A",
+        "yellow" : "#F5E12C"
       }
-    },
-    colors: {
-      'blue': '#4390cd'
     }
   },
   plugins: [],
