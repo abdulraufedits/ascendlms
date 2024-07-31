@@ -19,6 +19,9 @@ export default {
         "success": "#46BD84",
         "red" : "#CF3A3A",
         "yellow" : "#F5E12C"
+      },
+      fontSize: {
+        "36px": "36px"
       }
     }
   },

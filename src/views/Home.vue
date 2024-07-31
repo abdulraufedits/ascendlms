@@ -1,4 +1,5 @@
 <template>
+    <NavBar/>
     <section class="pt-12 pb-12 sm:pb-16 lg:pt-16">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="flex flex-col max-w-lg mx-auto lg:max-w-full lg:gap-y-12 lg:gap-x-16">
@@ -23,4 +24,5 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import NavBar from '../components/NavBar.vue';
 </script>
