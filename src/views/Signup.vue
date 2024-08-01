@@ -13,7 +13,7 @@
                     <p class="font-small text-center -mt-2">Already have an account? <RouterLink to="/login" class=" text-primary">Login</RouterLink></p>
                 </form>
                 <h3 class="font-big text-center text-2xl">OR</h3>
-                <button type="submit"><img src="../assets/continue-with-google.png" alt="Contniue with google"></button>
+                <button type="submit"><img src="../assets/continue-with-google.svg" alt="Contniue with google"></button>
             </div>
         </main>
         <aside class="bg-gray-100 h-screen w-full grid place-content-center max-sm:hidden">

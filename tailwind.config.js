@@ -8,10 +8,11 @@ export default {
     extend: {
       fontFamily: {
         big: ['Helvetica Now Display', 'sans-serif'],
-        small: ['Roboto', 'sans-serif'],
+        small: ['Roboto'],
       },
       colors: {
         'primary': '#3C3ACF',
+        "background": "#F3F3FC",
         "white": "#FEFEFE",
         "secondary": "#F97FC2",
         "accent" : "#8FD965",

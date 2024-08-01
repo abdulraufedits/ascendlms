@@ -4,6 +4,7 @@ import About from "../views/About.vue";
 import Contact from "../views/Contact.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
+import Dashboard from "../views/authorized-views/Dashboard.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -33,8 +34,16 @@ const router = createRouter({
             path: '/signup',
             name: 'Sign up',
             component: Signup
-        }
+        },
+        {
+            path: '/dashboard',
+            name: 'Dashboard',
+            component: Dashboard,
+            meta:{
+                requireAuth: true
+            }
+        },
+        
     ]
 })
-
 export default router
