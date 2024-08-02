@@ -7,7 +7,12 @@ import { RouterView } from 'vue-router';
 </template>
 
 <style>
-
+ .font-big {
+	font-feature-settings: "calt" 1, "liga" 1, "rlig" 1, "rvrn" 1, "kern" 1, "rclt" 1, "ss01" 1, "ss02" 1, "ss03" 1;
+}
+.font-small{
+	font-feature-settings: "calt" 1, "rlig" 1, "rvrn" 1, "kern" 1, "rclt" 1, "ss01" 1, "ss06" 1, "liga" 1;
+}
 .cta{
     padding: 1rem;
     background-color: #3C3ACF;
@@ -22,5 +27,26 @@ import { RouterView } from 'vue-router';
     &:focus{
         outline: none;
     }
+}
+.subtitle{
+    font-family: 'Roboto';
+    color: #919191;
+    font-size: 14px;
+}
+
+.h1-title{
+    font-family: 'Helvetica Now Display';
+    font-weight: bold;
+    font-size: 36px;
+}
+.h2-title{
+    font-family: 'Helvetica Now Display';
+    font-weight: bold;
+    font-size: 24px;
+}
+.h4-title{
+    font-family: 'Helvetica Now Display';
+    font-weight: bold;
+    font-size: 16px;
 }
 </style>

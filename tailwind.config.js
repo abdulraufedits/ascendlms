@@ -19,11 +19,20 @@ export default {
         "black" : "#050505",
         "success": "#46BD84",
         "red" : "#CF3A3A",
-        "yellow" : "#F5E12C"
+        "yellow" : "#F5E12C",
+        "ddd" : "#DDDDDD"
       },
       fontSize: {
         "36px": "36px"
       }
+    },
+    gridTemplateColumns:{
+      '16': 'repeat(16, minmax(0, 1fr))'
+    },
+    gridColumnStart: {
+      '14': '14',
+      '15' : '15',
+      '16': '16'
     }
   },
   plugins: [],

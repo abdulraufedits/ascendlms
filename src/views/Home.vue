@@ -26,9 +26,3 @@
 import { RouterLink } from 'vue-router'
 import NavBar from '../components/NavBar.vue';
 </script>
-
-<style>
-.font-small{
-	font-feature-settings: "calt" 1, "rlig" 1, "rvrn" 1, "kern" 1, "rclt" 1, "ss01" 1, "ss06" 1, "liga" 1;
-}
-</style>
