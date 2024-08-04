@@ -27,6 +27,7 @@ export default {
       }
     },
     gridTemplateColumns:{
+      '7': 'repeat(7, minmax(0, 1fr))',
       '16': 'repeat(16, minmax(0, 1fr))',
       '18': 'repeat(18, minmax(0, 1fr))'
     },

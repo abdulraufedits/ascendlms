@@ -49,4 +49,5 @@ import { RouterView } from 'vue-router';
     font-weight: bold;
     font-size: 16px;
 }
+
 </style>

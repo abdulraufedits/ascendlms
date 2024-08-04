@@ -53,11 +53,15 @@
                 </div>
             </div>
             <section class="grid grid-cols-18 gap-4">
-                <Widget class="col-span-7 row-span-2">
+                <Widget class="col-span-7 row-span-2 self-start">
                     <h1 class="h1-title">Statistics</h1>
-                    <GlanceWidget/>
+                    <div class="flex flex-col gap-y-1">
+                        <GlanceWidget flexClass="mt-5" icon="clipboard" bgColor="bg-primary"/>
+                        <GlanceWidget icon="checkmark" bgColor="bg-success" qty="11" work="Courses completed"/>
+                        <GlanceWidget icon="card" bgColor="bg-black" iconColor="text-secondary" qty="3" work="Badges earned"/>
+                    </div>
                 </Widget>
-                <Widget class="col-span-5 col-start-8 row-span-2">
+                <Widget class="col-span-5 col-start-8 row-span-2 self-start">
                     <h1 class="h1-title">Assignments</h1>
                     <ColoredListItem/>
                     <ColoredListItem/>
@@ -74,18 +78,37 @@
                     </div>
                 </Widget>
                 <Widget class="col-span-12 row-start-3">
-                    <h1 class="h1-title">Course Statistics</h1>
+                    <div class="flex justify-between">
+                        <h1 class="h1-title">Course Progress</h1>
+                        <div class="flex gap-x-2 items-center">
+                            <div class=" font-small font-medium px-2 py-1 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
+                                <time class="w-full">Active</time><ion-icon name="chevron-down-sharp"></ion-icon>
+                            </div>
+                            <div class=" font-small font-medium px-2 py-2 bg-accent flex items-center gap-2 rounded-full">
+                                <ion-icon name="add"></ion-icon>
+                            </div>
+                        </div>
+                    </div>
+
                 </Widget>
                 <Widget class="col-span-6 col-start-13 row-start-2 row-span-2">
                     <div class="flex gap-x-4 items-center">
                         <ion-icon class="h1-title" name="calendar-clear-outline"></ion-icon>
                         <h1 class="h1-title">Events</h1>
                     </div>
-                    <div>
+                    <div class="grid gap-y-5">
                         <div class="flex justify-between items-center p-1.5 bg-ddd rounded">
-                            <ion-icon class="text-lg" name="calendar-clear-outline"></ion-icon>
+                            <ion-icon class="text-lg" name="chevron-back"></ion-icon>
                             <label for="" class="font-big font-bold">March</label>
-                            <ion-icon class="text-lg" name="calendar-clear-outline"></ion-icon>
+                            <ion-icon class="text-lg" name="chevron-forward"></ion-icon>
+                        </div>
+                        <div class="grid  auto-cols-fr grid-flow-col gap-1">
+                            <label for="days" v-for="day,i in days" class="p-0.5 bg-background rounded min-w-6 text-center font-small font-bold" :key="i">
+                                {{ day }}
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1">
+                            <label for="days" v-for="i in 30" class="p-0.5 text-center font-small font-semibold">{{ i }}</label>
                         </div>
                     </div>
                 </Widget>
@@ -108,5 +131,7 @@ defineProps({
         default: "NOName"
     }
 })
+
+const days = ["S","M", "T", "W", "T", "F", "S"];
 
 </script>
