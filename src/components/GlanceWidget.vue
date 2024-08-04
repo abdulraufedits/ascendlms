@@ -6,6 +6,7 @@
             <p class="subtitle">Assignments completed</p>
         </span>
     </div>
+    <button class="text-white bg-black font-small rounded-full px-4 py-2 w-full">Button</button>
 </template>
 
 <script setup>

@@ -37,12 +37,12 @@ import { RouterView } from 'vue-router';
 .h1-title{
     font-family: 'Helvetica Now Display';
     font-weight: bold;
-    font-size: 36px;
+    font-size: 32px;
 }
 .h2-title{
     font-family: 'Helvetica Now Display';
     font-weight: bold;
-    font-size: 24px;
+    font-size: 28px;
 }
 .h4-title{
     font-family: 'Helvetica Now Display';

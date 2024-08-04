@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-between bg-background rounded-xl px-7 py-5">
+    <div class="flex flex-col gap-1 bg-background rounded-xl px-6 py-4 xl:flex-row xl:items-center justify-between">
         <span class="block">
             <h4 class="h4-title">Assignment Name</h4>
             <time class="subtitle">08 March, 10:20 AM</time>
