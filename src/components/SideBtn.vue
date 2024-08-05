@@ -1,5 +1,5 @@
 <template>
-    <div class="cursor-pointer w-full flex items-center gap-x-2 py-3 px-4 rounded-lg transition-all duration-300" :class="isActive ? 'bg-primary' : 'hover:bg-gray-200'" @click="()=> clicked = clicked ? false : true">
+    <div class="cursor-pointer w-full flex items-center gap-x-2 py-3 px-4 rounded-lg transition-all duration-300" :class="isActive ? 'bg-primary' : 'hover:bg-gray-200'" @click="$emit('getTitle', this.$props.title)">
         <ion-icon :name="icon" :class="isActive ? 'text-white' : ''" class="text-gray-600 text-2xl"></ion-icon>
         <label for="icon" :class="isActive ? 'text-white' : ''" class="font-medium font-big w-full text-gray-600">{{title}}</label>
         <ion-icon v-if="isDropDown" name="chevron-down-sharp"></ion-icon>
@@ -39,8 +39,15 @@ export default {
             type: Array,
             default: ["Untitled"]
         }
+    },
+    methods:{
+        getTitle(){
+            this.$emit('getTitle', this.$props.title)
+        }
     }
 }
+
+//@click="()=> clicked = clicked ? false : true"
 </script>
 
 <style scoped>

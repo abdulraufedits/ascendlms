@@ -4,7 +4,7 @@
             <ion-icon :name="activityIcon" class="text-gray-700"></ion-icon>
         </span>
         <div>
-            <label for="{{username}}"><b>{{username}}</b> {{ activityVerb }} <b>{{ activityObj }}</b></label>
+            <label for="{{username}}" class="font-small"><b>{{username}}</b> {{ activityVerb }} <b>{{ activityObj }}</b></label>
             <span class="flex gap-x-1 mt-1">
                 <ion-icon class="text-gray-400 text-lg" name="calendar-clear-outline"></ion-icon>
                 <time class="subtitle" datetime="{{date}}">{{ date }}</time>

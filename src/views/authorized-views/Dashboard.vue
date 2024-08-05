@@ -1,21 +1,6 @@
 <template>
     <div class="flex">
-        <aside class=" bg-background px-10 py-8 h-screen sticky left-0 top-0">
-        <TeamDropDown/>
-        <nav class="my-8 grid gap-y-4">
-            <div class="c1">
-                <SideBtn title="Dashboard" :isActive="true" icon="analytics"/>
-                <SideBtn title="Courses" :isActive="false" icon="book-outline" :isDropDown="true" :list="['My courses','Assignments','Quizzes', 'Announcements']"/>
-            </div>
-            <SideBtn title="Rewards" :isActive="false" icon="card-outline"/>
-            <SideBtn title="Trash" :isActive="false" icon="trash-bin-outline"/>
-            <div class="c2">
-                <SideBtn title="Help" :isActive="false" icon="information-circle-outline"/>
-                <SideBtn title="Settings" :isActive="false" icon="settings-outline"/>
-                <SideBtn title="Log out" :isActive="false" icon="log-out-outline"/>
-            </div>
-        </nav>
-    </aside>
+        <SideMenu isActivePage="Dashboard"/>
     <main class="w-full">
         <header class="px-10 py-8 flex items-center w-full justify-between">
             <div class=" flex items-center gap-x-4">
@@ -27,7 +12,7 @@
             </div>
             <div class=" flex items-center gap-x-4">
                 <form class="input-field flex justify-between items-center border-2 border-ddd">
-                    <input type="search" name="Search" id="search-input" class=" bg-transparent outline-none font-big" placeholder="Search anything...">
+                    <input type="search" name="Search" id="search-input" class=" bg-transparent outline-none font-big font-regular" placeholder="Search anything...">
                     <ion-icon name="search-outline" class="text-gray-700"></ion-icon>
                 </form>
                 <div class="grid place-content-center min-h-16 min-w-16 rounded-lg border-2 border-ddd">
@@ -49,23 +34,25 @@
                 <time class="w-full">2023 - 2024</time><ion-icon name="chevron-down-sharp"></ion-icon>
                 </div>
                 <div class="font-small font-medium px-4 py-2 bg-primary text-white flex items-center gap-2 rounded-lg">
-                <ion-icon name="chevron-down-sharp"></ion-icon><label for="">Add Widget</label>
+                <ion-icon name="add-sharp"></ion-icon><label for="">Add Widget</label>
                 </div>
             </div>
             <section class="grid grid-cols-18 gap-4">
-                <Widget class="col-span-7 row-span-2 self-start">
+                <Widget class="col-span-7 row-span-2 self-start h-full !flex flex-col justify-between">
                     <h1 class="h1-title">Statistics</h1>
                     <div class="flex flex-col gap-y-1">
-                        <GlanceWidget flexClass="mt-5" icon="clipboard" bgColor="bg-primary"/>
+                        <GlanceWidget icon="clipboard" bgColor="bg-primary"/>
                         <GlanceWidget icon="checkmark" bgColor="bg-success" qty="11" work="Courses completed"/>
                         <GlanceWidget icon="card" bgColor="bg-black" iconColor="text-secondary" qty="3" work="Badges earned"/>
                     </div>
                 </Widget>
-                <Widget class="col-span-5 col-start-8 row-span-2 self-start">
+                <Widget class="col-span-5 col-start-8 row-span-2 self-start h-full">
                     <h1 class="h1-title">Assignments</h1>
-                    <ColoredListItem/>
-                    <ColoredListItem/>
-                    <ColoredListItem/>
+                    <div class="flex flex-col gap-y-3">
+                        <ColoredListItem/>
+                        <ColoredListItem/>
+                        <ColoredListItem/>
+                    </div>
                 </Widget>
                 <Widget class="col-span-6 col-start-13 max-h-72 overflow-y-scroll">
                     <h1 class="h1-title">Recent Activity</h1>
@@ -78,7 +65,7 @@
                     </div>
                 </Widget>
                 <Widget class="col-span-12 row-start-3">
-                    <div class="flex justify-between">
+                    <div class="flex justify-between items-start">
                         <h1 class="h1-title">Course Progress</h1>
                         <div class="flex gap-x-2 items-center">
                             <div class=" font-small font-medium px-2 py-1 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
@@ -89,28 +76,14 @@
                             </div>
                         </div>
                     </div>
-
+                    <CoursesTable :courses="[{courseName: 'Untitled',percentage: 20,lecsCount: 3,assignmentCount: 3, quizCount: 3}]"/>
                 </Widget>
-                <Widget class="col-span-6 col-start-13 row-start-2 row-span-2">
+                <Widget class="col-span-6 col-start-13 row-start-2 row-span-2 self-start">
                     <div class="flex gap-x-4 items-center">
                         <ion-icon class="h1-title" name="calendar-clear-outline"></ion-icon>
                         <h1 class="h1-title">Events</h1>
                     </div>
-                    <div class="grid gap-y-5">
-                        <div class="flex justify-between items-center p-1.5 bg-ddd rounded">
-                            <ion-icon class="text-lg" name="chevron-back"></ion-icon>
-                            <label for="" class="font-big font-bold">March</label>
-                            <ion-icon class="text-lg" name="chevron-forward"></ion-icon>
-                        </div>
-                        <div class="grid  auto-cols-fr grid-flow-col gap-1">
-                            <label for="days" v-for="day,i in days" class="p-0.5 bg-background rounded min-w-6 text-center font-small font-bold" :key="i">
-                                {{ day }}
-                            </label>
-                        </div>
-                        <div class="grid grid-cols-7 gap-1">
-                            <label for="days" v-for="i in 30" class="p-0.5 text-center font-small font-semibold">{{ i }}</label>
-                        </div>
-                    </div>
+                    <Calendar :highlightedNum="6"/>
                 </Widget>
             </section>
         </section>
@@ -121,17 +94,17 @@
 <script setup>
 import GlanceWidget from '../../components/GlanceWidget.vue';
 import Widget from '../../components/Widget.vue';
-import SideBtn from '../../components/SideBtn.vue';
-import TeamDropDown from '../../components/TeamDropDown.vue';
 import ColoredListItem from '../../components/ColoredListItem.vue';
 import ActivityLog from '../../components/ActivityLog.vue';
+import CoursesTable from '../../components/CoursesTable.vue';
+import Calendar from '../../components/Calendar.vue';
+import SideMenu from '../../components/SideMenu.vue';
+
 defineProps({
     username: {
         type: String,
         default: "NOName"
     }
 })
-
-const days = ["S","M", "T", "W", "T", "F", "S"];
 
 </script>
