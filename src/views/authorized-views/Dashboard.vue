@@ -1,33 +1,8 @@
 <template>
     <div class="flex">
-        <SideMenu isActivePage="Dashboard"/>
+        <SideMenu isActivePage="Dashboard" v-show="sideBarState"/>
     <main class="w-full">
-        <header class="px-10 py-8 flex items-center w-full justify-between">
-            <div class=" flex items-center gap-x-4">
-                <img src="../../assets/icons/dock-icon.svg" alt="open and closing side menu" class="size-12">
-                <div>
-                    <h1 class="font-big text-3xl font-bold ">Welcome, {{ username }} 👋</h1>
-                    <p class="font-small text-gray-500">Here's how you doing</p>
-                </div>
-            </div>
-            <div class=" flex items-center gap-x-4">
-                <form class="input-field flex justify-between items-center border-2 border-ddd">
-                    <input type="search" name="Search" id="search-input" class=" bg-transparent outline-none font-big font-regular" placeholder="Search anything...">
-                    <ion-icon name="search-outline" class="text-gray-700"></ion-icon>
-                </form>
-                <div class="grid place-content-center min-h-16 min-w-16 rounded-lg border-2 border-ddd">
-                    <ion-icon name="notifications-outline" class=" text-2xl"></ion-icon>
-                </div>
-                <div class="border-ddd border-2 rounded-lg min-h-16 px-5 flex items-center gap-x-6">
-                    <img id="user-profile-img" src="../../assets/user-profile.png" alt="user profile image" class="size-9">
-                    <div>
-                        <label for="user-profile-img" class=" font-big font-bold" style="line-height: 0; font-size: 18px;">{{ username }}</label>
-                        <p class="subtitle -mt-1">Computer Science Student</p>
-                    </div>
-                    <ion-icon name="chevron-down-sharp"></ion-icon>
-                </div>
-            </div>
-        </header>
+        <StudentHeader :username="username" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <div class=" font-small font-medium px-4 py-2 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
@@ -37,8 +12,8 @@
                 <ion-icon name="add-sharp"></ion-icon><label for="">Add Widget</label>
                 </div>
             </div>
-            <section class="grid grid-cols-18 gap-4">
-                <Widget class="col-span-7 row-span-2 self-start h-full !flex flex-col justify-between">
+            <section class="grid grid-cols-18 gap-4 max-xl:flex max-xl:flex-col">
+                <Widget class="col-span-7 row-span-2 xl:self-start h-full !flex flex-col justify-between">
                     <h1 class="h1-title">Statistics</h1>
                     <div class="flex flex-col gap-y-1">
                         <GlanceWidget icon="clipboard" bgColor="bg-primary"/>
@@ -46,7 +21,7 @@
                         <GlanceWidget icon="card" bgColor="bg-black" iconColor="text-secondary" qty="3" work="Badges earned"/>
                     </div>
                 </Widget>
-                <Widget class="col-span-5 col-start-8 row-span-2 self-start h-full">
+                <Widget class="col-span-5 col-start-8 row-span-2 xl:self-start h-full">
                     <h1 class="h1-title">Assignments</h1>
                     <div class="flex flex-col gap-y-3">
                         <ColoredListItem/>
@@ -78,7 +53,7 @@
                     </div>
                     <CoursesTable :courses="[{courseName: 'Untitled',percentage: 20,lecsCount: 3,assignmentCount: 3, quizCount: 3}]"/>
                 </Widget>
-                <Widget class="col-span-6 col-start-13 row-start-2 row-span-2 self-start">
+                <Widget class="col-span-6 col-start-13 row-start-2 row-span-2 xl:self-start">
                     <div class="flex gap-x-4 items-center">
                         <ion-icon class="h1-title" name="calendar-clear-outline"></ion-icon>
                         <h1 class="h1-title">Events</h1>
@@ -99,6 +74,8 @@ import ActivityLog from '../../components/ActivityLog.vue';
 import CoursesTable from '../../components/CoursesTable.vue';
 import Calendar from '../../components/Calendar.vue';
 import SideMenu from '../../components/SideMenu.vue';
+import StudentHeader from '../../components/StudentHeader.vue';
+import { ref } from 'vue';
 
 defineProps({
     username: {
@@ -106,5 +83,9 @@ defineProps({
         default: "NOName"
     }
 })
+const sideBarState = ref(true);
+if(window.innerWidth < 1024){
+    sideBarState.value =  false;
+}
 
 </script>

@@ -3,8 +3,8 @@
         <TeamDropDown/>
         <nav class="my-8 grid gap-y-4">
             <div class="c1">
-                <SideBtn :title="pageTitles[0]" :isActive="pageTitles[0] == isActivePage ? true : false" icon="analytics" />
-                <SideBtn :title="pageTitles[1]" :isActive="pageTitles[1] == isActivePage ? true : false" icon="book-outline" :isDropDown="true" :list="['My courses','Assignments','Quizzes', 'Announcements']"/>
+                <SideBtn pageLink="/dashboard" :title="pageTitles[0]" :isActive="pageTitles[0] == isActivePage ? true : false" icon="analytics" />
+                <SideBtn pageLink="/mycourses" :title="pageTitles[1]" :isActive="pageTitles[1] == isActivePage ? true : false" icon="book-outline" :isDropDown="true" :list="['My courses','Assignments','Quizzes', 'Announcements']"/>
             </div>
             <SideBtn :title="pageTitles[2]" :isActive="pageTitles[2] == isActivePage ? true : false" icon="card-outline"/>
             <SideBtn :title="pageTitles[3]" :isActive="false" icon="trash-bin-outline"/>

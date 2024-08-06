@@ -5,6 +5,7 @@ import Contact from "../views/Contact.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import Dashboard from "../views/authorized-views/Dashboard.vue";
+import MyCourses from "../views/authorized-views/MyCourses.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -39,6 +40,14 @@ const router = createRouter({
             path: '/dashboard',
             name: 'Dashboard',
             component: Dashboard,
+            meta:{
+                requireAuth: true
+            }
+        },
+        {
+            path: '/mycourses',
+            name: "My Courses",
+            component: MyCourses,
             meta:{
                 requireAuth: true
             }
