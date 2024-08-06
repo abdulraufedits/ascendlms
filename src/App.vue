@@ -42,7 +42,15 @@ import { RouterView } from 'vue-router';
     font-weight: bold;
     font-size: 28px;
 }
+.h3-title{
+    font-weight: bold;
+    font-size: 20px;
+}
 .h4-title{
+    font-weight: bold;
+    font-size: 16px;
+}
+.h5-title{
     font-weight: bold;
     font-size: 16px;
 }

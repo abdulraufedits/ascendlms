@@ -5,22 +5,17 @@
         <StudentHeader :username="username" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses"/>
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
-                <div class=" font-small font-medium px-4 py-2 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
+                <div @click="courses" class=" font-small font-medium px-4 py-2 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
                 <time class="w-full">2023 - 2024</time><ion-icon name="chevron-down-sharp"></ion-icon>
                 </div>
-                <div class="font-small font-medium px-4 py-2 bg-primary text-white flex items-center gap-2 rounded-lg">
-                <ion-icon name="add-sharp"></ion-icon><label for="">Add Widget</label>
+                <div class="font-small font-medium  py-2 flex items-center gap-2 rounded-lg">
+                    <label for="view" class="h5-title">View as</label>
+                    <span class="p-1 grid place-content-center"><ion-icon name="list-outline"></ion-icon></span>
+                    <span class="p-1 grid place-content-center bg-gray-200 rounded-sm"><ion-icon name="grid-outline"></ion-icon></span>
                 </div>
             </div>
-            <section class="grid grid-cols-18 gap-4 max-xl:flex max-xl:flex-col">
-                <Widget class="col-span-7 row-span-2 xl:self-start h-full !flex flex-col justify-between">
-                    <h1 class="h1-title">Statistics</h1>
-                    <div class="flex flex-col gap-y-1">
-                        <GlanceWidget icon="clipboard" bgColor="bg-primary"/>
-                        <GlanceWidget icon="checkmark" bgColor="bg-success" qty="11" work="Courses completed"/>
-                        <GlanceWidget icon="card" bgColor="bg-black" iconColor="text-secondary" qty="3" work="Badges earned"/>
-                    </div>
-                </Widget>
+            <section class="grid grid-cols-3 gap-4 max-xl:flex max-xl:flex-col" >
+                <CourseCard/>
             </section>
         </section>
     </main>
@@ -29,11 +24,15 @@
 </template>
 
 <script setup>
-import GlanceWidget from '../../components/GlanceWidget.vue';
-import Widget from '../../components/Widget.vue';
+import CourseCard from '../../components/CourseCard.vue';
 import SideMenu from '../../components/SideMenu.vue';
 import StudentHeader from '../../components/StudentHeader.vue';
 import { ref } from 'vue';
+
+const courses = async () => {
+    var data = await fetch("../../assets/database/courses.json");
+    console.log(data);
+}
 
 defineProps({
     username: {
@@ -46,3 +45,17 @@ if(window.innerWidth < 1024){
     sideBarState.value =  false;
 }
 </script>
+
+
+<style>
+.img-badge{
+    border-radius: 999px;
+    height: 2.5rem;
+    width: 2.5rem;
+    display: grid;
+    place-content: center;
+}
+.badges-wrap{
+    gap: -4px;
+}
+</style>
