@@ -2,7 +2,7 @@
     <div class="flex">
         <SideMenu isActivePage="Dashboard" v-show="sideBarState"/>
     <main class="w-full">
-        <StudentHeader :username="username" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
+        <StudentHeader :username="user.username" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <div class=" font-small font-medium px-4 py-2 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
@@ -32,7 +32,7 @@
                 <Widget class="col-span-6 col-start-13 max-h-72 overflow-y-scroll">
                     <h1 class="h1-title">Recent Activity</h1>
                     <div class="flex flex-col gap-y-6">
-                        <ActivityLog activityIcon="document-text" :username="username"/>
+                        <ActivityLog activityIcon="document-text" :username="user.username"/>
                         <ActivityLog/>
                         <ActivityLog/>
                         <ActivityLog/>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <CoursesTable :courses="[{courseName: 'Untitled',percentage: 20,lecsCount: 3,assignmentCount: 3, quizCount: 3}]"/>
+                    <CoursesTable :courses="courses.courses"/>
                 </Widget>
                 <Widget class="col-span-6 col-start-13 row-start-2 row-span-2 xl:self-start">
                     <div class="flex gap-x-4 items-center">
@@ -77,12 +77,18 @@ import SideMenu from '../../components/SideMenu.vue';
 import StudentHeader from '../../components/StudentHeader.vue';
 import { ref } from 'vue';
 
-defineProps({
-    username: {
-        type: String,
-        default: "NOName"
-    }
-})
+import { useUserStore } from '../../stores/user';
+import { useCoursesStore } from '../../stores/courses';
+const user = useUserStore()
+// const props = defineProps({
+//     username: {
+//         type: String,
+//         default: "NOName"
+//     }
+// })
+
+const courses = useCoursesStore()
+
 const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;

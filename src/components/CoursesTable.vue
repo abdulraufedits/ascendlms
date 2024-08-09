@@ -46,6 +46,7 @@ thead {
     border-bottom: 1px solid #ddd;
     display: flex;
     justify-content: space-between;
+    padding-bottom: 6px;
 }
 th{
     font-family: 'Roboto';

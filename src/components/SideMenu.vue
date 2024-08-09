@@ -3,16 +3,16 @@
         <TeamDropDown/>
         <nav class="my-8 grid gap-y-4">
             <div class="c1">
-                <SideBtn pageLink="/dashboard" :title="pageTitles[0]" :isActive="pageTitles[0] == isActivePage ? true : false" icon="analytics" />
-                <SideBtn pageLink="/mycourses" :title="pageTitles[1]" :isActive="pageTitles[1] == isActivePage ? true : false" icon="book-outline" :isDropDown="true" :list="['My courses','Assignments','Quizzes', 'Announcements']"/>
+                <SideBtn :pageLink="pages[0].pageRoute" :title="pages[0].pageTitle" :isActive="pages[0].pageTitle == isActivePage ? true : false" icon="analytics" />
+                <SideBtn pageLink="/mycourses" :activePage="isActivePage" :title="pages[1].pageTitle" :isActive="true" icon="book-outline" :isDropDown="true" :list="pages[1].subPages"/>
             </div>
-            <SideBtn :title="pageTitles[2]" :isActive="pageTitles[2] == isActivePage ? true : false" icon="card-outline"/>
-            <SideBtn :title="pageTitles[3]" :isActive="false" icon="trash-bin-outline"/>
+            <SideBtn :pageLink="pages[2].pageRoute" :title="pages[2].pageTitle" :isActive="pages[2].pageTitle == isActivePage ? true : false" icon="card-outline"/>
+            <SideBtn :pageLink="pages[3].pageRoute" :title="pages[3].pageTitle" :isActive="false" icon="trash-bin-outline"/>
             <div class="c2">
-                <SideBtn :title="pageTitles[4]" :isActive="false" icon="information-circle-outline"/>
-                <SideBtn :title="pageTitles[5]" :isActive="false" icon="settings-outline"/>
-                <SideBtn :title="pageTitles[6]" :isActive="false" icon="log-out-outline"/>
-            </div>
+                <SideBtn :pageLink="pages[4].pageRoute" :title="pages[4].pageTitle" :isActive="false" icon="information-circle-outline"/>
+                <SideBtn :pageLink="pages[5].pageRoute" :title="pages[5].pageTitle" :isActive="false" icon="settings-outline"/>
+                <SideBtn :pageLink="pages[6].pageRoute" :title="pages[6].pageTitle" :isActive="false" icon="log-out-outline"/>
+            </div> 
         </nav>
     </aside>
 </template>
@@ -20,6 +20,7 @@
 <script setup>
 import SideBtn from './SideBtn.vue';
 import TeamDropDown from './TeamDropDown.vue';
+import { usePagesStore } from '../stores/pages';
 
 const props = defineProps({
     isActivePage: {
@@ -27,6 +28,7 @@ const props = defineProps({
         default: "none"
     },
 })
-const pageTitles = ["Dashboard", "Courses", "Rewards", "Trash", "Help","Settings","Log out"]
+const pagesStore = usePagesStore()
+const pages = pagesStore.pages
 
 </script>

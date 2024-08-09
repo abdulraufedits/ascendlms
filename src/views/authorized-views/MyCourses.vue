@@ -1,22 +1,21 @@
 <template>
     <div class="flex">
-        <SideMenu isActivePage="Courses" v-show="sideBarState"/>
+        <SideMenu isActivePage="My Courses" v-show="sideBarState"/>
     <main class="w-full">
         <StudentHeader :username="username" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses"/>
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
-                <div @click="courses" class=" font-small font-medium px-4 py-2 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
-                <time class="w-full">2023 - 2024</time><ion-icon name="chevron-down-sharp"></ion-icon>
-                </div>
+                <TimeSlot/>
                 <div class="font-small font-medium  py-2 flex items-center gap-2 rounded-lg">
                     <label for="view" class="h5-title">View as</label>
-                    <span class="p-1 grid place-content-center"><ion-icon name="list-outline"></ion-icon></span>
-                    <span class="p-1 grid place-content-center bg-gray-200 rounded-sm"><ion-icon name="grid-outline"></ion-icon></span>
+                    <span class="p-1 grid place-content-center" :class="coursesView === 'list' ? 'bg-gray-200 rounded-sm': ''" @click="()=> coursesView = 'list'"><ion-icon name="list-outline" class="text-2xl"></ion-icon></span>
+                    <span class="p-1 grid place-content-center" :class="coursesView === 'grid' ? 'bg-gray-200 rounded-sm': ''" @click="()=> coursesView = 'grid'"><ion-icon name="grid-outline" class="text-2xl"></ion-icon></span>
                 </div>
             </div>
             <section class="grid grid-cols-3 gap-4 max-xl:flex max-xl:flex-col" >
-                <CourseCard/>
+                <CourseCard v-if="coursesView === 'grid'" v-for="course in courses.courses" :course="course"/>
             </section>
+            <CoursesTable v-if="coursesView === 'list'" :courses="courses.courses"/>
         </section>
     </main>
     </div>
@@ -25,16 +24,16 @@
 
 <script setup>
 import CourseCard from '../../components/CourseCard.vue';
+import CoursesTable from '../../components/CoursesTable.vue'
 import SideMenu from '../../components/SideMenu.vue';
 import StudentHeader from '../../components/StudentHeader.vue';
 import { ref } from 'vue';
+import { useCoursesStore } from '../../stores/courses';
+import TimeSlot from '../../components/TimeSlot.vue';
 
-const courses = async () => {
-    var data = await fetch("../../assets/database/courses.json");
-    console.log(data);
-}
+const courses =useCoursesStore()
 
-defineProps({
+const props = defineProps({
     username: {
         type: String,
         default: "NOName"
@@ -44,6 +43,9 @@ const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;
 }
+
+const coursesView = ref("grid")
+
 </script>
 
 

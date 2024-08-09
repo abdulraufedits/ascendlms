@@ -19,7 +19,7 @@
 <script setup>
 const days = ["S","M", "T", "W", "T", "F", "S"];
 
-defineProps({
+const props = defineProps({
     month: {
         type: String,
         default: "January"

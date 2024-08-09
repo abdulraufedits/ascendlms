@@ -1,20 +1,25 @@
 <template>
     <RouterLink :to="pageLink">
-        <div class="cursor-pointer w-full flex items-center gap-x-2 py-3 px-4 rounded-lg transition-all duration-300" :class="isActive ? 'bg-primary' : 'hover:bg-gray-200'" @click="()=> clicked = clicked ? false : true">
-        <ion-icon :name="icon" :class="isActive ? 'text-white' : ''" class="text-gray-600 text-2xl"></ion-icon>
-        <label for="icon" :class="isActive ? 'text-white' : ''" class="font-medium font-big w-full text-gray-600">{{title}}</label>
-        <ion-icon v-if="isDropDown" name="chevron-down-sharp" :class="isActive ? 'text-white' : ''"></ion-icon>
+        <div class="cursor-pointer w-full flex items-center gap-x-2 py-3 px-4 rounded-lg transition-all duration-300" :class="isActive && !isDropDown ? 'bg-primary' : 'hover:bg-gray-200'" @click="()=> clicked = clicked ? false : true">
+        <ion-icon :name="icon" :class="isActive && !isDropDown ? 'text-white' : ''" class="text-gray-600 text-2xl"></ion-icon>
+        <label for="icon" :class="isActive && !isDropDown ? 'text-white' : ''" class="font-medium font-big w-full text-gray-600">{{title}}</label>
+        <ion-icon v-if="isDropDown" name="chevron-down-sharp"></ion-icon>
         
     </div>
-    <div v-if="isDropDown && clicked" v-for="li in list" class="cursor-pointer ml-5 w-full flex items-center gap-x-1 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-gray-200">
-            <label for="icon" class="font-medium font-big w-full text-gray-600">{{li}}</label>
-        </div>
     </RouterLink>
+    <div v-for="li in list">
+        <RouterLink :to="li.pageRoute">
+            <div v-if="isDropDown && clicked" class="cursor-pointer ml-5 w-full flex items-center gap-x-1 py-3 px-4 rounded-lg transition-all duration-300 " :class="activePage == li.pageTitle && isDropDown ? 'bg-primary ' : 'hover:bg-gray-200'">
+            <label for="icon" class="font-medium font-big w-full text-gray-600" :class="activePage == li.pageTitle && isDropDown ? 'text-white ' : ''">{{li.pageTitle}}</label>
+        </div>
+        </RouterLink>
+    </div>
 </template>
 
 <script>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+
 export default {
     data(){
         return {
@@ -34,22 +39,26 @@ export default {
             type: Boolean,
             default: false
         },
+        activePage: {
+            type: String,
+            default: "My Courses"
+        },
         isDropDown: {
             type: Boolean,
             default: false
         },
         list: {
             type: Array,
-            default: ["Untitled"]
+            default: [{pageTitle: "Untitled", pageRoute: "/"}]
         },
         pageLink: {
             type: String,
-            default: "/",
-        }
-    },
+            default: ["/"]
+        },
+        },
     methods:{
         getTitle(){
-            this.$emit('getTitle', this.$props.title)
+            this.$emit('getTitle', this.$props.list)
         }
     }
 }

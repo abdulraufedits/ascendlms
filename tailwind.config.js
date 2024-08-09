@@ -24,6 +24,9 @@ export default {
       },
       fontSize: {
         "36px": "36px"
+      },
+      boxShadow: {
+        "material": "inset 0px -1.5px 0px #050505"
       }
     },
     gridTemplateColumns:{

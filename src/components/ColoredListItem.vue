@@ -4,7 +4,7 @@
             <h4 class="h4-title">Assignment Name</h4>
             <time class="subtitle">08 March, 10:20 AM</time>
         </span>
-        <RouterLink>
+        <RouterLink to="/">
             <button class="bg-primary px-4 py-1 text-white font-small rounded-full">Submit</button>
         </RouterLink>
     </div>

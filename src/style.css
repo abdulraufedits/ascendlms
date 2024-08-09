@@ -21,3 +21,7 @@ h5,h6{
     @apply font-small;
     font-feature-settings: "calt" 1, "rlig" 1, "rvrn" 1, "kern" 1, "rclt" 1, "ss01" 1, "ss06" 1, "liga" 1;
 }
+
+input[type="search"]::-webkit-search-cancel-button{
+    appearance: none;
+}

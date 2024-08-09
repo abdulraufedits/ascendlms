@@ -1,7 +1,7 @@
 <template>
     <Widget class="xl:self-start h-full !flex flex-col justify-between">
-        <h1 class="h1-title">Course Name</h1>
-        <p class="subtitle">This course covers all the laws of UX theoretically and practically. UX laws are essential to understand the user experience of stakeholders.</p>
+        <h1 class="h1-title">{{course.courseName}}</h1>
+        <p class="subtitle">{{ course.courseDesc }}</p>
         <div class="grid grid-flow-col">
             <div>
                 <h5  class="h5-title">Members</h5>
@@ -22,7 +22,7 @@
         </div>
         <div>
             <h4 class="h4-title">Progress</h4>
-            <ProgressBar :percentage="72"/>
+            <ProgressBar :percentage="course.percentage"/>
         </div>
     </Widget>
 </template>
@@ -30,6 +30,13 @@
 <script setup>
 import Widget from './Widget.vue';
 import ProgressBar from './ProgressBar.vue'
+import { defineProps } from 'vue';
+const props = defineProps({
+    course: {
+        type: Object,
+        default: {}
+    }
+})
 </script>
 
 <style scoped>
