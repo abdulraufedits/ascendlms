@@ -83,6 +83,27 @@ export const useCoursesStore = defineStore('courses', {
                     status: "Failed",
                     dueDate: "08 March, 2024, 10:20 AM"
                 }
+            ],
+            announcements: [
+                {
+                    courseName: "UX Laws",
+                    msg: "Lorem ipsum dolor set amet is a dummy announcement.",
+                    instructor: "John Doe",
+                    date: "08 March, 2024, 10:20 AM"
+                },
+                {
+                    courseName: "UX Laws",
+                    msg: "Lorem ipsum dolor set amet is a dummy announcement.",
+                    instructor: "ABCD",
+                    date: "08 March, 2024, 10:20 AM"
+                },
+                {
+                    courseName: "Fundamentals of UI",
+                    msg: "Lorem ipsum dolor set amet is a dummy announcement.",
+                    instructor: "John Doe",
+                    date: "08 March, 2024, 10:20 AM"
+                }
+
             ]
                 
         }),
@@ -92,6 +113,10 @@ export const useCoursesStore = defineStore('courses', {
             sort(sortType, obj){
                 if(sortType == "All"){return obj}
                 else {return obj.filter(a => a.status == sortType)}
+            },
+            categorize(sortType, obj){
+                if(sortType == "All"){return obj}
+                else {return obj.filter(a => a.courseName == sortType)}
             }
         }
 })

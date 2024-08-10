@@ -92,8 +92,8 @@ tr{
 tbody{
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 0 40px;
+    gap: 24px 0;
+    padding-left: 40px;
 }
 td{
     text-align: left;

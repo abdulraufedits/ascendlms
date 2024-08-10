@@ -38,6 +38,10 @@ import { RouterView } from 'vue-router';
     font-weight: bold;
     font-size: 32px;
 }
+.h1-subtitle{
+    font-weight: bold;
+    font-size: 24px;
+}
 .h2-title{
     font-weight: bold;
     font-size: 28px;

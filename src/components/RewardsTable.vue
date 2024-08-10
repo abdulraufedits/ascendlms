@@ -3,24 +3,24 @@
         <thead>
             <th>Topic</th>
             <th>Status</th>
-            <th>Due Date</th>
-            <th></th>
+            <th>Date</th>
+            <th>Reward</th>
         </thead>
         <tbody>
-            <tr v-for="assignment in assignments">
-                <td>
-                    <h1 class="font-big font-bold text-xl">{{ assignment.assignmentName }}</h1>
-                    <p class="subtitle text-xs cursor-pointer hover:text-primary hover:underline">{{ assignment.courseName }}</p>
+            <tr v-for="achievement in achievements">
+                <td class="flex gap-2">
+                    <img src="../assets/achievement.png" alt="achievement icon">
+                    <div>
+                        <h1 class="font-big font-bold text-xl">{{ achievement.achievementName }}</h1>
+                        <p class="subtitle text-xs cursor-pointer hover:text-primary hover:underline">{{ achievement.achievementTask }}</p>
+                    </div>
                 </td>
-                <td><p class="font-small font-medium " :class="checkStatus(assignment.status)">{{assignment.status}}</p></td>
+                <td><p class="font-small font-medium " :class="checkStatus(achievement.status)">{{achievement.status}}</p></td>
                 <td>
-                    <time class="font-small font-bold">{{assignment.dueDate}}</time>
+                    <time class="font-small font-bold">{{achievement.date}}</time>
                 </td>
-                <td class="cursor-pointer">
-                    <span class=" flex gap-x-1 text-primary items-center">
-                        <label for="assignment" class="font-semibold font-small">Go to Assignment</label>
-                        <ion-icon name="chevron-forward-sharp"></ion-icon>
-                    </span>
+                <td>
+                    <label for="assignment" class="font-semibold font-small text-accent">{{achievement.xp}} XP</label>
                 </td>
             </tr>
         </tbody>
@@ -30,7 +30,7 @@
 <script setup>
 
 const props = defineProps({
-    assignments:{
+    achievements:{
         type: Array,
         default: []
     }
@@ -56,6 +56,7 @@ const checkStatus = (status) => {
 <style scoped>
 thead {
     border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
     display: flex;
     justify-content: space-between;
     padding: 6px 0 6px 40px;
@@ -72,6 +73,7 @@ tr{
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 tbody{

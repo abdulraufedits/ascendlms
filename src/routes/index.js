@@ -10,6 +10,7 @@ import Assignments from "../views/authorized-views/Assignments.vue";
 import NotFound from '../views/NotFound.vue'
 import Quizzes from "../views/authorized-views/Quizzes.vue";
 import Announcements from "../views/authorized-views/Announcements.vue";
+import Rewards from "../views/authorized-views/Rewards.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -98,10 +99,16 @@ const router = createRouter({
         },{
             path: '/rewards',
             name: "Rewards",
-            component: MyCourses,
+            component: Rewards,
             meta:{
                 requireAuth: true
-            }
+            },
+            children: [
+                {
+                    path: ':filter',
+                    component: Rewards
+                },
+            ]
         },
         {
             path: '/trash',

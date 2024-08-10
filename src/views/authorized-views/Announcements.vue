@@ -4,7 +4,7 @@
         <main class="w-full">
             <StudentHeader :username="username" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / Announcements"/>
             <section class="flex px-10 pt-8">
-                <Tab title="All" @click="sortType = 'All'" :sortType="sortType" obj="assignments"/>
+                <Tab title="All" @click="sortType = 'All'" :sortType="sortType" obj="announcements"/>
                 <Tab v-for="course in courses.courses" :title="course.courseName" obj="announcements" @click="sortType = course.courseName"/>
             </section>
             <section class="flex justify-between px-10 py-4 bg-background border-y-2 border-ddd">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </section>
-            
+            <AnnouncementList :announcements="courses.categorize(sortType,courses.announcements)"/>
         </main>
     </div>
 
@@ -25,8 +25,9 @@
 import StudentHeader from '../../components/StudentHeader.vue'
 import SideMenu from '../../components/SideMenu.vue'
 import Tab from '../../components/Tab.vue'
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useCoursesStore } from '../../stores/courses';
+import AnnouncementList from '../../components/AnnouncementList.vue';
 
 const props = defineProps({
     username: {
@@ -40,6 +41,7 @@ if(window.innerWidth < 1024){
 }
 const courses = useCoursesStore()
 const sortType = ref("All")
+
 </script>
 
 
