@@ -16,18 +16,18 @@ export const usePagesStore = defineStore('pages', {
                     },
                     {
                         pageTitle: "Assignments",
-                        pageRoute: "/assignments",
+                        pageRoute: "/assignments/all",
                     },{
                         pageTitle: "Quizzes",
-                        pageRoute: "/quizzes",
+                        pageRoute: "/quizzes/all",
                     },{
                         pageTitle: "Announcements",
-                        pageRoute: "/announcements",
+                        pageRoute: "/announcements/all",
                     }
                 ]
             },{
                 pageTitle:  "Rewards",
-                pageRoute: "/rewards"
+                pageRoute: "/rewards/all"
             },{
                 pageTitle:  "Trash",
                 pageRoute: "/trash"

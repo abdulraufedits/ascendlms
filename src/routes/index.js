@@ -13,7 +13,6 @@ import Announcements from "../views/authorized-views/Announcements.vue";
 import Rewards from "../views/authorized-views/Rewards.vue";
 import CreateAccount from "../views/CreateAccount.vue";
 import StudentLayout from "../views/authorized-views/StudentLayout.vue";
-import MainLayout from "../views/authorized-views/MainLayout.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -52,7 +51,7 @@ const router = createRouter({
         },
         {
             path: '/student/:user/:page',
-            component: MainLayout,
+            component: StudentLayout,
             props: (route) => ({user: route.params.user, page: route.params.page }),
             children:[
                 {
@@ -60,119 +59,19 @@ const router = createRouter({
                     components:{
                         dashboard: Dashboard,
                         mycourses: MyCourses,
+                        rewards: Rewards,
+                    }
+                },
+                {
+                    path: ':filter',
+                    components: {
+                        assignments: Assignments,
+                        quizzes: Quizzes,
+                        announcements: Announcements
                     }
                 }
             ]
         },
-        // {
-        //     path: '/student/:user',
-        //     name: 'Student',
-        //     component: Dashboard,
-        //     props: true,
-        //     children: [
-        //         {
-        //             path: 'dashboard',
-        //             name: 'Dashboard',
-        //             component: Dashboard,
-        //             meta:{
-        //                 requireAuth: true
-        //             },
-        //             props: true,
-        //             params: { user: ':user'}
-        //         },
-        //         {
-        //             path: '/mycourses',
-        //             name: "My Courses",
-        //             component: MyCourses,
-        //             meta:{
-        //                 requireAuth: true
-        //             }
-        //         },{
-        //             path: '/assignments',
-        //             name: "Assignments",
-        //             component: Assignments,
-        //             meta:{
-        //                 requireAuth: true
-        //             },
-        //             children: [
-        //                 {
-        //                     path: ':filter',
-        //                     component: Assignments
-        //                 },
-        //             ]
-        //         },
-        //         {
-        //             path: '/quizzes',
-        //             name: "Quizzes",
-        //             component: Quizzes,
-        //             meta:{
-        //                 requireAuth: true
-        //             },
-        //             children: [
-        //                 {
-        //                     path: ':filter',
-        //                     component: Quizzes
-        //                 },
-        //             ]
-        //         },{
-        //             path: '/announcements',
-        //             name: "Announcements",
-        //             component: Announcements,
-        //             meta:{
-        //                 requireAuth: true
-        //             },
-        //             children: [
-        //                 {
-        //                     path: ':filter',
-        //                     component: Announcements
-        //                 },
-        //             ]
-        //         },{
-        //             path: '/rewards',
-        //             name: "Rewards",
-        //             component: Rewards,
-        //             meta:{
-        //                 requireAuth: true
-        //             },
-        //             children: [
-        //                 {
-        //                     path: ':filter',
-        //                     component: Rewards
-        //                 },
-        //             ]
-        //         },
-        //         {
-        //             path: '/trash',
-        //             name: "Trash",
-        //             component: MyCourses,
-        //             meta:{
-        //                 requireAuth: true
-        //             }
-        //         },{
-        //             path: '/help',
-        //             name: "Help",
-        //             component: MyCourses,
-        //             meta:{
-        //                 requireAuth: true
-        //             }
-        //         },{
-        //             path: '/settings',
-        //             name: "Settings",
-        //             component: MyCourses,
-        //             meta:{
-        //                 requireAuth: true
-        //             }
-        //         },{
-        //             path: '/logout',
-        //             name: "Log out",
-        //             component: MyCourses,
-        //             meta:{
-        //                 requireAuth: true
-        //             }
-        //         },
-                
-        //     ]
-        // },
         
         
         {   path: '/:pathMatch(.*)*',

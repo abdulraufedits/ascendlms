@@ -15,7 +15,7 @@ function valid(eml,pass){
             if(user.email == eml && user.password == pass){
                 console.log(data)
                 console.log(router.getRoutes())
-                router.push(`/${user.username}/dashboard`)
+                router.push(`/student/${user.username}/dashboard`)
             } else {
                 err.value = true;
             }

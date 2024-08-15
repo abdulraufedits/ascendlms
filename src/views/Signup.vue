@@ -52,7 +52,7 @@ function createAcc(){
         }).then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                router.push(`/${username.value}/dashboard`)
+                router.push(`/student/${username.value}/dashboard`)
                 })
             }
 </script>
