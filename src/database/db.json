@@ -1,0 +1,56 @@
+{
+  "instructors": [
+    {
+      "id": "f2b7",
+      "username": "newinst",
+      "email": "inst@test",
+      "password": "abcs",
+      "achievements": []
+    }
+  ],
+  "students": [
+    {
+      "id": "1so0",
+      "username": "Pagal",
+      "email": "pagal@test.com",
+      "password": "1234",
+      "achievements": [
+        {
+          "achievementName": "Topper",
+          "achievementTask": "Achieve highest scores in 3 Quizzes.",
+          "status": "Completed",
+          "xp": 100,
+          "date": "08 March, 2024, 10:20 AM"
+        },
+        {
+          "achievementName": "Champion",
+          "achievementTask": "Achieve highest scores in 3 Assignments.",
+          "status": "Completed",
+          "xp": 500,
+          "date": "08 March, 2024, 10:20 AM"
+        },
+        {
+          "achievementName": "Leader",
+          "achievementTask": "Submit the assignment very first.",
+          "status": "New",
+          "xp": 100,
+          "date": "08 March, 2024, 10:20 AM"
+        }
+      ]
+    },
+    {
+      "id": "3aa2",
+      "username": "",
+      "email": "",
+      "password": "",
+      "achievements": []
+    },
+    {
+      "id": "a82e",
+      "username": "hello123",
+      "email": "qqq@www",
+      "password": "jdbc",
+      "achievements": []
+    }
+  ]
+}

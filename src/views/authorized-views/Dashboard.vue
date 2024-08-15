@@ -2,7 +2,7 @@
     <div class="flex">
         <SideMenu isActivePage="Dashboard" v-show="sideBarState"/>
     <main class="w-full">
-        <StudentHeader :username="user.username" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
+        <StudentHeader :username="$route.params.user" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <div class=" font-small font-medium px-4 py-2 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
@@ -76,16 +76,13 @@ import Calendar from '../../components/Calendar.vue';
 import SideMenu from '../../components/SideMenu.vue';
 import StudentHeader from '../../components/StudentHeader.vue';
 import { ref } from 'vue';
-
 import { useUserStore } from '../../stores/user';
 import { useCoursesStore } from '../../stores/courses';
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+const name = 'Dashboard'
 const user = useUserStore()
-// const props = defineProps({
-//     username: {
-//         type: String,
-//         default: "NOName"
-//     }
-// })
 
 const courses = useCoursesStore()
 
@@ -93,5 +90,6 @@ const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;
 }
+
 
 </script>

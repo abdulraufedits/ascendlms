@@ -40,7 +40,7 @@ const props = defineProps({
                 <div class="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-8 xl:space-x-10">
                     <RouterLink to="/login" class="nav-link text-primary focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"> Log in </RouterLink>
 
-                    <RouterLink to="/" class="px-5 py-2 nav-link leading-7 text-white bg-primary border border-transparent rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
+                    <RouterLink to="/pre-signup" class="px-5 py-2 nav-link leading-7 text-white bg-primary border border-transparent rounded-full hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
                         Get Started - It's Free!
                     </RouterLink>
                 </div>

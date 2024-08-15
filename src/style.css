@@ -25,3 +25,8 @@ h5,h6{
 input[type="search"]::-webkit-search-cancel-button{
     appearance: none;
 }
+
+hr{
+    @apply border-ddd bg-transparent;
+    border-width: 1px
+}

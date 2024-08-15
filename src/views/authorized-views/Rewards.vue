@@ -2,7 +2,7 @@
     <div class="flex">
         <SideMenu isActivePage="Rewards" v-show="sideBarState"/>
         <main class="w-full">
-            <StudentHeader :username="username" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Rewards"/>
+            <StudentHeader :username="$route.params.user" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Rewards"/>
                 <section class="flex flex-col gap-10 px-10 py-8">
                     <div class="flex justify-between">
                         <div>

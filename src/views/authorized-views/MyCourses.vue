@@ -2,7 +2,7 @@
     <div class="flex">
         <SideMenu isActivePage="My Courses" v-show="sideBarState"/>
     <main class="w-full">
-        <StudentHeader :username="username" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses"/>
+        <StudentHeader :username="$route.params.user" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses"/>
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <TimeSlot/>
@@ -39,6 +39,7 @@ const props = defineProps({
         default: "NOName"
     }
 })
+const name ='MyCourses'
 const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;

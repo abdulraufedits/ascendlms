@@ -6,9 +6,10 @@
                         <img class="w-auto h-8" src="../assets/logo.svg" alt="" />&nbsp;&nbsp;&nbsp;Ascend LMS
                     </RouterLink>
                 <h1 class=" text-3xl bold text-grey font-big font-bold">Create a new account</h1>
-                <form action="" class="flex flex-col gap-4">
-                    <input type="text" class="input-field" placeholder="email address">
-                    <input type="password" class="input-field" placeholder="password">
+                <form action="" class="flex flex-col gap-4" @submit.prevent="createAcc">
+                    <input autocomplete="username" type="fname" class="input-field" placeholder="username" v-model="username">
+                    <input autocomplete="email" type="email" class="input-field" placeholder="email address" v-model="email">
+                    <input autocomplete="password" type="password" class="input-field" placeholder="password" v-model="password">
                     <input type="submit" value="Sign up" class="cta font-big text-white font-medium cursor-pointer hover:bg-gray-900 transition-colors duration-300">
                     <p class="font-small text-center -mt-2">Already have an account? <RouterLink to="/login" class=" text-primary">Login</RouterLink></p>
                 </form>
@@ -23,6 +24,35 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
+import { ref } from 'vue';
+import { RouterLink,useRouter,useRoute } from 'vue-router';
 import Illust from '../assets/login-img.svg';
+
+const username=ref("");
+const email=ref("");
+const password=ref("");
+let err = ref(false);
+
+const router = useRouter()
+const route = useRoute()
+
+function createAcc(){
+    fetch(route.query.p == 'Student' ? "http://localhost:8000/students" : route.query.p == 'Instructor' ? "http://localhost:8000/instructors": null,{
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+            },
+            body: JSON.stringify({
+                username: username.value,
+                email: email.value,
+                password: password.value,
+                achievements: []
+            }),
+        }).then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                router.push(`/${username.value}/dashboard`)
+                })
+            }
 </script>
