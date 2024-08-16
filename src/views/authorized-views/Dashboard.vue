@@ -2,7 +2,7 @@
     <div class="flex">
         <SideMenu isActivePage="Dashboard" v-show="sideBarState"/>
     <main class="w-full">
-        <StudentHeader :username="$route.params.user" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
+        <StudentHeader :username="user.username" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <div class=" font-small font-medium px-4 py-2 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
@@ -32,11 +32,8 @@
                 <Widget class="col-span-6 col-start-13 max-h-72 overflow-y-scroll">
                     <h1 class="h1-title">Recent Activity</h1>
                     <div class="flex flex-col gap-y-6">
-                        <ActivityLog activityIcon="document-text" :username="user.username"/>
-                        <ActivityLog/>
-                        <ActivityLog/>
-                        <ActivityLog/>
-                        <ActivityLog/>
+                        <ActivityLog :username="user.username"/>
+                        <ActivityLog activityObj="Quiz" :username="user.username"/>
                     </div>
                 </Widget>
                 <Widget class="col-span-12 row-start-3">
@@ -75,14 +72,11 @@ import CoursesTable from '../../components/CoursesTable.vue';
 import Calendar from '../../components/Calendar.vue';
 import SideMenu from '../../components/SideMenu.vue';
 import StudentHeader from '../../components/StudentHeader.vue';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { useUserStore } from '../../stores/user';
 import { useCoursesStore } from '../../stores/courses';
-import { useRoute } from 'vue-router';
 
-const route = useRoute()
-const name = 'Dashboard'
-const user = useUserStore()
+const user = reactive(useUserStore().users[0])
 
 const courses = useCoursesStore()
 

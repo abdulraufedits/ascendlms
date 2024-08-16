@@ -59,7 +59,6 @@ const router = createRouter({
                     components:{
                         dashboard: Dashboard,
                         mycourses: MyCourses,
-                        rewards: Rewards,
                     }
                 },
                 {
@@ -67,7 +66,8 @@ const router = createRouter({
                     components: {
                         assignments: Assignments,
                         quizzes: Quizzes,
-                        announcements: Announcements
+                        announcements: Announcements,
+                        rewards: Rewards,
                     }
                 }
             ]

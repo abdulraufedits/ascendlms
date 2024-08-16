@@ -2,6 +2,24 @@
 import { RouterLink, useRouter } from 'vue-router';
 import Illust from '../assets/login-img.svg';
 import { ref } from 'vue';
+import {useUserStore} from '../stores/user'
+import { setCookie, checkCookie } from '../cookies';
+
+const currentUser = useUserStore()
+const usersCookie = checkCookie('id')
+if(!usersCookie ){
+    console.log(usersCookie)
+} else {
+    fetch("http://localhost:8000/students")
+    .then(res => res.json()).then(data => {
+        data.forEach(user => {
+            if(user.id == usersCookie){
+                router.push(`/student/${user.username}/dashboard`)
+            currentUser.getUserData(user)
+            }
+        })
+    }).catch(err => console.log(err))
+}
 
 const email=ref("");
 const password=ref("");
@@ -13,9 +31,9 @@ function valid(eml,pass){
     .then(res => res.json()).then(data => {
         data.forEach(user => {
             if(user.email == eml && user.password == pass){
-                console.log(data)
-                console.log(router.getRoutes())
                 router.push(`/student/${user.username}/dashboard`)
+                currentUser.getUserData(user)
+                setCookie('id', user.id, 2)
             } else {
                 err.value = true;
             }
@@ -27,9 +45,6 @@ function valid(eml,pass){
 
 
 <template>
-    {{ email }}
-    <br>
-    {{ password }}
     <div class="font-small h-screen md:flex w-full justify-between items-center">
         <main class=" w-full grid place-content-center h-screen">
             <div class=" w-80 h-2xl flex flex-col gap-6">

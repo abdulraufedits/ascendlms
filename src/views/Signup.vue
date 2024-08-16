@@ -51,8 +51,7 @@ function createAcc(){
             }),
         }).then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 router.push(`/student/${username.value}/dashboard`)
-                })
+                }).catch(err => alert("Select your profession first."))
             }
 </script>

@@ -2,7 +2,7 @@
     <div class="flex">
         <SideMenu isActivePage="My Courses" v-show="sideBarState"/>
     <main class="w-full">
-        <StudentHeader :username="$route.params.user" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses"/>
+        <StudentHeader :username="user.username" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses"/>
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <TimeSlot/>
@@ -27,11 +27,13 @@ import CourseCard from '../../components/CourseCard.vue';
 import CoursesTable from '../../components/CoursesTable.vue'
 import SideMenu from '../../components/SideMenu.vue';
 import StudentHeader from '../../components/StudentHeader.vue';
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { useCoursesStore } from '../../stores/courses';
 import TimeSlot from '../../components/TimeSlot.vue';
+import { useUserStore } from '../../stores/user';
 
 const courses =useCoursesStore()
+const user = reactive(useUserStore().users[0])
 
 const props = defineProps({
     username: {

@@ -2,12 +2,12 @@
     <div class="flex">
         <SideMenu isActivePage="Rewards" v-show="sideBarState"/>
         <main class="w-full">
-            <StudentHeader :username="$route.params.user" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Rewards"/>
+            <StudentHeader :username="user.username" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Rewards"/>
                 <section class="flex flex-col gap-10 px-10 py-8">
                     <div class="flex justify-between">
                         <div>
                             <img src="../../assets/user-profile.png" alt="user-img">
-                            <h1 class="h1-title">{{ username }}</h1>
+                            <h1 class="h1-title">{{ user.username }}</h1>
                         </div>
                         <div class="flex items-center gap-x-5 w-3/5">
                             <div>
@@ -42,13 +42,13 @@
 import Glance from '../../components/Glance.vue';
 import SideMenu from '../../components/SideMenu.vue'
 import StudentHeader from '../../components/StudentHeader.vue'
-import { ref, useSSRContext } from 'vue';
+import { ref,reactive } from 'vue';
 import Tab from '../../components/Tab.vue';
 import RewardsTable from '../../components/RewardsTable.vue';
 import { useUserStore } from '../../stores/user';
 import { useCoursesStore } from '../../stores/courses';
 
-const user = useUserStore()
+const user = reactive(useUserStore().users[0])
 
 const props = defineProps({
     username: {

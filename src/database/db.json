@@ -40,10 +40,25 @@
     },
     {
       "id": "3aa2",
-      "username": "",
-      "email": "",
-      "password": "",
-      "achievements": []
+      "username": "keal",
+      "email": "ke@hal",
+      "password": "12",
+      "achievements": [
+        {
+          "achievementName": "Topper",
+          "achievementTask": "Achieve highest scores in 3 Quizzes.",
+          "status": "Completed",
+          "xp": 100,
+          "date": "08 March, 2024, 10:20 AM"
+        },
+        {
+          "achievementName": "Champion",
+          "achievementTask": "Achieve highest scores in 3 Assignments.",
+          "status": "Completed",
+          "xp": 500,
+          "date": "08 March, 2024, 10:20 AM"
+        }
+      ]
     },
     {
       "id": "a82e",

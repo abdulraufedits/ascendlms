@@ -2,7 +2,7 @@
     <div class="flex">
         <SideMenu isActivePage="Assignments" v-show="sideBarState"/>
         <main class="w-full">
-            <StudentHeader :username="$route.params.user" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / Assignments"/>
+            <StudentHeader :username="user.username" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / Assignments"/>
             <section class="flex px-10 pt-8">
                 <Tab title="All" @click="sortType = 'All'" :sortType="sortType" obj="assignments"/>
                 <Tab title="In-progress" @click="sortType = 'In-progress'" obj="assignments"/>
@@ -33,9 +33,10 @@
 import StudentHeader from '../../components/StudentHeader.vue'
 import SideMenu from '../../components/SideMenu.vue'
 import Tab from '../../components/Tab.vue'
-import { ref } from 'vue';
+import { ref,reactive } from 'vue';
 import AssignmentsTable from '../../components/AssignmentsTable.vue';
 import { useCoursesStore } from '../../stores/courses';
+import { useUserStore } from '../../stores/user';
 
 const props = defineProps({
     username: {
@@ -48,6 +49,8 @@ if(window.innerWidth < 1024){
     sideBarState.value =  false;
 }
 const courses = useCoursesStore()
+const user = reactive(useUserStore().users[0])
+
 const coursesView = ref("grid")
 const sortType = ref("All")
 </script>
