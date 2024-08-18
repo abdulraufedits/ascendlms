@@ -13,7 +13,7 @@
                 </div>
             </div>
             <section class="grid grid-cols-3 gap-4 max-xl:flex max-xl:flex-col" >
-                <CourseCard v-if="coursesView === 'grid'" v-for="course in courses.courses" :course="course"/>
+                <RouterLink :to="`/student/${$route.params.user}/details/${course.courseName}`" v-for="course in courses.courses"><CourseCard v-if="coursesView === 'grid'" :course="course"/></RouterLink>
             </section>
             <CoursesTable v-if="coursesView === 'list'" :courses="courses.courses"/>
         </section>
@@ -31,6 +31,7 @@ import { ref, reactive } from 'vue';
 import { useCoursesStore } from '../../stores/courses';
 import TimeSlot from '../../components/TimeSlot.vue';
 import { useUserStore } from '../../stores/user';
+import { RouterLink } from 'vue-router';
 
 const courses =useCoursesStore()
 const user = reactive(useUserStore().users[0])
@@ -41,7 +42,7 @@ const props = defineProps({
         default: "NOName"
     }
 })
-const name ='MyCourses'
+
 const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;

@@ -1,6 +1,8 @@
 <template>
     <div>
-      <RouterView :name="page"></RouterView>
+      <RouterView :name="page">
+      </RouterView>
+
     </div>
 </template>
 
@@ -9,6 +11,7 @@ import { RouterView } from 'vue-router';
 
 const props = defineProps({
     user: String,
-    page: String
+    page: String,
+    course: String
 })
 </script>

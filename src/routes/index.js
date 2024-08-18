@@ -13,6 +13,7 @@ import Announcements from "../views/authorized-views/Announcements.vue";
 import Rewards from "../views/authorized-views/Rewards.vue";
 import CreateAccount from "../views/CreateAccount.vue";
 import StudentLayout from "../views/authorized-views/StudentLayout.vue";
+import CourseDetails from "../views/authorized-views/CourseDetails.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -68,12 +69,11 @@ const router = createRouter({
                         quizzes: Quizzes,
                         announcements: Announcements,
                         rewards: Rewards,
+                        details: CourseDetails
                     }
                 }
             ]
         },
-        
-        
         {   path: '/:pathMatch(.*)*',
             name: 'NotFound',
             component: NotFound

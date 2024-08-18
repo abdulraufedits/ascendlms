@@ -1,0 +1,87 @@
+<template>
+    <div class="flex">
+        <SideMenu isActivePage="My Courses" v-show="sideBarState"/>
+    <main class="w-full">
+        <StudentHeader :username="user.username" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses / UX Laws"/>
+        <section class="flex flex-col gap-6 px-10 py-8">
+            <div class=" rounded-lg h-72 bg-[url(/src/assets/courses/uxlaws.png)] bg-cover bg-no-repeat"></div>
+            <div class="flex justify-between items-center">
+                <h1 class="h1-title">UX Laws</h1>
+                <div class="flex gap-x-2">
+                    <button class=" grid place-content-center rounded-lg px-5 font-big bg-red text-white">End Course</button>
+                    <div class="grid place-content-center min-h-14 min-w-14 rounded-lg border-2 border-ddd">
+                        <ion-icon name="settings-outline" class=" text-2xl"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-x-2 items-center">
+                <div class="bg-[#BAFA95] text-[#3D8415] font-big flex items-center gap-x-1 px-3 py-1.5 rounded">
+                    <ion-icon name="ribbon"></ion-icon>
+                    <label for="category">Design</label>
+                </div>
+                <span class="size-1 bg-gray-400 rounded-full my-auto"></span>
+                <div class=" text-gray-500 font-big flex items-center gap-x-1">
+                    <ion-icon name="globe-outline"></ion-icon>
+                    <label for="visibility">Public</label>
+                </div>
+                <div class="flex gap-x-1 items-center text-gray-500 font-big">
+                    <ion-icon class=" md hydrated" role="img" name="calendar-outline"></ion-icon>
+                    <time class="" datetime="{{date}}">March 12, 2024</time>
+                    <span class="size-1 bg-gray-500 rounded-full my-auto"></span>
+                    <time class="" datetime="{{ date }}">10:12 PM</time>
+                </div>
+            </div>
+            <div>
+                <div class="badges-wrap flex">
+                    <img class="img-badge bg-accent -mr-2" src="https://api.dicebear.com/9.x/personas/svg?seed=Buster" alt="avatar" />
+                    <img class="img-badge bg-secondary -mr-2" src="https://api.dicebear.com/9.x/avataaars/svg?seed=Bubba" alt="avatar" />
+                    <img class="img-badge bg-yellow -mr-2" src="https://api.dicebear.com/9.x/avataaars/svg?seed=Bubba" alt="avatar" />
+                    <label for="members" class="img-badge bg-gray-200 text-sm font-bold font-small">+93</label>
+                </div>
+            </div>
+        </section>
+        <section class="flex px-10 pt-8">
+                <Tab title="Content" @click="sortType = 'All'" :sortType="sortType" obj="assignments"/>
+                <Tab title="Assignments" @click="sortType = 'In-progress'" obj="assignments"/>
+                <Tab title="Quizzes" @click="sortType = 'Upcoming'" obj="assignments"/>
+                <Tab title="Mentors"@click="sortType = 'Completed'" obj="assignments"/>
+                <Tab title="Announcements" @click="sortType = 'Failed'" obj="assignments"/>
+            </section>
+            <section class="flex justify-between px-10 py-4 bg-background border-y-2 border-ddd">
+                <div class="flex gap-x-2">
+                    <input type="search" name="search-assignments" id="search-assignments"  class=" bg-white px-6 py-3 rounded-lg border-ddd border-2 bg-[url('/src/assets/icons/search-outline.svg')] bg-[right_1rem_center] bg-no-repeat bg-[length:18px_18px]   outline-none font-big font-light" placeholder="Search anything...">
+                    <div class="grid place-content-center rounded-lg p-3 bg-white border-2 border-ddd">
+                    <ion-icon name="filter-outline" class=" text-2xl"></ion-icon>
+                    </div>
+                </div>
+                <div class="font-small font-medium  py-2 flex items-center gap-2 rounded-lg">
+                    <label for="view" class="h5-title">View as</label>
+                    <span class="p-1 grid place-content-center" :class="coursesView === 'list' ? 'bg-white rounded-sm': ''" @click="()=> coursesView = 'list'"><ion-icon name="list-outline" class="text-2xl"></ion-icon></span>
+                    <span class="p-1 grid place-content-center" :class="coursesView === 'grid' ? 'bg-white rounded-sm': ''" @click="()=> coursesView = 'grid'"><ion-icon name="grid-outline" class="text-2xl"></ion-icon></span>
+                </div>
+            </section>
+            <CourseTable :courses="courses.courses"/>
+    </main>
+    </div>
+</template>
+
+<script setup>
+import SideMenu from '../../components/SideMenu.vue';
+import StudentHeader from '../../components/StudentHeader.vue';
+import Tab from '../../components/Tab.vue';
+import { useUserStore } from '../../stores/user'
+import { ref, reactive } from 'vue';
+import { useCoursesStore } from '../../stores/courses';
+import CourseTable from '../../components/CourseTable.vue';
+
+const courses =useCoursesStore()
+const user = reactive(useUserStore().users[0])
+const coursesView = ref('list')
+const sortType = ref("All")
+
+const sideBarState = ref(true);
+if(window.innerWidth < 1024){
+    sideBarState.value =  false;
+}
+
+</script>

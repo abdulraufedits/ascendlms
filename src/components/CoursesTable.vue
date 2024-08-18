@@ -7,7 +7,7 @@
         </thead>
         <tbody>
             <tr v-for="course in courses">
-                <td class="font-big font-bold text-xl">{{ course.courseName }}</td>
+                <RouterLink :to="`/student/${$route.params.user}/mycourses/${course.courseName}`"><td class="font-big font-bold text-xl">{{ course.courseName }}</td></RouterLink>
                 <td class="pr-7"><ProgressBar :percentage="course.percentage"/></td>
                 <td class="flex items-center gap-x-3">
                     <div class="summary-with-icon font-small">
@@ -30,6 +30,7 @@
 </template>
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import ProgressBar from './ProgressBar.vue';
 
 const props = defineProps({
