@@ -14,9 +14,14 @@ import { RouterView } from 'vue-router';
 	font-feature-settings: "calt" 1, "rlig" 1, "rvrn" 1, "kern" 1, "rclt" 1, "ss01" 1, "ss06" 1, "liga" 1;
 }
 .cta{
-    padding: 1rem;
     background-color: #3C3ACF;
-    border-radius: 4px;
+    font-family: 'Roboto';
+    color: #fefefe;
+    border-radius: 999px;
+    &[type="submit"]{
+        padding: 1rem 2rem;
+        border-radius: 4px;
+    }
 }
 
 .input-field{

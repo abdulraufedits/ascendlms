@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </section>
-            <AnnouncementList :announcements="courses.categorize(sortType,courses.announcements)"/>
+            <AnnouncementList :announcements="courses.sort(sortType,courses.announcements, 'announcements')"/>
         </main>
     </div>
 

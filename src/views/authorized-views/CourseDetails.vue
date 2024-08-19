@@ -41,11 +41,13 @@
             </div>
         </section>
         <section class="flex px-10 pt-8">
-                <Tab title="Content" @click="sortType = 'All'" :sortType="sortType" obj="assignments"/>
-                <Tab title="Assignments" @click="sortType = 'In-progress'" obj="assignments"/>
-                <Tab title="Quizzes" @click="sortType = 'Upcoming'" obj="assignments"/>
-                <Tab title="Mentors"@click="sortType = 'Completed'" obj="assignments"/>
-                <Tab title="Announcements" @click="sortType = 'Failed'" obj="assignments"/>
+                <Tab title="Content" @click="sortType = 'Content'" :sortType="sortType" :obj="obj" :courseFilter="'Content'"/>
+                <Tab title="Assignments" @click="sortType = 'Assignments'" :obj="obj" :courseFilter="'Assignments'"/>
+                <Tab title="Quizzes" @click="sortType = 'Quizzes'" :obj="obj" :courseFilter="'Quizzes'"/>
+                <Tab title="Mentors" @click="sortType = 'Mentors'" :obj="obj" :courseFilter="'Mentors'"/>
+                <Tab title="Announcements" @click="sortType = 'Announcements'" :obj="obj" :courseFilter="'Announcements'"/>
+                <Tab title="Miscellaneous" @click="sortType = 'Miscellaneous'" :obj="obj" :courseFilter="'Miscellaneous'"/>
+                <Tab title="Support" @click="sortType = 'Support'" :obj="obj" :courseFilter="'Support'"/>
             </section>
             <section class="flex justify-between px-10 py-4 bg-background border-y-2 border-ddd">
                 <div class="flex gap-x-2">
@@ -74,14 +76,30 @@ import { ref, reactive } from 'vue';
 import { useCoursesStore } from '../../stores/courses';
 import CourseTable from '../../components/CourseTable.vue';
 
-const courses =useCoursesStore()
+const courses = reactive(useCoursesStore().courses)
+
 const user = reactive(useUserStore().users[0])
 const coursesView = ref('list')
-const sortType = ref("All")
+const sortType = ref("Content")
+
+const obj = 'details'
 
 const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;
 }
 
+// const props = defineProps({
+//     course: {
+//         type: Object,
+//         default: {
+//             courseName: "",
+//             courseDesc: "",
+//             percentage: 0,
+//             lecsCount: 0,
+//             assignmentCount: 0,
+//             quizCount: 0,
+//         }
+//     }
+// })
 </script>

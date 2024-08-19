@@ -7,7 +7,7 @@
         </thead>
         <tbody>
             <tr v-for="course in courses">
-                <RouterLink :to="`/student/${$route.params.user}/mycourses/${course.courseName}`"><td class="font-big font-bold text-xl">{{ course.courseName }}</td></RouterLink>
+                <td class="font-big font-bold text-xl"><RouterLink :to="`/student/${$route.params.user}/details/${course.courseName}`">{{ course.courseName }}</RouterLink></td>
                 <td class="pr-7"><ProgressBar :percentage="course.percentage"/></td>
                 <td class="flex items-center gap-x-3">
                     <div class="summary-with-icon font-small">

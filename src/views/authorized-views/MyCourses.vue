@@ -13,7 +13,7 @@
                 </div>
             </div>
             <section class="grid grid-cols-3 gap-4 max-xl:flex max-xl:flex-col" >
-                <RouterLink :to="`/student/${$route.params.user}/details/${course.courseName}`" v-for="course in courses.courses"><CourseCard v-if="coursesView === 'grid'" :course="course"/></RouterLink>
+                <RouterLink :to="`/student/${$route.params.user}/details/${course.courseName}/content`" v-for="course in courses.courses"><CourseCard v-if="coursesView === 'grid'" :course="course"/></RouterLink>
             </section>
             <CoursesTable v-if="coursesView === 'list'" :courses="courses.courses"/>
         </section>
@@ -33,7 +33,7 @@ import TimeSlot from '../../components/TimeSlot.vue';
 import { useUserStore } from '../../stores/user';
 import { RouterLink } from 'vue-router';
 
-const courses =useCoursesStore()
+const courses = reactive(useCoursesStore())
 const user = reactive(useUserStore().users[0])
 
 const props = defineProps({

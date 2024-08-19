@@ -64,13 +64,20 @@ const router = createRouter({
                 },
                 {
                     path: ':filter',
+                    props: (route) => ({user: route.params.user, page: route.params.page, filter: route.params.filter }),
                     components: {
                         assignments: Assignments,
                         quizzes: Quizzes,
                         announcements: Announcements,
                         rewards: Rewards,
                         details: CourseDetails
-                    }
+                    },
+                    children: [
+                        {
+                            path: ':course',
+                            component: CourseDetails,
+                        }
+                    ]
                 }
             ]
         },

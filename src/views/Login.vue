@@ -4,8 +4,15 @@ import Illust from '../assets/login-img.svg';
 import { ref } from 'vue';
 import {useUserStore} from '../stores/user'
 import { setCookie, checkCookie } from '../cookies';
+import { useCoursesStore } from '../stores/courses';
+
+import LectureNote from '../stores/classes/LectureNote';
+import Assignment from '../stores/classes/Assignment';
+import Quiz from '../stores/classes/Quiz';
 
 const currentUser = useUserStore()
+
+const currentCourses = useCoursesStore()
 const usersCookie = checkCookie('id')
 if(!usersCookie ){
     console.log(usersCookie)
@@ -34,6 +41,46 @@ function valid(eml,pass){
                 router.push(`/student/${user.username}/dashboard`)
                 currentUser.getUserData(user)
                 setCookie('id', user.id, 2)
+                fetch("http://localhost:8000/courses")
+                .then(res => res.json()).then(courses => {
+                    courses.forEach(course => {
+                        course.students.forEach(std => {
+                            if(std.id == user.id){
+                                const lecs = []
+                                const assigns = []
+                                const quizs = []
+                                course.lectureNotes.forEach(lec => {
+                                        lec.students.forEach(stdd => {
+                                            if(stdd.id == user.id){
+                                                lecs.push(new LectureNote(lec.id,lec.lectureName, lec.courseName, lec.createdOn, stdd.status))
+                                            }})
+                                })
+                                course.assignments.forEach(assign => {
+                                    assign.students.forEach(stdd => {
+                                        if(stdd.id == user.id){
+                                            assigns.push(new Assignment(assign.id,assign.assignmentName, assign.courseName, assign.dueDate, stdd.status))
+                                        }})
+                                })
+                                course.quizzes.forEach(quiz => {
+                                    quiz.students.forEach(stdd => {
+                                        if(stdd.id == user.id){
+                                            quizs.push(new Quiz(quiz.id,quiz.quizName, quiz.courseName, quiz.dueDate, stdd.status))
+                                        }})
+                                })
+                                currentCourses.getCoursesData({
+                                    id: course.id,
+                                    courseName: course.courseName,
+                                    courseDesc: course.courseDesc,
+                                    status: course.students.find(std => std.id === user.id)?.status,
+                                    lectureNotes: lecs,
+                                    assignments: assigns,
+                                    quizzes: quizs,
+                                    announcements: course.announcements,
+                                        })
+                            }
+                    })
+                }
+            )}).catch(err => console.log(err))
             } else {
                 err.value = true;
             }

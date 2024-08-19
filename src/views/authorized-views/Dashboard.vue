@@ -78,8 +78,11 @@ import { useCoursesStore } from '../../stores/courses';
 
 const user = reactive(useUserStore().users[0])
 
-const courses = useCoursesStore()
+const courses = reactive(useCoursesStore())
 
+
+// console.log(courses.courses)
+// courses.consoleKar()
 const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;

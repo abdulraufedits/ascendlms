@@ -7,36 +7,42 @@
             <th></th>
         </thead>
         <tbody>
-            <tr v-for="assignment in assignments">
-                <td>
-                    <h1 class="font-big font-bold text-xl">{{ assignment.assignmentName }}</h1>
-                    <p class="subtitle text-xs cursor-pointer hover:text-primary hover:underline">{{ assignment.courseName }}</p>
-                </td>
-                <td><p class="font-small font-medium " :class="checkStatus(assignment.status)">{{assignment.status}}</p></td>
-                <td>
-                    <time class="font-small font-bold">{{assignment.dueDate}}</time>
-                </td>
-                <td class="cursor-pointer">
-                    <span class=" flex gap-x-1 text-primary items-center">
-                        <label for="assignment" class="font-semibold font-small">Go to Assignment</label>
-                        <ion-icon name="chevron-forward-sharp"></ion-icon>
-                    </span>
-                </td>
-            </tr>
+                <template v-for="(indassignments,i) in allAssignments" :key="i">
+                    <tr v-for="(assignment,j) in indassignments" :key="j" >
+                        <td>
+                            <h1 class="font-big font-bold text-xl">{{ assignment.assignmentName }}</h1>
+                            <p class="subtitle text-xs cursor-pointer hover:text-primary hover:underline">{{ assignment.courseName }}</p>
+                        </td>
+                        <td><p class="font-small font-medium " :class="checkStatus(assignment.status)">{{assignment.status}}</p></td>
+                        <td>
+                            <time class="font-small font-bold">{{assignment.dueDate}}</time>
+                        </td>
+                        <td class="cursor-pointer">
+                            <span class=" flex gap-x-1 text-primary items-center">
+                                <label for="assignment" class="font-semibold font-small">Go to Assignment</label>
+                                <ion-icon name="chevron-forward-sharp"></ion-icon>
+                            </span>
+                        </td>
+                    </tr>
+                </template>
         </tbody>
     </table>
 </template>
 
 <script setup>
-
+import { ref } from 'vue';
 const props = defineProps({
     assignments:{
-        type: Array,
-        default: []
+        type: Promise,
+        default: [{assignmentName: "Assignment 1", status: "Completed", dueDate: "12/12/2021", courseName: "Mathematics"}]
     }
 
 })
 
+var allAssignments = []
+props.assignments.then((data) => {
+    allAssignments = data
+})
 const checkStatus = (status) => {
     switch(status){
         case "Completed": 
