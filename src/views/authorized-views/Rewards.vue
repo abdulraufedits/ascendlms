@@ -32,7 +32,7 @@
                             <Tab title="New" @click="sortType = 'New'" obj="rewards"/>
                             <Tab title="Completed" @click="sortType = 'Completed'" obj="rewards"/>
                         </div>
-                        <RewardsTable :achievements="courses.sort(sortType,user.achievements)"/>
+                        <RewardsTable :achievements="useUserStore().sort(sortType,user.achievements)"/>
                 </section>
         </main>
     </div>
@@ -46,7 +46,6 @@ import { ref,reactive } from 'vue';
 import Tab from '../../components/Tab.vue';
 import RewardsTable from '../../components/RewardsTable.vue';
 import { useUserStore } from '../../stores/user';
-import { useCoursesStore } from '../../stores/courses';
 
 const user = reactive(useUserStore().users[0])
 
@@ -64,7 +63,6 @@ const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;
 }
-const courses = useCoursesStore()
 const sortType = ref("All")
 
 </script>

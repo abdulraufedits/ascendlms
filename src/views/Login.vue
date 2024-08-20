@@ -22,7 +22,49 @@ if(!usersCookie ){
         data.forEach(user => {
             if(user.id == usersCookie){
                 router.push(`/student/${user.username}/dashboard`)
-            currentUser.getUserData(user)
+                currentUser.getUserData(user)
+                fetch("http://localhost:8000/courses")
+                .then(res => res.json()).then(courses => {
+                    courses.forEach(course => {
+                        course.students.forEach(std => {
+                            if(std.id == user.id){
+                                const lecs = []
+                                const assigns = []
+                                const quizs = []
+                                course.lectureNotes.forEach(lec => {
+                                        lec.students.forEach(stdd => {
+                                            if(stdd.id == user.id){
+                                                lecs.push(new LectureNote(lec.id,lec.lectureName, lec.courseName, lec.createdOn, stdd.status))
+                                            }})
+                                })
+                                course.assignments.forEach(assign => {
+                                    assign.students.forEach(stdd => {
+                                        if(stdd.id == user.id){
+                                            assigns.push(new Assignment(assign.id,assign.assignmentName, assign.courseName, assign.dueDate, stdd.status))
+                                        }})
+                                })
+                                course.quizzes.forEach(quiz => {
+                                    quiz.students.forEach(stdd => {
+                                        if(stdd.id == user.id){
+                                            quizs.push(new Quiz(quiz.id,quiz.quizName, quiz.courseName, quiz.dueDate, stdd.status))
+                                        }})
+                                })
+                                currentCourses.getCoursesData({
+                                    id: course.id,
+                                    courseName: course.courseName,
+                                    courseDesc: course.courseDesc,
+                                    status: course.students.find(std => std.id === user.id)?.status,
+                                    lectureNotes: lecs,
+                                    assignments: assigns,
+                                    quizzes: quizs,
+                                    announcements: course.announcements,
+                                        })
+                            }
+                    })
+                }
+            )}).catch(err => console.log(err))
+            } else {
+                err.value = true;
             }
         })
     }).catch(err => console.log(err))

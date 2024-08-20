@@ -15,6 +15,13 @@ export const useUserStore = defineStore('user', {
     actions:{
         getUserData(userr){
             this.users[0] = userr;
+        },
+        sort(sortType, obj){
+            if(sortType !== "All"){
+                obj = obj.filter(a => a.status == sortType)
+            }
+            return obj
+
         }
     }
 })

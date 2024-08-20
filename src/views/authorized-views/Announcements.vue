@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </section>
-            <AnnouncementList :announcements="courses.sort(sortType,courses.announcements, 'announcements')"/>
+            <AnnouncementList :announcements="courses.sort(sortType,userCourses.coursess, 'announcements')"/>
         </main>
     </div>
 
@@ -25,7 +25,7 @@
 import StudentHeader from '../../components/StudentHeader.vue'
 import SideMenu from '../../components/SideMenu.vue'
 import Tab from '../../components/Tab.vue'
-import { computed, ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { useCoursesStore } from '../../stores/courses';
 import AnnouncementList from '../../components/AnnouncementList.vue';
 
@@ -39,7 +39,11 @@ const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;
 }
-const courses = useCoursesStore()
+const courses = reactive(useCoursesStore())
+const userCourses = reactive({
+    coursess: courses.courses
+})
+
 const sortType = ref("All")
 
 </script>

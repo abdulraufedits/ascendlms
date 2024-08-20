@@ -6,7 +6,7 @@
         <section class="flex flex-col gap-6 px-10 py-8">
             <div class=" rounded-lg h-72 bg-[url(/src/assets/courses/uxlaws.png)] bg-cover bg-no-repeat"></div>
             <div class="flex justify-between items-center">
-                <h1 class="h1-title">UX Laws</h1>
+                <h1 class="h1-title">{{$route.params.filter}}</h1>
                 <div class="flex gap-x-2">
                     <button class=" grid place-content-center rounded-lg px-5 font-big bg-red text-white">End Course</button>
                     <div class="grid place-content-center min-h-14 min-w-14 rounded-lg border-2 border-ddd">
@@ -41,13 +41,13 @@
             </div>
         </section>
         <section class="flex px-10 pt-8">
-                <Tab title="Content" @click="sortType = 'Content'" :sortType="sortType" :obj="obj" :courseFilter="'Content'"/>
-                <Tab title="Assignments" @click="sortType = 'Assignments'" :obj="obj" :courseFilter="'Assignments'"/>
-                <Tab title="Quizzes" @click="sortType = 'Quizzes'" :obj="obj" :courseFilter="'Quizzes'"/>
-                <Tab title="Mentors" @click="sortType = 'Mentors'" :obj="obj" :courseFilter="'Mentors'"/>
-                <Tab title="Announcements" @click="sortType = 'Announcements'" :obj="obj" :courseFilter="'Announcements'"/>
-                <Tab title="Miscellaneous" @click="sortType = 'Miscellaneous'" :obj="obj" :courseFilter="'Miscellaneous'"/>
-                <Tab title="Support" @click="sortType = 'Support'" :obj="obj" :courseFilter="'Support'"/>
+            <CourseTab obj="content" :title="$route.params.filter" :sortType="sortType" @click="sortType = 'content'"/>
+            <CourseTab obj="assignments" :title="$route.params.filter" :sortType="sortType" @click="sortType = 'assignments'"/>
+            <CourseTab obj="quizzes" :title="$route.params.filter" :sortType="sortType" @click="sortType = 'quizzes'"/>
+            <CourseTab obj="mentors" :title="$route.params.filter" :sortType="sortType" @click="sortType = 'mentors'"/>
+            <CourseTab obj="announcements" :title="$route.params.filter" :sortType="sortType" @click="sortType = 'announcements'"/>
+            <CourseTab obj="miscellaneous" :title="$route.params.filter" :sortType="sortType" @click="sortType = 'miscellaneous'"/>
+            <CourseTab obj="support" :title="$route.params.filter" :sortType="sortType" @click="sortType = 'support'"/>
             </section>
             <section class="flex justify-between px-10 py-4 bg-background border-y-2 border-ddd">
                 <div class="flex gap-x-2">
@@ -62,7 +62,7 @@
                     <span class="p-1 grid place-content-center" :class="coursesView === 'grid' ? 'bg-white rounded-sm': ''" @click="()=> coursesView = 'grid'"><ion-icon name="grid-outline" class="text-2xl"></ion-icon></span>
                 </div>
             </section>
-            <CourseTable :courses="courses.courses"/>
+            <CourseTable :courses="courses.contentFilter(userCourses.coursess, sortType)" :type="sortType" />
     </main>
     </div>
 </template>
@@ -70,19 +70,21 @@
 <script setup>
 import SideMenu from '../../components/SideMenu.vue';
 import StudentHeader from '../../components/StudentHeader.vue';
-import Tab from '../../components/Tab.vue';
+import CourseTab from '../../components/CourseTab.vue';
 import { useUserStore } from '../../stores/user'
 import { ref, reactive } from 'vue';
 import { useCoursesStore } from '../../stores/courses';
 import CourseTable from '../../components/CourseTable.vue';
 
-const courses = reactive(useCoursesStore().courses)
+const courses = reactive(useCoursesStore())
+const userCourses = reactive({
+    coursess: courses.courses
+})
 
 const user = reactive(useUserStore().users[0])
 const coursesView = ref('list')
-const sortType = ref("Content")
+const sortType = ref("content")
 
-const obj = 'details'
 
 const sideBarState = ref(true);
 if(window.innerWidth < 1024){

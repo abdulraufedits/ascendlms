@@ -8,9 +8,6 @@ export const useCoursesStore = defineStore('courses', {
         }
     },
         getters: {
-            async getCourses(){
-                return this.courses
-           }
         },
         actions: {
             getCoursesData(crs){
@@ -20,15 +17,19 @@ export const useCoursesStore = defineStore('courses', {
                     this.courses[0] = crs;
                 }
             },
-            async sort(sortType, obj, type){
-                const sorted = []
+            sort(sortType, obj, type){
+                var sorted = []
                 if(sortType == "All"){
-
-                    obj.forEach(a => type == 'assignments' ? sorted.push(a.assignments) : type == 'quizzes' ? sorted.push(a.quizzes) : sorted.push(a.announcements))
+                    obj.forEach(a => type == 'assignments' ? sorted = [...sorted,...a.assignments] : type == 'quizzes' ? sorted = [...sorted,...a.quizzes] : type == 'announcements' ? sorted = [...sorted,...a.announcements]  : null)
                 }
-                else { obj.forEach(a => type == 'assignments' ? sorted.push(a.assignments.filter(b => b.status == sortType)) : type == 'quizzes' ? sorted.push(a.quizzes.filter(b => b.status == sortType)) : sorted.push(a.announcements.filter(b => b.courseName == sortType)))}
-                console.log(sorted)
+                else { obj.forEach(a => type == 'assignments' ? sorted = [...sorted,...a.assignments.filter(b => b.status == sortType)] : type == 'quizzes' ? sorted = [...sorted,...a.quizzes.filter(b => b.status == sortType)] : sorted = [...sorted,...a.announcements.filter(b => b.courseName == sortType)])}
                 return sorted
             },
+            contentFilter(obj, type){
+                var sorted = []
+                obj.forEach(a => type == 'content' ? sorted = [...sorted,...a.lectureNotes] : type == 'assignments' ? sorted = [...sorted,...a.assignments] : type == 'quizzes' ? sorted = [...sorted,...a.quizzes] : type == 'announcements' ? sorted = [...sorted,...a.announcements] : type == 'mentors' ? sorted = [...sorted,...a.mentors] : type == 'misc' ? sorted = [...sorted,...a.miscellaneous] : null )
+                return sorted
+            }
+                
         }
 })

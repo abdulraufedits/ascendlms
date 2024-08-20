@@ -23,7 +23,7 @@
                     <span class="p-1 grid place-content-center" :class="coursesView === 'grid' ? 'bg-white rounded-sm': ''" @click="()=> coursesView = 'grid'"><ion-icon name="grid-outline" class="text-2xl"></ion-icon></span>
                 </div>
             </section>
-            <AssignmentsTable :assignments="courses.sort(sortType, userCourses, 'assignments')"/>
+            <AssignmentsTable :assignments="courses.sort(sortType, userCourses.coursess, 'assignments')"/>
         </main>
     </div>
 
@@ -49,8 +49,11 @@ if(window.innerWidth < 1024){
     sideBarState.value =  false;
 }
 
-const courses = useCoursesStore()
-const userCourses = reactive(courses.courses)
+const courses = reactive(useCoursesStore())
+const userCourses = reactive({
+    coursess: courses.courses
+})
+
 
 const user = reactive(useUserStore().users[0])
 
