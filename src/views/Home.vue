@@ -25,4 +25,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import NavBar from '../components/NavBar.vue';
+
+localStorage.removeItem('isAuthenticated')
 </script>

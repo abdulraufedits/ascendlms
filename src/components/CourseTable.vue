@@ -53,6 +53,73 @@
             </tr>
         </tbody>
     </table>
+    <table v-if="type == 'quizzes'">
+        <thead>
+            <th>Quiz title</th>
+            <th>Status</th>
+            <th>Results</th>
+        </thead>
+        <tbody>
+            <tr v-for="quiz in courses">
+                <td class="font-big font-bold text-xl">
+                
+                    <div class="flex items-center gap-x-2">
+                        <label for="topic">{{quiz.quizName}}</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="flex items-center gap-x-2">
+                        <label for="status" class="font-small font-semibold">{{quiz.status}}</label>
+                    </div>
+                </td>
+                <td>
+                    <button class="cta px-4 py-2 flex items-center gap-x-3">Start the quiz<ion-icon name="arrow-forward-outline"></ion-icon></button>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+    <table v-if="type == 'announcements'">
+        <thead>
+            <th>Announcements</th>
+        </thead>
+        <tbody>
+            <tr v-for="announcement in courses">
+                <div class="px-4 py-2 bg-background border-2 border-primary rounded-md font-small">
+        <div class="flex gap-x-1 items-center mb-2">
+            <ion-icon name="create"></ion-icon>
+            <label for="instructor-name" class="font-semibold">{{announcement.instructor}}</label>
+        </div>
+        <blockquote class="font-big text-xl my-2">{{announcement.msg}}</blockquote>
+        <time datetime="08 March, 2024, 10:20 AM" class="text-sm text-[color:rgb(0,0,0,0.5)]">{{announcement.date}}</time>
+    </div>
+                
+            </tr>
+        </tbody>
+    </table>
+    <table v-if="type == 'mentors'">
+        <thead>
+            <th class="!w-4/5">Name</th>
+            <th class="!w-1/5">Status</th>
+        </thead>
+        <tbody>
+            <tr v-for="instructor in courses">
+                <td class="!w-4/5">
+                    <div>
+                        <h1 class="font-big font-bold text-xl">{{ instructor.username }}</h1>
+                            <p class="subtitle text-xs cursor-pointer hover:text-primary hover:underline">{{ instructor.designation }}</p>
+                    </div>
+                </td>
+                <td class="!w-1/5">
+                    <div class="flex items-center gap-x-4">
+                        <label for="status" class="font-small font-semibold" :class="instructor.status =='Active' ? 'text-accent' : 'text-gray-400'">{{instructor.status}}</label>
+                        <ion-icon name="chatbox-ellipses-outline" class="text-2xl text-gray-400"></ion-icon>
+                    </div>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
 </template>
 
 <script setup>
@@ -105,6 +172,7 @@ tbody{
     flex-direction: column;
     gap: 24px 0;
     padding-left: 40px;
+    padding-bottom: 40px;
 }
 td{
     text-align: left;

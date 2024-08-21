@@ -17,7 +17,7 @@
             <div class="flex gap-x-2 items-center">
                 <div class="bg-[#BAFA95] text-[#3D8415] font-big flex items-center gap-x-1 px-3 py-1.5 rounded">
                     <ion-icon name="ribbon"></ion-icon>
-                    <label for="category">Design</label>
+                    <label for="category">{{userCourses.coursess[userCourses.coursess.findIndex(crs => $route.params.filter === crs.courseName)].category}}</label>
                 </div>
                 <span class="size-1 bg-gray-400 rounded-full my-auto"></span>
                 <div class=" text-gray-500 font-big flex items-center gap-x-1">
@@ -31,14 +31,14 @@
                     <time class="" datetime="{{ date }}">10:12 PM</time>
                 </div>
             </div>
-            <div>
+            <RouterLink :to="{name: 'Coursefilter', params: { course: 'mentors'}}" @click="sortType = 'mentors'">
                 <div class="badges-wrap flex">
                     <img class="img-badge bg-accent -mr-2" src="https://api.dicebear.com/9.x/personas/svg?seed=Buster" alt="avatar" />
                     <img class="img-badge bg-secondary -mr-2" src="https://api.dicebear.com/9.x/avataaars/svg?seed=Bubba" alt="avatar" />
                     <img class="img-badge bg-yellow -mr-2" src="https://api.dicebear.com/9.x/avataaars/svg?seed=Bubba" alt="avatar" />
                     <label for="members" class="img-badge bg-gray-200 text-sm font-bold font-small">+93</label>
                 </div>
-            </div>
+            </RouterLink>
         </section>
         <section class="flex px-10 pt-8">
             <CourseTab obj="content" :title="$route.params.filter" :sortType="sortType" @click="sortType = 'content'"/>
@@ -75,6 +75,7 @@ import { useUserStore } from '../../stores/user'
 import { ref, reactive } from 'vue';
 import { useCoursesStore } from '../../stores/courses';
 import CourseTable from '../../components/CourseTable.vue';
+import { RouterLink } from 'vue-router';
 
 const courses = reactive(useCoursesStore())
 const userCourses = reactive({

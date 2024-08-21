@@ -27,6 +27,7 @@
 import { ref } from 'vue';
 import { RouterLink,useRouter,useRoute } from 'vue-router';
 import Illust from '../assets/login-img.svg';
+import Student from '../stores/classes/Student';
 
 const username=ref("");
 const email=ref("");
@@ -37,21 +38,18 @@ const router = useRouter()
 const route = useRoute()
 
 function createAcc(){
-    fetch(route.query.p == 'Student' ? "http://localhost:8000/students" : route.query.p == 'Instructor' ? "http://localhost:8000/instructors": null,{
+    fetch(route.query.p == 'Student' ? "https://ascendapi-b810cfaf8c4a.herokuapp.com/students" : route.query.p == 'Instructor' ? "https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors": null,{
             method: "POST",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json;charset=UTF-8",
             },
-            body: JSON.stringify({
-                username: username.value,
-                email: email.value,
-                password: password.value,
-                achievements: []
-            }),
-        }).then((response) => response.json())
+            body: JSON.stringify(new Student(username.value,email.value,password.value))
+            }).then((response) => response.json())
             .then((data) => {
                 router.push(`/student/${username.value}/dashboard`)
+                currentUser.getUserData(user)
+                setCookie('id', user.id, 2)
                 }).catch(err => alert("Select your profession first."))
             }
 </script>

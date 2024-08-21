@@ -16,9 +16,9 @@
                 <Widget class="col-span-7 row-span-2 xl:self-start h-full !flex flex-col justify-between">
                     <h1 class="h1-title">Statistics</h1>
                     <div class="flex flex-col gap-y-1">
-                        <GlanceWidget icon="clipboard" bgColor="bg-primary"/>
-                        <GlanceWidget icon="checkmark" bgColor="bg-success" qty="11" work="Courses completed"/>
-                        <GlanceWidget icon="card" bgColor="bg-black" iconColor="text-secondary" qty="3" work="Badges earned"/>
+                        <!-- <GlanceWidget icon="clipboard" bgColor="bg-primary" :qty="assignmentsCompleted" work="Assignments completed"/> -->
+                        <GlanceWidget icon="checkmark" bgColor="bg-success" :qty="coursesCompleted()" work="Courses completed"/>
+                        <GlanceWidget icon="card" bgColor="bg-black" iconColor="text-secondary" :qty="badgesEarned()" work="Badges earned"/>
                     </div>
                 </Widget>
                 <Widget class="col-span-5 col-start-8 row-span-2 xl:self-start h-full">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <CoursesTable :courses="courses.courses"/>
+                    <CoursesTable :courses="userCourses.coursess"/>
                 </Widget>
                 <Widget class="col-span-6 col-start-13 row-start-2 row-span-2 xl:self-start">
                     <div class="flex gap-x-4 items-center">
@@ -79,10 +79,41 @@ import { useCoursesStore } from '../../stores/courses';
 const user = reactive(useUserStore().users[0])
 
 const courses = reactive(useCoursesStore())
+const userCourses = reactive({
+    coursess: courses.courses
+})
 
+// const  assignmentsCompleted = async()=>{
+//     let n = 0;
+//     userCourses.coursess.forEach( course => {
+//          course.assignments.forEach(assignment => {
+//             if(assignment.status == "Completed"){
+//                 n +=1
+//             }
+//         })
+//     })
+//     return n
+// }
 
-// console.log(courses.courses)
-// courses.consoleKar()
+const coursesCompleted = ref( ()=>{
+    let n = 0;
+    userCourses.coursess.forEach(course => {
+        if(course.status == 'Completed'){
+            n += 1
+        }
+    })
+    return n
+})
+
+const badgesEarned = ref(()=>{
+    let n = 0;
+    user.achievements.forEach(ach => {
+        if(ach.status == 'Completed'){
+            n += 1
+        }
+    })
+    return n
+})
 const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;
