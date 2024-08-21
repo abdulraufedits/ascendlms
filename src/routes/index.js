@@ -54,7 +54,7 @@ const router = createRouter({
             path: '/student/:user/:page',
             component: StudentLayout,
             props: (route) => ({user: route.params.user, page: route.params.page }),
-            // meta: { requiresAuth: true },
+            meta: { requiresAuth: true },
             children:[
                 {
                     path: '',
@@ -73,7 +73,7 @@ const router = createRouter({
                         rewards: Rewards,
                         details: CourseDetails
                     },
-                    // meta: { requiresAuth: true },
+                    meta: { requiresAuth: true },
                     children: [
                         {
                             path: ':course',
@@ -98,13 +98,13 @@ const router = createRouter({
     }
 })
 
-// router.beforeEach((to, from) => {
-//     const isAuthenticated = localStorage.getItem('isAuthenticated');
-//     // Check if the route requires authentication
-//     if (to.meta.requiresAuth && !isAuthenticated){
-//         // Check if the user is authenticated
-//         return {name: 'Login'}
+router.beforeEach((to, from) => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    // Check if the route requires authentication
+    if (to.meta.requiresAuth && !isAuthenticated){
+        // Check if the user is authenticated
+        return {name: 'Login'}
         
-//     } 
-// });
+    } 
+});
 export default router
