@@ -5,6 +5,7 @@ export default class LectureNote {
     courseName = "";
     createdOn = "";
     status = "";
+    students = [];
 
     constructor(id, lectureName, courseName, createdOn, status) {
         this.id = id;
@@ -12,6 +13,13 @@ export default class LectureNote {
         this.courseName = courseName;
         this.createdOn = createdOn;
         this.status = status;
+    }
+    constructor(id, lectureName, courseName, createdOn, students, nul) {
+        this.id = id;
+        this.lectureName = lectureName;
+        this.courseName = courseName;
+        this.createdOn = createdOn;
+        this.students = students;
     }
 
     getId() {

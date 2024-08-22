@@ -62,17 +62,17 @@
 </template>
 
 <script setup>
-import GlanceWidget from '../../components/GlanceWidget.vue';
-import Widget from '../../components/Widget.vue';
-import ColoredListItem from '../../components/ColoredListItem.vue';
-import ActivityLog from '../../components/ActivityLog.vue';
-import CoursesTable from '../../components/CoursesTable.vue';
-import Calendar from '../../components/Calendar.vue';
-import SideMenu from '../../components/SideMenu.vue';
-import StudentHeader from '../../components/StudentHeader.vue';
+import GlanceWidget from '../../../components/GlanceWidget.vue';
+import Widget from '../../../components/Widget.vue';
+import ColoredListItem from '../../../components/ColoredListItem.vue';
+import ActivityLog from '../../../components/ActivityLog.vue';
+import CoursesTable from '../../../components/CoursesTable.vue';
+import Calendar from '../../../components/Calendar.vue';
+import SideMenu from '../../../components/SideMenu.vue';
+import StudentHeader from '../../../components/StudentHeader.vue';
 import { reactive, ref } from 'vue';
-import { useUserStore } from '../../stores/user';
-import { useCoursesStore } from '../../stores/courses';
+import { useUserStore } from '../../../stores/user';
+import { useCoursesStore } from '../../../stores/courses';
 
 const user = reactive(useUserStore().users[0])
 

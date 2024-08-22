@@ -39,13 +39,13 @@
 </template>
 
 <script setup>
-import Glance from '../../components/Glance.vue';
-import SideMenu from '../../components/SideMenu.vue'
-import StudentHeader from '../../components/StudentHeader.vue'
+import Glance from '../../../components/Glance.vue';
+import SideMenu from '../../../components/SideMenu.vue'
+import StudentHeader from '../../../components/StudentHeader.vue'
 import { ref,reactive } from 'vue';
-import Tab from '../../components/Tab.vue';
-import RewardsTable from '../../components/RewardsTable.vue';
-import { useUserStore } from '../../stores/user';
+import Tab from '../../../components/Tab.vue';
+import RewardsTable from '../../../components/RewardsTable.vue';
+import { useUserStore } from '../../../stores/user';
 
 const user = reactive(useUserStore().users[0])
 

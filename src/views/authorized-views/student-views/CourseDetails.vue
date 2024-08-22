@@ -68,13 +68,13 @@
 </template>
 
 <script setup>
-import SideMenu from '../../components/SideMenu.vue';
-import StudentHeader from '../../components/StudentHeader.vue';
-import CourseTab from '../../components/CourseTab.vue';
-import { useUserStore } from '../../stores/user'
+import SideMenu from '../../../components/SideMenu.vue';
+import StudentHeader from '../../../components/StudentHeader.vue';
+import CourseTab from '../../../components/CourseTab.vue';
+import { useUserStore } from '../../../stores/user'
 import { ref, reactive } from 'vue';
-import { useCoursesStore } from '../../stores/courses';
-import CourseTable from '../../components/CourseTable.vue';
+import { useCoursesStore } from '../../../stores/courses';
+import CourseTable from '../../../components/CourseTable.vue';
 import { RouterLink } from 'vue-router';
 
 const courses = reactive(useCoursesStore())

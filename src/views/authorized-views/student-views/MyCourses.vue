@@ -23,14 +23,14 @@
 </template>
 
 <script setup>
-import CourseCard from '../../components/CourseCard.vue';
-import CoursesTable from '../../components/CoursesTable.vue'
-import SideMenu from '../../components/SideMenu.vue';
-import StudentHeader from '../../components/StudentHeader.vue';
+import CourseCard from '../../../components/CourseCard.vue';
+import CoursesTable from '../../../components/CoursesTable.vue'
+import SideMenu from '../../../components/SideMenu.vue';
+import StudentHeader from '../../../components/StudentHeader.vue';
 import { ref, reactive } from 'vue';
-import { useCoursesStore } from '../../stores/courses';
-import TimeSlot from '../../components/TimeSlot.vue';
-import { useUserStore } from '../../stores/user';
+import { useCoursesStore } from '../../../stores/courses';
+import TimeSlot from '../../../components/TimeSlot.vue';
+import { useUserStore } from '../../../stores/user';
 import { RouterLink } from 'vue-router';
 
 const courses = reactive(useCoursesStore())

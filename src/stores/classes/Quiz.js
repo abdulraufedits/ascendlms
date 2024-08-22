@@ -4,8 +4,10 @@ export default class Quiz {
     id = 0;
     quizName = "";
     courseName = "";
+    uploadDate = "";
     dueDate = "";
     status = "";
+    students = [];
 
     constructor(id, quizName, courseName, dueDate, status) {
         this.id = id;
@@ -13,6 +15,14 @@ export default class Quiz {
         this.courseName = courseName;
         this.dueDate = dueDate;
         this.status = status;
+    }
+    constructor(id, quizName, courseName, uploadDate, dueDate, students) {
+        this.id = id;
+        this.quizName = quizName;
+        this.courseName = courseName;
+        this.dueDate = dueDate;
+        this.uploadDate =uploadDate;
+        this.students = students;
     }
 
     getId() {

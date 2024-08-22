@@ -18,14 +18,14 @@
 </template>
 
 <script setup>
-import StudentHeader from '../../components/StudentHeader.vue'
-import SideMenu from '../../components/SideMenu.vue'
-import Tab from '../../components/Tab.vue'
+import StudentHeader from '../../../components/StudentHeader.vue'
+import SideMenu from '../../../components/SideMenu.vue'
+import Tab from '../../../components/Tab.vue'
 import { ref,reactive } from 'vue';
-import AssignmentsTable from '../../components/AssignmentsTable.vue';
-import { useCoursesStore } from '../../stores/courses';
-import { useUserStore } from '../../stores/user';
-import TableControls from '../../components/TableControls.vue';
+import AssignmentsTable from '../../../components/AssignmentsTable.vue';
+import { useCoursesStore } from '../../../stores/courses';
+import { useUserStore } from '../../../stores/user';
+import TableControls from '../../../components/TableControls.vue';
 
 const props = defineProps({
     username: {

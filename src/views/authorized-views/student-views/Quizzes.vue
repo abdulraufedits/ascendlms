@@ -30,13 +30,13 @@
 </template>
 
 <script setup>
-import StudentHeader from '../../components/StudentHeader.vue'
-import SideMenu from '../../components/SideMenu.vue'
-import Tab from '../../components/Tab.vue'
+import StudentHeader from '../../../components/StudentHeader.vue'
+import SideMenu from '../../../components/SideMenu.vue'
+import Tab from '../../../components/Tab.vue'
 import { ref ,reactive} from 'vue';
-import { useCoursesStore } from '../../stores/courses';
-import QuizzesTable from '../../components/QuizzesTable.vue';
-import { useUserStore } from '../../stores/user';
+import { useCoursesStore } from '../../../stores/courses';
+import QuizzesTable from '../../../components/QuizzesTable.vue';
+import { useUserStore } from '../../../stores/user';
 
 const props = defineProps({
     username: {

@@ -6,13 +6,8 @@ import {useUserStore} from '../stores/user'
 import { setCookie, checkCookie } from '../cookies';
 import { useCoursesStore } from '../stores/courses';
 
-import LectureNote from '../stores/classes/LectureNote';
-import Assignment from '../stores/classes/Assignment';
-import Quiz from '../stores/classes/Quiz';
-import Instructor from '../stores/classes/Instructor';
-
 const currentUser = useUserStore()
-
+let student =true;
 const currentCourses = useCoursesStore()
 const usersCookie = checkCookie('id')
 if(!usersCookie ){
@@ -37,23 +32,47 @@ if(!usersCookie ){
                                 course.lectureNotes.forEach(lec => {
                                         lec.students.forEach(stdd => {
                                             if(stdd.id == user.id){
-                                                lecs.push(new LectureNote(lec.id,lec.lectureName, lec.courseName, lec.createdOn, stdd.status))
+                                                lecs.push({
+                                                    id: lec.id,
+                                                    lectureName:lec.lectureName,
+                                                    courseName: lec.courseName,
+                                                    createdOn: lec.createdOn,
+                                                    status:  stdd.status
+                                                })
                                             }})
                                 })
                                 course.assignments.forEach(assign => {
                                     assign.students.forEach(stdd => {
                                         if(stdd.id == user.id){
-                                            assigns.push(new Assignment(assign.id,assign.assignmentName, assign.courseName, assign.dueDate, stdd.status))
+                                            assigns.push({
+                                                    id: assign.id,
+                                                    assignmentName:assign.assignmentName,
+                                                    courseName: assign.courseName,
+                                                    dueDate: assign.dueDate,
+                                                    status:  stdd.status
+                                                })
                                         }})
                                 })
                                 course.quizzes.forEach(quiz => {
                                     quiz.students.forEach(stdd => {
                                         if(stdd.id == user.id){
-                                            quizs.push(new Quiz(quiz.id,quiz.quizName, quiz.courseName, quiz.dueDate, stdd.status))
+                                            quizs.push({
+                                                    id: quiz.id,
+                                                    quizName: quiz.quizName,
+                                                    courseName: quiz.courseName,
+                                                    dueDate: quiz.dueDate,
+                                                    status:  stdd.status
+                                                })
                                         }})
                                 })
                                 course.mentors.forEach(mntr => {
-                                    mntrs.push(new Instructor(mntr.id, mntr.username, mntr.email,undefined, mntr.designation, mntr.status))
+                                    mntrs.push({
+                                        id: mntr.id,
+                                        username: mntr.username,
+                                        email: mntr.email,
+                                        designation: mntr.designation,
+                                        status: mntr.status
+                                    })
                                 })
                                 currentCourses.getCoursesData({
                                     id: course.id,
@@ -72,12 +91,74 @@ if(!usersCookie ){
                     })
                 }
             )}).catch(err => console.log(err))
-            } else {
-                err.value = true;
+        return;    
+        } else {
+                student = false;
             }
         })
     }).catch(err => console.log(err))
-}
+    if(!student){
+        fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors")
+    .then(res => res.json()).then(data => {
+        data.forEach(user => {
+            if(user.email == eml && user.password == pass){
+                router.push(`/instructor/${user.username}/dashboard`)
+                currentUser.getUserData(user)
+                setCookie('id', user.id, 2)
+                fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/courses")
+                .then(res => res.json()).then(courses => {
+                    courses.forEach(course => {
+                        course.mentors.forEach(mnt => {
+                            if(mnt.id == mnt.id){
+                                const lecs = []
+                                const assigns = []
+                                const quizs = []
+                                course.lectureNotes.forEach(lec => {
+                                        lecs.push({
+                                                    id: lec.id,
+                                                    lectureName:lec.lectureName,
+                                                    courseName: lec.courseName,
+                                                    createdOn: lec.createdOn,
+                                                    students: lec.students
+                                                })
+                                })
+                                course.assignments.forEach(assign => {
+                                        assigns.push({
+                                                    id: assign.id,
+                                                    assignmentName: assign.assignmentName,
+                                                    courseName: assign.courseName,
+                                                    uploadedOn: assign.dueDate, // API needs to be changed
+                                                    dueDate: assign.dueDate,
+                                                    students: assign.students
+                                                })
+                                })
+                                course.quizzes.forEach(quiz => {  
+                                        quizs.push({
+                                                    id: quiz.id,
+                                                    quizName: quiz.quizName,
+                                                    courseName: quiz.courseName,
+                                                    uploadedOn: quiz.dueDate,
+                                                    dueDate: quiz.dueDate,
+                                                    students: quiz.students
+                                                })
+                                })
+
+                                currentCourses.getCoursesData({
+                                    id: course.id,
+                                    courseName: course.courseName,
+                                    courseDesc: course.courseDesc,
+                                    category: course.category,
+                                    lectureNotes: lecs,
+                                    assignments: assigns,
+                                    quizzes: quizs,
+                                    announcements: course.announcements,
+                                })
+                    }}
+                        )}).catch(err => console.log(err))
+            })} else {
+                err.value = true
+            }
+})})}}
 
 const email=ref("");
 const password=ref("");
@@ -89,6 +170,7 @@ function valid(eml,pass){
     .then(res => res.json()).then(data => {
         data.forEach(user => {
             if(user.email == eml && user.password == pass){
+                student = true;
                 router.push(`/student/${user.username}/dashboard`)
                 currentUser.getUserData(user)
                 setCookie('id', user.id, 2)
@@ -104,24 +186,47 @@ function valid(eml,pass){
                                 course.lectureNotes.forEach(lec => {
                                         lec.students.forEach(stdd => {
                                             if(stdd.id == user.id){
-                                                lecs.push(new LectureNote(lec.id,lec.lectureName, lec.courseName, lec.createdOn, stdd.status))
+                                                lecs.push({
+                                                    id: lec.id,
+                                                    lectureName:lec.lectureName,
+                                                    courseName: lec.courseName,
+                                                    createdOn: lec.createdOn,
+                                                    status:  stdd.status
+                                                })
                                             }})
                                 })
                                 course.assignments.forEach(assign => {
                                     assign.students.forEach(stdd => {
                                         if(stdd.id == user.id){
-                                            assigns.push(new Assignment(assign.id,assign.assignmentName, assign.courseName, assign.dueDate, stdd.status))
+                                            assigns.push({
+                                                    id: assign.id,
+                                                    assignmentName:assign.assignmentName,
+                                                    courseName: assign.courseName,
+                                                    dueDate: assign.dueDate,
+                                                    status:  stdd.status
+                                                })
                                         }})
                                 })
                                 course.quizzes.forEach(quiz => {
                                     quiz.students.forEach(stdd => {
                                         if(stdd.id == user.id){
-                                            quizs.push(new Quiz(quiz.id,quiz.quizName, quiz.courseName, quiz.dueDate, stdd.status))
+                                            quizs.push({
+                                                    id: quiz.id,
+                                                    quizName: quiz.quizName,
+                                                    courseName: quiz.courseName,
+                                                    dueDate: quiz.dueDate,
+                                                    status:  stdd.status
+                                                })
                                         }})
                                 })
-
                                 course.mentors.forEach(mntr => {
-                                    mntrs.push(new Instructor(mntr.id, mntr.username, mntr.email,undefined, mntr.designation, mntr.status))
+                                    mntrs.push({
+                                        id: mntr.id,
+                                        username: mntr.username,
+                                        email: mntr.email,
+                                        designation: mntr.designation,
+                                        status: mntr.status
+                                    })
                                 })
                                 currentCourses.getCoursesData({
                                     id: course.id,
@@ -135,16 +240,81 @@ function valid(eml,pass){
                                     quizzes: quizs,
                                     announcements: course.announcements,
                                     mentors: mntrs
-                                        })
+                                })
                             }
                     })
                 }
             )}).catch(err => console.log(err))
-            } else {
-                err.value = true;
+        return;    
+        } else {
+                student = false;
             }
         })
     }).catch(err => console.log(err))
+    if(!student){
+        fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors")
+    .then(res => res.json()).then(data => {
+        data.forEach(user => {
+            if(user.email == eml && user.password == pass){
+                router.push(`/instructor/${user.username}/dashboard`)
+                currentUser.getUserData(user)
+                setCookie('id', user.id, 2)
+                fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/courses")
+                .then(res => res.json()).then(courses => {
+                    courses.forEach(course => {
+                        course.mentors.forEach(mnt => {
+                            if(mnt.id == mnt.id){
+                                const lecs = []
+                                const assigns = []
+                                const quizs = []
+                                course.lectureNotes.forEach(lec => {
+                                        lecs.push({
+                                                    id: lec.id,
+                                                    lectureName:lec.lectureName,
+                                                    courseName: lec.courseName,
+                                                    createdOn: lec.createdOn,
+                                                    students: lec.students
+                                                })
+                                })
+                                course.assignments.forEach(assign => {
+                                        assigns.push({
+                                                    id: assign.id,
+                                                    assignmentName: assign.assignmentName,
+                                                    courseName: assign.courseName,
+                                                    uploadedOn: assign.dueDate, // API needs to be changed
+                                                    dueDate: assign.dueDate,
+                                                    students: assign.students
+                                                })
+                                })
+                                course.quizzes.forEach(quiz => {  
+                                        quizs.push({
+                                                    id: quiz.id,
+                                                    quizName: quiz.quizName,
+                                                    courseName: quiz.courseName,
+                                                    uploadedOn: quiz.dueDate,
+                                                    dueDate: quiz.dueDate,
+                                                    students: quiz.students
+                                                })
+                                })
+
+                                currentCourses.getCoursesData({
+                                    id: course.id,
+                                    courseName: course.courseName,
+                                    courseDesc: course.courseDesc,
+                                    category: course.category,
+                                    lectureNotes: lecs,
+                                    assignments: assigns,
+                                    quizzes: quizs,
+                                    announcements: course.announcements,
+                                })
+                    }}
+                        )}).catch(err => console.log(err))
+            })} else {
+                err.value = true
+            }
+        })
+    }).catch(err => console.log(err))
+}
 }
 
 </script>

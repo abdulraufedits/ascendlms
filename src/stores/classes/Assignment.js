@@ -3,8 +3,10 @@ export default class Assignment {
     id = 0;
     assignmentName = "";
     courseName = "";
+    uploadDate ="";
     dueDate = "";
     status = "";
+    students =[];
 
     constructor(id, assignmentName, courseName, dueDate, status) {
         this.id = id;
@@ -12,6 +14,14 @@ export default class Assignment {
         this.courseName = courseName;
         this.dueDate = dueDate;
         this.status = status;
+    }
+    constructor(id, assignmentName, courseName, uploadDate,  dueDate, students) {
+        this.id = id;
+        this.assignmentName = assignmentName;
+        this.courseName = courseName;
+        this.dueDate = dueDate;
+        this.uploadDate = uploadDate;
+        this.students = students;
     }
 
     getId() {

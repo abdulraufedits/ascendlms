@@ -22,12 +22,12 @@
 </template>
 
 <script setup>
-import StudentHeader from '../../components/StudentHeader.vue'
-import SideMenu from '../../components/SideMenu.vue'
-import Tab from '../../components/Tab.vue'
+import StudentHeader from '../../../components/StudentHeader.vue'
+import SideMenu from '../../../components/SideMenu.vue'
+import Tab from '../../../components/Tab.vue'
 import { ref, reactive } from 'vue';
-import { useCoursesStore } from '../../stores/courses';
-import AnnouncementList from '../../components/AnnouncementList.vue';
+import { useCoursesStore } from '../../../stores/courses';
+import AnnouncementList from '../../../components/AnnouncementList.vue';
 
 const props = defineProps({
     username: {
