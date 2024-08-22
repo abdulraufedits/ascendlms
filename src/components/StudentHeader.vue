@@ -3,7 +3,7 @@
             <div class=" flex items-center gap-x-4">
                 <img src="../assets/icons/dock-icon.svg" alt="open and closing side menu" class="size-12 cursor-pointer" @click="$emit('closeSideBar')">
                 <div>
-                    <h1 class="font-big text-3xl font-bold ">Welcome, {{ username }} 👋</h1>
+                    <h1 class="font-big text-3xl font-bold ">{{ title }}</h1>
                     <p class="font-small text-gray-500">{{subtitle}}</p>
                 </div>
             </div>
@@ -30,6 +30,10 @@
 <script setup>
 const props = defineProps({
     username: {
+        type: String,
+        default: "Untitled"
+    },
+    title: {
         type: String,
         default: "Untitled"
     },
