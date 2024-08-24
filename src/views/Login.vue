@@ -17,6 +17,8 @@ if(!usersCookie ){
     .then(res => res.json()).then(data => {
         data.forEach(user => {
             if(user.id == usersCookie){
+                
+                localStorage.setItem('isAuthenticated', 'true')
                 router.push(`/student/${user.username}/dashboard`)
                 currentUser.getUserData(user)
                 localStorage.setItem('isAuthenticated', true)
@@ -102,6 +104,7 @@ if(!usersCookie ){
     .then(res => res.json()).then(data => {
         data.forEach(user => {
             if(user.email == eml && user.password == pass){
+                localStorage.setItem('isAuthenticated', 'true')
                 router.push(`/instructor/${user.username}/dashboard`)
                 currentUser.getUserData(user)
                 setCookie('id', user.id, 2)
@@ -170,7 +173,8 @@ function valid(eml,pass){
     .then(res => res.json()).then(data => {
         data.forEach(user => {
             if(user.email == eml && user.password == pass){
-                student = true;
+                
+                localStorage.setItem('isAuthenticated', 'true')
                 router.push(`/student/${user.username}/dashboard`)
                 currentUser.getUserData(user)
                 setCookie('id', user.id, 2)
@@ -256,6 +260,8 @@ function valid(eml,pass){
     .then(res => res.json()).then(data => {
         data.forEach(user => {
             if(user.email == eml && user.password == pass){
+                
+                localStorage.setItem('isAuthenticated', 'true')
                 router.push(`/instructor/${user.username}/dashboard`)
                 currentUser.getUserData(user)
                 setCookie('id', user.id, 2)
@@ -308,7 +314,7 @@ function valid(eml,pass){
                                     announcements: course.announcements,
                                 })
                     }}
-                        )}).catch(err => console.log(err))
+                        )})
             })} else {
                 err.value = true
             }

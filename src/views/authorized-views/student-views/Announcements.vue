@@ -7,14 +7,7 @@
                 <Tab title="All" @click="sortType = 'All'" :sortType="sortType" obj="announcements"/>
                 <Tab v-for="course in courses.courses" :title="course.courseName" obj="announcements" @click="sortType = course.courseName"/>
             </section>
-            <section class="flex justify-between px-10 py-4 bg-background border-y-2 border-ddd">
-                <div class="flex gap-x-2">
-                    <input type="search" name="search-assignments" id="search-assignments"  class=" bg-white px-6 py-3 rounded-lg border-ddd border-2 bg-[url('/src/assets/icons/search-outline.svg')] bg-[right_1rem_center] bg-no-repeat bg-[length:18px_18px]   outline-none font-big font-light" placeholder="Search anything...">
-                    <div class="grid place-content-center rounded-lg p-3 bg-white border-2 border-ddd">
-                    <ion-icon name="filter-outline" class=" text-2xl"></ion-icon>
-                    </div>
-                </div>
-            </section>
+            <TableControls/>
             <AnnouncementList :announcements="courses.sort(sortType,userCourses.coursess, 'announcements')"/>
         </main>
     </div>
@@ -28,6 +21,7 @@ import Tab from '../../../components/Tab.vue'
 import { ref, reactive } from 'vue';
 import { useCoursesStore } from '../../../stores/courses';
 import AnnouncementList from '../../../components/AnnouncementList.vue';
+import TableControls from '../../../components/TableControls.vue';
 
 const props = defineProps({
     username: {

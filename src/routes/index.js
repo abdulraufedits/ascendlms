@@ -18,6 +18,7 @@ import Trash from "../views/authorized-views/student-views/Trash.vue";
 
 import InstructorLayout from "../views/authorized-views/instructor-views/InstructorLayout.vue";
 import Logout from "../views/authorized-views/Logout.vue";
+import InstructorDashboard from "../views/authorized-views/instructor-views/InstructorDashboard.vue";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -90,40 +91,39 @@ const router = createRouter({
                 }
             ]
         },
-        // {
-        //     path: '/instructor/:user/:page',
-        //     component: InstructorLayout,
-        //     props: (route) => ({user: route.params.user, page: route.params.page }),
-        //     meta: { requiresAuth: true },
-        //     children:[
-        //         {
-        //             path: '',
-        //             components:{
-        //                 dashboard: InstructorDashboard,
-        //                 mycourses: InstructorCourses
-        //             }
-        //         },
-        //         {
-        //             path: ':filter',
-        //             props: (route) => ({user: route.params.user, page: route.params.page, filter: route.params.filter }),
-        //             components: {
-        //                 assignments: InstructorAssignments,
-        //                 quizzes: InstructorQuizzes,
-        //                 announcements: InstructorAnnouncements,
-        //                 rewards: InstructorRewards,
-        //                 details: InstructorCourseDetails
-        //             },
-        //             meta: { requiresAuth: true },
-        //             children: [
-        //                 {
-        //                     path: ':course',
-        //                     name: 'Coursefilter',
-        //                     component: InstructorCourseDetails,
-        //                 }
-        //             ]
-        //         }
-        //     ]
-        // },
+        {
+            path: '/instructor/:user/:page',
+            component: InstructorLayout,
+            props: (route) => ({user: route.params.user, page: route.params.page }),
+            meta: { requiresAuth: true },
+            children:[
+                {
+                    path: '',
+                    components:{
+                        dashboard: InstructorDashboard
+                    }
+                },
+                // {
+                //     path: ':filter',
+                //     props: (route) => ({user: route.params.user, page: route.params.page, filter: route.params.filter }),
+                //     components: {
+                //         assignments: InstructorAssignments,
+                //         quizzes: InstructorQuizzes,
+                //         announcements: InstructorAnnouncements,
+                //         rewards: InstructorRewards,
+                //         details: InstructorCourseDetails
+                //     },
+                //     meta: { requiresAuth: true },
+                //     children: [
+                //         {
+                //             path: ':course',
+                //             name: 'Coursefilter',
+                //             component: InstructorCourseDetails,
+                //         }
+                //     ]
+                // }
+            ]
+        },
         {   path: '/:pathMatch(.*)*',
             name: 'NotFound',
             component: NotFound

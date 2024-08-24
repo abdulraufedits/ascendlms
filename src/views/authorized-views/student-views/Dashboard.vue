@@ -1,6 +1,6 @@
 <template>
     <div class="flex">
-        <SideMenu isActivePage="Dashboard" v-show="sideBarState"/>
+    <SideMenu isActivePage="Dashboard" v-show="sideBarState"/>
     <main class="w-full">
         <StudentHeader :username="user.username" :title="`Hello, ${user.username} 👋`" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
         <section class="flex flex-col gap-4 px-10 py-8">
@@ -75,7 +75,6 @@ import { useUserStore } from '../../../stores/user';
 import { useCoursesStore } from '../../../stores/courses';
 
 const user = reactive(useUserStore().users[0])
-
 const courses = reactive(useCoursesStore())
 const userCourses = reactive({
     coursess: courses.courses

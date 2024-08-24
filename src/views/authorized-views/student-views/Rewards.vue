@@ -6,7 +6,7 @@
                 <section class="flex flex-col gap-10 px-10 py-8">
                     <div class="flex justify-between">
                         <div>
-                            <img src="../../assets/user-profile.png" alt="user-img">
+                            <img src="../../../assets/user-profile.png" alt="user-img">
                             <h1 class="h1-title">{{ user.username }}</h1>
                         </div>
                         <div class="flex items-center gap-x-5 w-3/5">
