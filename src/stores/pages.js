@@ -53,6 +53,7 @@ export const usePagesStore = defineStore('pages', {
             ]
             },
             instructor: {
+                prof: "instructor", 
                 pages: [
                     {
                         pageTitle: "Dashboard",
@@ -84,7 +85,7 @@ export const usePagesStore = defineStore('pages', {
                 },{
                     pageTitle:  "Database",
                     pageRoute: "/database/all",
-                    pageIcon: "database-outline"
+                    pageIcon: "server-outline"
                 },{
                     pageTitle:  "Reminders",
                     pageRoute: "/reminders",

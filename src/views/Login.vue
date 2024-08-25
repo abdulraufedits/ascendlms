@@ -7,7 +7,7 @@ import { setCookie, checkCookie } from '../cookies';
 import { useCoursesStore } from '../stores/courses';
 
 const currentUser = useUserStore()
-let student =true;
+const student = ref(true);
 const currentCourses = useCoursesStore()
 const usersCookie = checkCookie('id')
 if(!usersCookie ){
@@ -21,7 +21,6 @@ if(!usersCookie ){
                 localStorage.setItem('isAuthenticated', 'true')
                 router.push(`/student/${user.username}/dashboard`)
                 currentUser.getUserData(user)
-                localStorage.setItem('isAuthenticated', true)
                 fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/courses")
                 .then(res => res.json()).then(courses => {
                     courses.forEach(course => {
@@ -80,34 +79,35 @@ if(!usersCookie ){
                                     id: course.id,
                                     courseName: course.courseName,
                                     courseDesc: course.courseDesc,
-                                    category: course.category,
                                     percentage: course.students.find(std => std.id === user.id)?.percentage,
+                                    category: course.category,
                                     status: course.students.find(std => std.id === user.id)?.status,
                                     lectureNotes: lecs,
                                     assignments: assigns,
                                     quizzes: quizs,
                                     announcements: course.announcements,
                                     mentors: mntrs
-                                        })
+                                })
                             }
                     })
                 }
-            )}).catch(err => console.log(err))
-        return;    
+            )}).catch(err => console.log(err))  
         } else {
-                student = false;
+                student.value = false;
+                console.log('student gets false')
             }
         })
     }).catch(err => console.log(err))
-    if(!student){
+    if(student.value == false){
+        console.log('instructor check start') 
         fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors")
     .then(res => res.json()).then(data => {
         data.forEach(user => {
-            if(user.email == eml && user.password == pass){
+            if(user.id == usersCookie){
+                
                 localStorage.setItem('isAuthenticated', 'true')
                 router.push(`/instructor/${user.username}/dashboard`)
                 currentUser.getUserData(user)
-                setCookie('id', user.id, 2)
                 fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/courses")
                 .then(res => res.json()).then(courses => {
                     courses.forEach(course => {
@@ -157,11 +157,14 @@ if(!usersCookie ){
                                     announcements: course.announcements,
                                 })
                     }}
-                        )}).catch(err => console.log(err))
+                        )})
             })} else {
                 err.value = true
             }
-})})}}
+        })
+    }).catch(err => console.log(err))
+}
+}
 
 const email=ref("");
 const password=ref("");
@@ -251,11 +254,12 @@ function valid(eml,pass){
             )}).catch(err => console.log(err))
         return;    
         } else {
-                student = false;
+                student.value = false;
+                console.log('student gets false')
             }
         })
     }).catch(err => console.log(err))
-    if(!student){
+    if(!student.value){
         fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors")
     .then(res => res.json()).then(data => {
         data.forEach(user => {

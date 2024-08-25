@@ -95,7 +95,6 @@ const router = createRouter({
             path: '/instructor/:user/:page',
             component: InstructorLayout,
             props: (route) => ({user: route.params.user, page: route.params.page }),
-            meta: { requiresAuth: true },
             children:[
                 {
                     path: '',
