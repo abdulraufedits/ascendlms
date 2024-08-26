@@ -102,25 +102,24 @@ const router = createRouter({
                         dashboard: InstructorDashboard
                     }
                 },
-                // {
-                //     path: ':filter',
-                //     props: (route) => ({user: route.params.user, page: route.params.page, filter: route.params.filter }),
-                //     components: {
-                //         assignments: InstructorAssignments,
-                //         quizzes: InstructorQuizzes,
-                //         announcements: InstructorAnnouncements,
-                //         rewards: InstructorRewards,
-                //         details: InstructorCourseDetails
-                //     },
-                //     meta: { requiresAuth: true },
-                //     children: [
-                //         {
-                //             path: ':course',
-                //             name: 'Coursefilter',
-                //             component: InstructorCourseDetails,
-                //         }
-                //     ]
-                // }
+                {
+                    path: ':filter',
+                    props: (route) => ({user: route.params.user, page: route.params.page, filter: route.params.filter }),
+                    components: {
+                        assignments: InstructorAssignments,
+                        quizzes: InstructorQuizzes,
+                        announcements: InstructorAnnouncements,
+                        rewards: InstructorRewards,
+                        details: InstructorCourseDetails
+                    },
+                    children: [
+                        {
+                            path: ':course',
+                            name: 'Coursefilter',
+                            component: InstructorCourseDetails,
+                        }
+                    ]
+                }
             ]
         },
         {   path: '/:pathMatch(.*)*',

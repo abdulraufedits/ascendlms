@@ -15,17 +15,32 @@
                     <h1 class="h1-title text-white">Lecturer Performance</h1>
                     <div class="flex flex-col gap-y-1">
                         <div class="flex">
-                            <img id="user-profile-img" src="../../../assets/user-profile.png" alt="user profile image" class="size-9">
+                            <img id="user-profile-img" src="../../../assets/user-profile.png" alt="user profile image" class="size-12">
                             <div >
                                 <label for="user-profile-img" class=" font-big font-bold text-white" style="line-height: 0; font-size: 18px;">uername</label>
                                 <p class="subtitle -mt-1">css</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-x-2 items-center">
+                            <ion-icon name="trophy-outline" class="text-white text-4xl"></ion-icon>
+                            <div>
+                                <label for="" class="subtitle">3 badges earned</label>
+                                <div class="badges-wrap flex">
+                                <img class="img-badge bg-accent -mr-2" src="https://api.dicebear.com/9.x/personas/svg?seed=Buster" alt="avatar" />
+                                <img class="img-badge bg-secondary -mr-2" src="https://api.dicebear.com/9.x/avataaars/svg?seed=Bubba" alt="avatar" />
+                                <img class="img-badge bg-yellow -mr-2" src="https://api.dicebear.com/9.x/avataaars/svg?seed=Bubba" alt="avatar" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </Widget>
                 <div class="flex flex-col gap-y-4 col-span-5 col-start-8">
                     <Widget class=" h-full">
-                        <h1 class="h1-title self-start">$100.00</h1>
+                        <span>
+                            <h1 class="h1-title self-start">$100.00</h1>
+                            <p class="subtitle">Total income</p>
+                        </span>
+                        <label for="" class="font-small text-sm"><span class="text-success font-semibold"><ion-icon name="arrow-up-outline"></ion-icon>24% increase</span> from last week</label>
                     </Widget>
                     <Widget class=" h-full">
                         <h1 class="h1-title self-start">$100.00</h1>
