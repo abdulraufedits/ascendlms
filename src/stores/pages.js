@@ -110,45 +110,46 @@ export const usePagesStore = defineStore('pages', {
             ]
             },
             admin: {
+                prof: "admin",
                 pages: [
                     {
                         pageTitle: "Dashboard",
                         pageRoute: "/dashboard",
                         pageIcon: "analytics"
-                },{
-                    pageTitle: "Courses",
-                    pageRoute: "/mycourses",
-                    pageIcon: "book-outline"
-                },{
-                    pageTitle:  "Learning Path",
-                    pageRoute: "/learningpath/all",
-                    pageIcon: "globe-outline"
-                },{
-                    pageTitle:  "Tracking",
-                    pageRoute: "/tracking",
-                    pageIcon: "bar-graph-outline"
-                },{
-                },{
-                    pageTitle:  "Database",
-                    pageRoute: "/database/students",
-                    pageIcon: "database-outline"
-                },{
-                    pageTitle:  "Trash",
-                    pageRoute: "/trash",
-                    pageIcon: "trash-bin-outline"
-                },{
-                    pageTitle: "Help",
-                    pageRoute: "/help",
-                    pageIcon: "trash-bin-outline"
-                },{
-                    pageTitle: "Settings",
-                    pageRoute: "/settings",
-                    pageIcon: "settings-outline"
-                },{
-                    pageTitle:"Log out",
-                    pageRoute: "/logout",
-                    pageIcon: "log-out-outline"
-                }
+                    },{
+                        pageTitle: "Courses",
+                        pageRoute: "/mycourses",
+                        pageIcon: "book-outline"
+                    },{
+                        pageTitle:  "Learning Path",
+                        pageRoute: "/learningpath/all",
+                        pageIcon: "globe-outline"
+                    },{
+                        pageTitle:  "Tracking",
+                        pageRoute: "/tracking",
+                        pageIcon: "bar-chart-outline"
+                    },
+                    {
+                        pageTitle:  "Database",
+                        pageRoute: "/database/students",
+                        pageIcon: "server-outline"
+                    },{
+                        pageTitle:  "Trash",
+                        pageRoute: "/trash",
+                        pageIcon: "trash-bin-outline"
+                    },{
+                        pageTitle: "Help",
+                        pageRoute: "/help",
+                        pageIcon: "information-circle-outline"
+                    },{
+                        pageTitle: "Settings",
+                        pageRoute: "/settings",
+                        pageIcon: "settings-outline"
+                    },{
+                        pageTitle:"Log out",
+                        pageRoute: "/logout",
+                        pageIcon: "log-out-outline"
+                    }
             ]
             }
             

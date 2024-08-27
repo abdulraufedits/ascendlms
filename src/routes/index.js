@@ -19,6 +19,13 @@ import Trash from "../views/authorized-views/student-views/Trash.vue";
 import InstructorLayout from "../views/authorized-views/instructor-views/InstructorLayout.vue";
 import Logout from "../views/authorized-views/Logout.vue";
 import InstructorDashboard from "../views/authorized-views/instructor-views/InstructorDashboard.vue";
+import InstructorAssignments from "../views/authorized-views/instructor-views/InstructorAssignments.vue";
+import InstructorQuizzes from "../views/authorized-views/instructor-views/InstructorQuizzes.vue";
+import InstructorAnnouncements from "../views/authorized-views/instructor-views/InstructorAnnouncements.vue";
+import InstructorRewards from "../views/authorized-views/instructor-views/InstructorRewards.vue";
+import InstructorCourseDetails from "../views/authorized-views/instructor-views/InstructorCourseDetails.vue";
+import AdminLayout from "../views/authorized-views/admin-views/AdminLayout.vue";
+
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -120,6 +127,20 @@ const router = createRouter({
                         }
                     ]
                 }
+            ]
+        },
+        {
+            path: '/admin/:user/:page',
+            component: AdminLayout,
+            props: (route) => ({user: route.params.user, page: route.params.page }),
+            children: [
+                {
+                    path: '',
+                    components:{
+                        dashboard: () => import('../views/authorized-views/admin-views/AdminDashboard.vue'),
+                        mycourses: () => import('../views/authorized-views/admin-views/AdminCourses.vue')
+                    }
+                },
             ]
         },
         {   path: '/:pathMatch(.*)*',

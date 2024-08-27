@@ -107,4 +107,10 @@ const courses = reactive(useCoursesStore())
 const userCourses = reactive({
     coursess: courses.courses
 })
+
+const sideBarState = ref(true);
+if(window.innerWidth < 1024){
+    sideBarState.value =  false;
+}
+
 </script>
