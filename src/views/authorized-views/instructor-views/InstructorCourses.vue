@@ -1,7 +1,7 @@
 <template>
     <div class="flex">
         <main class="w-full">
-            <StudentHeader :username="user.username" title="My Courses" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses"/>
+            <StudentHeader :username="user.username" title="My Courses" />
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <TimeSlot/>

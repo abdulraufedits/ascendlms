@@ -2,7 +2,7 @@
     <div class="flex">
     <SideMenu isActivePage="Dashboard" v-show="sideBarState"/>
     <main class="w-full">
-        <StudentHeader :username="user.username" :title="`Hello, ${user.username} 👋`" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
+        <StudentHeader :username="user.username" :title="`Hello, ${user.username} 👋`" />
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <div class=" font-small font-medium px-4 py-2 border-2 border-ddd bg-background flex items-center gap-2 rounded-lg">
@@ -111,10 +111,10 @@ const badgesEarned = ref(()=>{
     })
     return n
 })
+
 const sideBarState = ref(true);
 if(window.innerWidth < 1024){
     sideBarState.value =  false;
 }
-
 
 </script>

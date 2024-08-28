@@ -2,7 +2,7 @@
     <div class="flex">
         <SideMenu isActivePage="My Courses" v-show="sideBarState"/>
     <main class="w-full">
-        <StudentHeader :username="user.username" :title="$route.params.filter" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses / UX Laws"/>
+        <StudentHeader :username="user.username" :title="$route.params.filter" subtitle="Courses / My Courses / UX Laws"/>
         <section class="flex flex-col gap-6 px-10 py-8">
             <div class=" rounded-lg h-72 bg-[url(/src/assets/courses/uxlaws.png)] bg-cover bg-no-repeat"></div>
             <div class="flex justify-between items-center">

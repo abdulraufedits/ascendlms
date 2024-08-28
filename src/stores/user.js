@@ -3,7 +3,8 @@ import { defineStore } from "pinia";
 export const useUserStore = defineStore('user', {
     state: () => {
         return {
-            users: [{}]
+            users: [{}],
+            sideBarState: true,
             
         }
     },
@@ -22,6 +23,9 @@ export const useUserStore = defineStore('user', {
             }
             return obj
 
+        },
+        changeSideBarState(){
+            this.sideBarState = !this.sideBarState
         }
     }
 })

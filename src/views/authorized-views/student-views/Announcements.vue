@@ -2,7 +2,7 @@
     <div class="flex">
         <SideMenu isActivePage="Announcements" v-show="sideBarState"/>
         <main class="w-full">
-            <StudentHeader :username="$route.params.user" title="Announcements" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / Announcements"/>
+            <StudentHeader :username="$route.params.user" title="Announcements"  subtitle="Courses / Announcements"/>
             <section class="flex px-10 pt-8">
                 <Tab title="All" @click="sortType = 'All'" :sortType="sortType" obj="announcements"/>
                 <Tab v-for="course in courses.courses" :title="course.courseName" obj="announcements" @click="sortType = course.courseName"/>

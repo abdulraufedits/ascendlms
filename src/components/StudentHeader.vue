@@ -1,7 +1,7 @@
 <template>
     <header class="px-10 py-8 flex items-center w-full justify-between">
             <div class=" flex items-center gap-x-4">
-                <img src="../assets/icons/dock-icon.svg" alt="open and closing side menu" class="size-12 cursor-pointer" @click="$emit('closeSideBar')">
+                <img src="../assets/icons/dock-icon.svg" alt="open and closing side menu" class="size-12 cursor-pointer" @click="sideBarState.changeSideBarState">
                 <div>
                     <h1 class="font-big text-3xl font-bold ">{{ title }}</h1>
                     <p class="font-small text-gray-500">{{subtitle}}</p>
@@ -28,6 +28,9 @@
 </template>
 
 <script setup>
+import { useUserStore } from '../stores/user';
+
+const sideBarState = useUserStore() 
 const props = defineProps({
     username: {
         type: String,

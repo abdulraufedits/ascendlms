@@ -1,6 +1,6 @@
 <template>
     <main class="w-full">
-        <StudentHeader :username="user.username" :title="`Hello, ${user.username} 👋`" @close-side-bar="()=> sideBarState = sideBarState ? false : true"/>
+        <StudentHeader :username="user.username" :title="`Hello, ${user.username} 👋`" />
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <div class=" font-small font-medium flex items-center ">
@@ -88,7 +88,7 @@ import Widget from '../../../components/Widget.vue'
 import Calendar from '../../../components/Calendar.vue'
 import CoursesTable from '../../../components/CoursesTable.vue'
 import ActivityLog from '../../../components/ActivityLog.vue'
-import { reactive, ref } from 'vue';
+import { reactive} from 'vue';
 import { useUserStore } from '../../../stores/user';
 import { useCoursesStore } from '../../../stores/courses';
 
@@ -97,10 +97,5 @@ const courses = reactive(useCoursesStore())
 const userCourses = reactive({
     coursess: courses.courses
 })
-
-const sideBarState = ref(true);
-if(window.innerWidth < 1024){
-    sideBarState.value =  false;
-}
 
 </script>

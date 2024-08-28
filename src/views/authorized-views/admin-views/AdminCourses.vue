@@ -1,6 +1,6 @@
 <template>
     <main class="w-full">
-        <StudentHeader :username="user.username" title="My Courses" @close-side-bar="()=> sideBarState = sideBarState ? false : true" subtitle="Courses / My Courses"/>
+        <StudentHeader :username="user.username" title="My Courses"  subtitle="Courses / My Courses"/>
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <div class="font-small font-medium pl-2 pr-4 py-2 bg-primary text-white flex items-center gap-1 rounded-lg">

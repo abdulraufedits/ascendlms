@@ -1,5 +1,5 @@
 <template>
-    <aside class=" bg-background px-10 py-8 h-screen sticky left-0 top-0">
+    <aside class=" bg-background px-10 py-8 h-screen sticky left-0 top-0" v-if="sideBarState.sideBarState">
         <TeamDropDown/>
         <nav class="my-8 grid gap-y-4">
             <template v-if="pages.prof == 'student'">
@@ -50,8 +50,10 @@
 
 <script setup>
 import SideBtn from './SideBtn.vue';
-import TeamDropDown from './TeamDropDown.vue';
-import { usePagesStore } from '../stores/pages';
+import TeamDropDown from './TeamDropDown.vue'
+import { useUserStore } from '../stores/user';
+
+const sideBarState = useUserStore()
 
 const props = defineProps({
     isActivePage: {
