@@ -20,7 +20,11 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div v-if="$route.params.user == 'admin'" class="font-small font-semibold flex justify-between items-center pt-4 -mb-3">
+            <button class="text-primary">MANAGE</button>
+            <button class="text-red">DELETE</button>
+        </div>
+        <div v-else>
             <h4 class="h4-title">Progress</h4>
             <ProgressBar :percentage="course.percentage"/>
         </div>

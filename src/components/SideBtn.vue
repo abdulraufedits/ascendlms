@@ -1,5 +1,6 @@
 <template>
-    <RouterLink :to="`/${prof}/${route + pageLink}`">
+    <div>
+    <RouterLink :to="isDropDown ? `/${prof}/${route + list[0].pageRoute}` : `/${prof}/${route + pageLink}`">
         <div class="cursor-pointer w-full flex items-center gap-x-2 py-3 px-4 rounded-lg transition-all duration-300" :class="isActive && !isDropDown ? 'bg-primary' : 'hover:bg-gray-200'" @click="()=> clicked = clicked ? false : true">
         <ion-icon :name="icon" :class="isActive && !isDropDown ? 'text-white' : ''" class="text-gray-600 text-2xl"></ion-icon>
         <label for="icon" :class="isActive && !isDropDown ? 'text-white' : ''" class="font-medium font-big w-full text-gray-600">{{title}}</label>
@@ -14,6 +15,7 @@
         </div>
         </RouterLink>
     </div>
+</div>
 </template>
 
 <script>

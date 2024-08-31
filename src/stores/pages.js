@@ -131,8 +131,17 @@ export const usePagesStore = defineStore('pages', {
                     },
                     {
                         pageTitle:  "Database",
-                        pageRoute: "/database/students",
-                        pageIcon: "server-outline"
+                        pageRoute: "/database",
+                        pageIcon: "server-outline",
+                        subPages: [
+                            {
+                                pageTitle: "Instructors",
+                                pageRoute: "/database/instructors",
+                            },{
+                                pageTitle: "Students",
+                                pageRoute: "/database/students",
+                            }
+                        ]
                     },{
                         pageTitle:  "Trash",
                         pageRoute: "/trash",

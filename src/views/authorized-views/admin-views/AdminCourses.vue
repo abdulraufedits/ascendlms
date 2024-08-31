@@ -15,7 +15,7 @@
             <section class="grid grid-cols-3 gap-4 max-xl:flex max-xl:flex-col" >
                 <RouterLink :to="`/student/${$route.params.user}/details/${course.courseName}/content`" v-for="course in userCourses.coursess"><CourseCard v-if="coursesView === 'grid'" :course="course"/></RouterLink>
             </section>
-            <CoursesTable v-if="coursesView === 'list'" :courses="courses.courses"/>
+            <CoursesTable v-if="coursesView === 'list'" :courses="courses.courses" prof="admin"/>
         </section>
     </main>
 </template>
@@ -26,7 +26,6 @@ import CoursesTable from '../../../components/CoursesTable.vue'
 import StudentHeader from '../../../components/StudentHeader.vue';
 import { ref, reactive } from 'vue';
 import { useCoursesStore } from '../../../stores/courses';
-import TimeSlot from '../../../components/TimeSlot.vue';
 import { useUserStore } from '../../../stores/user';
 import { RouterLink } from 'vue-router';
 

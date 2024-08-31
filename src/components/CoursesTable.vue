@@ -1,5 +1,5 @@
 <template>
-    <table class="flex flex-col gap-y-4">
+    <table class="flex flex-col gap-y-4" v-if="prof == 'student'">
         <thead>
             <th>Course name</th>
             <th>Progress</th>
@@ -12,18 +12,51 @@
                 <td class="flex items-center gap-x-3">
                     <div class="summary-with-icon font-small">
                         <ion-icon name="albums-outline" class="text-primary"></ion-icon>
-                        <label for="lecture notes">{{course.lecsCount}}</label>
+                        <label for="lecture notes">{{course.lectureNotes.length}}</label>
                     </div>
                     <div class="summary-with-icon font-small">
                         <ion-icon name="clipboard-outline" class="text-accent"></ion-icon>
-                        <label for="assignments">{{course.assignmentCount}}</label>
+                        <label for="assignments">{{course.assignments.length}}</label>
                     </div>
                     <div class="summary-with-icon font-small">
                         <ion-icon name="document-text-outline" class="text-secondary"></ion-icon>
-                        <label for="quizzes">{{course.quizCount}}</label>
+                        <label for="quizzes">{{course.quizzes.length}}</label>
                     </div>
                 </td>
                 
+            </tr>
+        </tbody>
+    </table>
+    <table class="flex flex-col gap-y-4" v-if="prof == 'admin'">
+        <thead>
+            <th>Course name</th>
+            <th>Category</th>
+            <th>Students</th>
+            <th>Ratings</th>
+            <th>Value</th>
+            <th>Earnings</th>
+        </thead>
+        <tbody>
+            <tr v-for="course in courses" class="font-semibold font-small">
+                <td class="font-big font-bold text-xl"><RouterLink :to="`/student/${$route.params.user}/category`">{{ course.courseName }}</RouterLink></td>
+                <td>
+                    <span class=" flex gap-x-1 items-center">
+                        <label for="assignment" >{{course.category}}</label>
+                        <ion-icon name="chevron-forward-sharp"></ion-icon>
+                    </span>
+                </td>
+                <td>
+                    {{ course.students.length }}
+                </td>
+                <td>
+                    {{ course.rating }}
+                </td>
+                <td>
+                    {{ course.value }}
+                </td>
+                <td :class="course.earning < avgEarning ? 'text-red' : 'text-success'">
+                    {{ course.earning }}
+                </td>
             </tr>
         </tbody>
     </table>
@@ -31,15 +64,26 @@
 
 <script setup>
 import { RouterLink } from 'vue-router';
-import ProgressBar from './ProgressBar.vue';
-
+import ProgressBar from './ProgressBar.vue'
 const props = defineProps({
     courses:{
         type: Array,
         default: []
+    },
+    prof: {
+        type: String,
+        default: 'student'
     }
 
 })
+
+const avgEarning= () => {
+    var amount = 0.0
+    props.courses.forEach(course => {
+        amount += course.earning
+    })
+    return amount/props.courses.length
+}
 </script>
 
 <style scoped>

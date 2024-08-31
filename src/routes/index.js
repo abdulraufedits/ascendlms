@@ -25,6 +25,7 @@ import InstructorAnnouncements from "../views/authorized-views/instructor-views/
 import InstructorRewards from "../views/authorized-views/instructor-views/InstructorRewards.vue";
 import InstructorCourseDetails from "../views/authorized-views/instructor-views/InstructorCourseDetails.vue";
 import AdminLayout from "../views/authorized-views/admin-views/AdminLayout.vue";
+import { data } from "autoprefixer";
 
 
 const router = createRouter({
@@ -61,6 +62,11 @@ const router = createRouter({
             path: '/pre-signup',
             name: 'Pre-signup',
             component: CreateAccount
+        },
+        {
+            path: '/admin/login',
+            name: 'Login',
+            component: () => import('../views/AdminLogin.vue')
         },
         {
             path: '/student/:user/:page',
@@ -138,9 +144,18 @@ const router = createRouter({
                     path: '',
                     components:{
                         dashboard: () => import('../views/authorized-views/admin-views/AdminDashboard.vue'),
-                        mycourses: () => import('../views/authorized-views/admin-views/AdminCourses.vue')
-                    }
+                        mycourses: () => import('../views/authorized-views/admin-views/AdminCourses.vue'),
+                        tracking: () => import('../views/authorized-views/admin-views/AdminTracking.vue'),
+                    },
+                    
                 },
+                {
+                    path: ':filter',
+                    props: (route) => ({user: route.params.user, page: route.params.page, filter: route.params.filter }),
+                    components: {
+                        database: () => import('../views/authorized-views/admin-views/AdminDatabase.vue'), 
+                    }
+                }
             ]
         },
         {   path: '/:pathMatch(.*)*',

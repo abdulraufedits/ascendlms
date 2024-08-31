@@ -133,7 +133,19 @@ export const useCoursesStore = defineStore('courses', {
                         email: "abcd@abcd",
                         status: "Active"
                     }
-                ]
+                ],
+                students: [
+                    {
+                        id: "1so0",
+                        status: "Not completed",
+                        percentage: 60
+                    },
+                    {
+                        id: "3aa2",
+                        status: "Not completed",
+                        percentage: 46
+                    }
+                ],
             }]
             
         }

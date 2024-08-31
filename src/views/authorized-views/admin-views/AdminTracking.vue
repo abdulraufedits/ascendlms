@@ -1,6 +1,6 @@
 <template>
     <main class="w-full">
-        <StudentHeader :username="user.username" :title="`Hello, ${user.username} 👋`" />
+        <StudentHeader :username="user.username" title="Tracking Dashboard" />
         <section class="flex flex-col gap-4 px-10 py-8">
             <div class="flex justify-between items-center">
                 <div class=" font-small font-medium flex items-center ">
@@ -18,34 +18,35 @@
                 </div>
             </div>
             <section class="grid grid-cols-18 gap-4 max-xl:flex max-xl:flex-col">
-                <div class="col-span-7 grid grid-cols-[repeat(2,1fr)] gap-4">
-                    <Widget >
-                        <GlanceWidget icon="school" bgColor="bg-background" iconColor="text-gray-400" :qty="3" work="New students"/>
+                <div class="col-span-5 flex flex-col gap-4">
+                    <Widget class=" h-full !gap-y-4">
+                        <div class="flex justify-between">
+                            <span>
+                            <h1 class="h1-title self-start">$100.00</h1>
+                            <p class="subtitle">Total income</p>
+                        </span>
+                        <div class="w-1/2 ">
+                            <LineGraph/>
+                        </div>
+                        </div>
+                        <label for="" class="font-small text-sm"><span class="text-success font-semibold"><ion-icon name="arrow-up-outline"></ion-icon>24% increase</span> from last week</label>
                     </Widget>
-                    <Widget >
-                        <GlanceWidget icon="people" bgColor="bg-background" iconColor="text-gray-400" :qty="3" work="New instructors"/>
-                    </Widget>
-                    <Widget >
-                            <GlanceWidget icon="clipboard" bgColor="bg-background" iconColor="text-gray-400" :qty="4" work="Total courses"/>
-                    </Widget>
-                    
-                    <Widget >
-                            <GlanceWidget icon="person-circle" bgColor="bg-background" iconColor="text-gray-400" :qty="4" work="Admins active"/>
+                    <Widget class=" h-full">
+                        <div class="flex justify-between">
+                            <span>
+                            <h1 class="h1-title self-start">$100.00</h1>
+                            <p class="subtitle">Total expenses</p>
+                        </span>
+                        <div class="w-1/2 ">
+                            <LineGraph/>
+                        </div>
+                        </div>
+                        <label for="" class="font-small text-sm"><span class="text-success font-semibold"><ion-icon name="arrow-up-outline"></ion-icon>24% increase</span> from last week</label>
                     </Widget>
                 </div>
-                <Widget class="flex flex-col gap-y-4 col-span-5 col-start-8">
-                    <h1 class="h1-title self-start">Student Queries</h1>
-
-                    <div>
-                        <div class="flex gap-x-2 items-center">
-                        <span class="size-4 rounded-full bg-primary"></span>
-                        <label for="" class="font-small font-semibold">Resolved</label>
-                    </div>
-                    <div class="flex gap-x-2 items-center">
-                        <span class="size-4 rounded-full bg-background"></span>
-                        <label for="" class="font-small font-semibold">Not resolved</label>
-                    </div>
-                    </div>
+                <Widget class="flex flex-col gap-y-4 col-span-7 col-start-6">
+                    <h1 class="h1-title self-start">Sales Chart</h1>
+                    <BarGraph/>
                 </Widget>
                 <Widget class="col-span-6 col-start-13 max-h-72 overflow-y-scroll">
                     <h1 class="h1-title">Recent Activity</h1>
@@ -83,7 +84,6 @@
 
 <script setup>
 import StudentHeader from '../../../components/StudentHeader.vue';
-import GlanceWidget from '../../../components/GlanceWidget.vue'
 import Widget from '../../../components/Widget.vue'
 import Calendar from '../../../components/Calendar.vue'
 import CoursesTable from '../../../components/CoursesTable.vue'
@@ -91,6 +91,10 @@ import ActivityLog from '../../../components/ActivityLog.vue'
 import { reactive} from 'vue';
 import { useUserStore } from '../../../stores/user';
 import { useCoursesStore } from '../../../stores/courses';
+import LineGraph from '../../../components/LineGraph.vue';
+import BarGraph from '../../../components/BarGraph.vue';
+
+
 
 const user = reactive(useUserStore().users[0])
 const courses = reactive(useCoursesStore())
