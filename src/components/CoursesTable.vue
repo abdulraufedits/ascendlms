@@ -29,8 +29,8 @@
     </table>
     <table class="flex flex-col gap-y-4" v-if="prof == 'admin'">
         <thead>
-            <th>Course name</th>
-            <th>Category</th>
+            <th class="!w-4/5">Course name</th>
+            <th class="!w-3/5">Category</th>
             <th>Students</th>
             <th>Ratings</th>
             <th>Value</th>
@@ -38,8 +38,8 @@
         </thead>
         <tbody>
             <tr v-for="course in courses" class="font-semibold font-small">
-                <td class="font-big font-bold text-xl"><RouterLink :to="`/student/${$route.params.user}/category`">{{ course.courseName }}</RouterLink></td>
-                <td>
+                <td class="font-big font-bold text-xl !w-4/5"><RouterLink :to="`/student/${$route.params.user}/category`">{{ course.courseName }}</RouterLink></td>
+                <td class="!w-3/5">
                     <span class=" flex gap-x-1 items-center">
                         <label for="assignment" >{{course.category}}</label>
                         <ion-icon name="chevron-forward-sharp"></ion-icon>
@@ -52,10 +52,10 @@
                     {{ course.rating }}
                 </td>
                 <td>
-                    {{ course.value }}
+                    {{"$" + course.value }}
                 </td>
                 <td :class="course.earning < avgEarning ? 'text-red' : 'text-success'">
-                    {{ course.earning }}
+                    {{ "$" + course.earning}}
                 </td>
             </tr>
         </tbody>
@@ -114,7 +114,7 @@ tbody{
 }
 td{
     text-align: left;
-    width: 45%;
+   width: 45%;
 }
 .summary-with-icon{
     display: flex;

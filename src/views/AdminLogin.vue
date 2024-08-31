@@ -1,13 +1,15 @@
 <script setup>
 import { RouterLink, useRouter } from 'vue-router';
-import Illust from '../assets/login-img.svg';
 import { ref } from 'vue';
 import {useUserStore} from '../stores/user'
-import { setCookie } from '../cookies';
 import { useCoursesStore } from '../stores/courses';
+import { useStudentStore } from '../stores/students';
+import { useInstructorStore } from '../stores/instructors';
 
 const currentUser = useUserStore()
 const currentCourses = useCoursesStore()
+const currentStudents = useStudentStore()
+const currentInstructors = useInstructorStore()
 
 const email=ref("");
 const password=ref("");
@@ -31,6 +33,9 @@ function valid(usern,eml,pass){
                         courseName: course.courseName,
                         courseDesc: course.courseDesc,
                         category: course.category,
+                        value: course.value,
+                        rating: course.rating,
+                        earning: course.earning,
                         lectureNotes: course.lectureNotes,
                         assignments: course.assignments,
                         quizzes: course.quizzes,
@@ -40,7 +45,21 @@ function valid(usern,eml,pass){
                     })
                     
                 })
-            })
+            }).catch(err => console.log(err))
+
+                fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/students")
+                .then(res => res.json()).then(students => {
+                    students.forEach(student => {
+                        currentStudents.getStudentData(student)
+                    })
+                }).catch(err => console.log(err))
+
+                fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors")
+                .then(res => res.json()).then(instructors => {
+                    instructors.forEach(inst => {
+                        currentInstructors.getInstructorData(inst)
+                    })
+                }).catch(err => console.log(err))
         }
     }).catch(err => console.log(err))
 }

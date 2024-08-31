@@ -10,6 +10,9 @@ export const useCoursesStore = defineStore('courses', {
                 percentage: 0,
                 status: "Not completed",
                 category: "Programming",
+                value: 1000,
+                rating: 4.5,
+                earning: 200,
                 lectureNotes: [
                     {
                         id: 1,

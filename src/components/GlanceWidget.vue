@@ -31,7 +31,7 @@ const props = defineProps({
         },
         qty: {
             type: Number,
-            default: 1
+            default: 999
         },
         bgColor: {
            type: String,

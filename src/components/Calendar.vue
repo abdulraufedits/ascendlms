@@ -13,6 +13,9 @@
         <div class="grid grid-cols-7 gap-1">
             <label for="days" v-for="i in numberOfDays" class="p-0.5 rounded text-center font-small font-semibold" :class="i == highlightedNum ? 'bg-accent' :''">{{ i }}</label>
         </div>
+        <div v-if="prof == 'admin'" class="font-small font-medium pl-2 pr-4 py-2 bg-primary text-white flex items-center justify-center gap-1 rounded-lg">
+            <ion-icon name="add-outline" class="text-xl"></ion-icon><label for="">Create a new event</label>
+         </div>
     </div>
 </template>
 
@@ -31,6 +34,10 @@ const props = defineProps({
     highlightedNum: {
         type: Number,
         default: 0
+    },
+    prof: {
+        type: String,
+        default: "student"
     },
 })
 </script>
