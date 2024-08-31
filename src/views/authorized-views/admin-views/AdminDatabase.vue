@@ -18,7 +18,8 @@
                 </div>
             </div>
             <section class="grid grid-cols-4 gap-4 max-xl:flex max-xl:flex-col" >
-                <ContactCard v-for="stud in userCourses.coursess[0].students" name="abcd" designation="Student"/>
+                <ContactCard v-if="$route.params.filter == 'students'" v-for="stud in userCourses.coursess[0].students" :name="stud.username" designation="Student" :imgsrc="stud.img"/>
+                <ContactCard v-if="$route.params.filter == 'instructors'" v-for="inst in userCourses.coursess[0].instructors" :name="inst.username" :designation="inst.designation" :imgsrc="inst.img"/>
             </section>
             
         </section>
