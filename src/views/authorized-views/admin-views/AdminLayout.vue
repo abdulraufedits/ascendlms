@@ -1,6 +1,6 @@
 <template>
     <div class="flex">
-        <SideMenu :isActivePage="page" :pages="pages" v-show="sideBarState"/>
+        <SideMenu :isActivePage="page" :pages="pages" v-if="sideBarState.sideBarState"/>
       <RouterView :name="page">
       </RouterView>
 
@@ -11,6 +11,7 @@
 import { RouterView } from 'vue-router';
 import SideMenu from '../../../components/SideMenu.vue';
 import { usePagesStore } from '../../../stores/pages'
+import {useUserStore} from '../../../stores/user'
 import { ref } from 'vue';
 
 const pages = usePagesStore().admin
@@ -20,8 +21,5 @@ const props = defineProps({
     course: String
 })
 
-const sideBarState = ref(true);
-if(window.innerWidth < 1024){
-    sideBarState.value =  false;
-}
+const sideBarState = ref(useUserStore())
 </script>

@@ -18,8 +18,8 @@
                 </div>
             </div>
             <section class="grid grid-cols-4 gap-4 max-xl:flex max-xl:flex-col" >
-                <ContactCard v-if="$route.params.filter == 'students'" v-for="stud in userCourses.coursess[0].students" :name="stud.username" designation="Student" :imgsrc="stud.img"/>
-                <ContactCard v-if="$route.params.filter == 'instructors'" v-for="inst in userCourses.coursess[0].instructors" :name="inst.username" :designation="inst.designation" :imgsrc="inst.img"/>
+                <ContactCard v-if="$route.params.filter == 'students'" v-for="stud in students" :name="stud.username" designation="Student" :imgsrc="stud.img"/>
+                <ContactCard v-if="$route.params.filter == 'instructors'" v-for="inst in instructors" :name="inst.username" :designation="inst.designation" :imgsrc="inst.img"/>
             </section>
             
         </section>
@@ -32,6 +32,8 @@ import { reactive, ref} from 'vue';
 import { useUserStore } from '../../../stores/user';
 import { useCoursesStore } from '../../../stores/courses';
 import ContactCard from '../../../components/ContactCard.vue';
+import { useStudentStore } from '../../../stores/students';
+import { useInstructorStore } from '../../../stores/instructors';
 
 export default {
     data(){
@@ -45,12 +47,14 @@ export default {
     },
     setup(){
         const user = reactive(useUserStore().users[0])
+        const students = reactive(useStudentStore().students)
+        const instructors = reactive(useInstructorStore().instructors)
         const courses = reactive(useCoursesStore())
         const userCourses = reactive({
             coursess: courses.courses
         })
 
-    return { user, userCourses }
+    return { user, userCourses, students, instructors}
     }
 }
 </script>

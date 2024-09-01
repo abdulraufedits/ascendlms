@@ -1,7 +1,7 @@
 <template>
     <header class="px-10 py-8 flex items-center w-full justify-between">
             <div class=" flex items-center gap-x-4">
-                <img src="../assets/icons/dock-icon.svg" alt="open and closing side menu" class="size-12 cursor-pointer" @click="sideBarState.changeSideBarState">
+                <img src="../assets/icons/dock-icon.svg" alt="open and closing side menu" class="size-12 cursor-pointer" @click="sideBarState.changeSideBarState()">
                 <div>
                     <h1 class="font-big text-3xl font-bold ">{{ title }}</h1>
                     <p class="font-small text-gray-500">{{subtitle}}</p>
@@ -9,8 +9,7 @@
             </div>
             <div class=" flex items-center gap-x-4">
                 <form class="input-field flex justify-between items-center border-2 border-ddd"  v-show="showInMobile">
-                    <input type="search" name="Search" id="search-input" class=" bg-transparent outline-none font-big font-regular" placeholder="Search anything...">
-                    <ion-icon name="search-outline" class="text-gray-700"></ion-icon>
+                    <input type="search" name="search-assignments" id="search-assignments"  class=" bg-white px-6 py-3 rounded-lg border-ddd border-2 bg-[url('/src/assets/icons/search-outline.svg')] bg-[right_1rem_center] bg-no-repeat bg-[length:18px_18px]   outline-none font-big font-light" placeholder="Search anything...">
                 </form>
                 <div class="grid place-content-center min-h-16 min-w-16 rounded-lg border-2 border-ddd">
                     <ion-icon name="notifications-outline" class=" text-2xl"></ion-icon>
@@ -30,7 +29,7 @@
 <script setup>
 import { useUserStore } from '../stores/user';
 
-const sideBarState = useUserStore() 
+const sideBarState = useUserStore()
 const props = defineProps({
     username: {
         type: String,
