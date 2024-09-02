@@ -2,23 +2,22 @@
     <div class="container mx-auto mt-8 flex flex-col items-center gap-y-6">
         <h1 class="h1-title text-center">Who are you?</h1>
         <main class="flex flex-col items-center gap-y-7">
-            <form id="profession-form" @submit.prevent="submitForm()" class="lg:flex border-ddd rounded-3xl border-2 w-4/5 overflow-hidden">
-                <div class="w-full">
+            <form id="profession-form" @submit.prevent="submitForm()" class="lg:flex w-4/5 gap-4 max-lg:space-y-4">
+                <div class="w-full border-ddd rounded-3xl border-2 overflow-hidden">
                     <img src="../assets/teacher.svg" alt="instructor image" class="radio-img">
                 <div class="py-8 grid place-content-center">
-                    <label class="font-big text-4xl"><input type="radio" name="type" id="instructor-check" value="Instructor" v-model="prof">I'm an Instructor</label>
+                    <label class="font-big text-4xl"><input type="radio" name="type" id="instructor-check" value="instructor" v-model="prof">I'm an Instructor</label>
                 </div>
                 </div>
-                <div class="bg-ddd w-1"></div>
-                <div class="w-full">
+                <div class="w-full border-ddd rounded-3xl border-2 overflow-hidden">
                     <img src="../assets/student.svg" alt="student image" class="radio-img">
                 <div class="py-8 grid place-content-center">
-                    <label class="font-big text-4xl"><input type="radio" name="type" id="student-check" value="Student" v-model="prof">I'm a Student</label>
+                    <label class="font-big text-4xl"><input type="radio" name="type" id="student-check" value="student" v-model="prof">I'm a Student</label>
                 </div>
                 </div>
             </form>
             <button form="profession-form" type="submit" class="px-5 min-w-12 min-h-12 py-3 rounded-full font-small transition-all duration-300" :class="prof == null ? 'text-gray-400 bg-gray-200 pointer-events-none':'text-white bg-primary'">{{ selectedRadio == null ? 'Create account': selectedRadio }}</button>
-            <p class="font-small text-center -mt-2">Already have an account? <RouterLink to="/login" class=" text-primary">Login</RouterLink></p>
+            <p class="font-small text-center -mt-2 mb-4">Already have an account? <RouterLink to="/login" class=" text-primary">Login</RouterLink></p>
         </main>
 
     </div>
@@ -31,7 +30,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 const prof = ref(null)
 const selectedRadio = computed(()=> {
-    return prof.value === 'Instructor' ? 'Apply as Instructor' : prof.value === 'Student' ? 'Join as Student' : null;
+    return prof.value === 'instructor' ? 'Apply as Instructor' : prof.value === 'student' ? 'Join as Student' : null;
 })
 
 function submitForm(){

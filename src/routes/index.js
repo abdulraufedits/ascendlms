@@ -138,7 +138,6 @@ const router = createRouter({
             path: '/admin/:user/:page',
             component: AdminLayout,
             props: (route) => ({user: route.params.user, page: route.params.page }),
-            meta: { requiresAuth: true },
             children: [
                 {
                     path: '',

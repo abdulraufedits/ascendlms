@@ -8,10 +8,8 @@
                 </div>
             </div>
             <div class=" flex items-center gap-x-4">
-                <form class="input-field flex justify-between items-center border-2 border-ddd"  v-show="showInMobile">
-                    <input type="search" name="search-assignments" id="search-assignments"  class=" bg-white px-6 py-3 rounded-lg border-ddd border-2 bg-[url('/src/assets/icons/search-outline.svg')] bg-[right_1rem_center] bg-no-repeat bg-[length:18px_18px]   outline-none font-big font-light" placeholder="Search anything...">
-                </form>
-                <div class="grid place-content-center min-h-16 min-w-16 rounded-lg border-2 border-ddd">
+                <input type="search" name="search-assignments" id="search-assignments"  class=" bg-white px-6 py-4 rounded-lg border-ddd border-2 bg-[url('/src/assets/icons/search-outline.svg')] bg-[right_1rem_center] bg-no-repeat bg-[length:18px_18px]   outline-none font-big font-light" placeholder="Search anything...">
+                <div class="grid place-content-center rounded-lg p-4 bg-white border-2 border-ddd">
                     <ion-icon name="notifications-outline" class=" text-2xl"></ion-icon>
                 </div>
                 <div class="border-ddd border-2 rounded-lg min-h-16 px-5 flex items-center gap-x-6">

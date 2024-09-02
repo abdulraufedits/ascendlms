@@ -17,7 +17,7 @@
                         <div class="flex">
                             <img id="user-profile-img" src="../../../assets/user-profile.png" alt="user profile image" class="size-12">
                             <div >
-                                <label for="user-profile-img" class=" font-big font-bold text-white" style="line-height: 0; font-size: 18px;">uername</label>
+                                <label for="user-profile-img" class=" font-big font-bold text-white" style="line-height: 0; font-size: 18px;">{{user.username}}</label>
                                 <p class="subtitle -mt-1">css</p>
                             </div>
                         </div>
@@ -36,14 +36,28 @@
                 </Widget>
                 <div class="flex flex-col gap-y-4 col-span-5 col-start-8">
                     <Widget class=" h-full">
-                        <span>
+                        <div class="flex justify-between">
+                            <span>
                             <h1 class="h1-title self-start">$100.00</h1>
                             <p class="subtitle">Total income</p>
                         </span>
+                        <div class="w-1/2 ">
+                            <LineGraph/>
+                        </div>
+                        </div>
                         <label for="" class="font-small text-sm"><span class="text-success font-semibold"><ion-icon name="arrow-up-outline"></ion-icon>24% increase</span> from last week</label>
                     </Widget>
                     <Widget class=" h-full">
-                        <h1 class="h1-title self-start">$100.00</h1>
+                        <div class="flex justify-between">
+                            <span>
+                            <h1 class="h1-title self-start">$100.00</h1>
+                            <p class="subtitle">Total expenses</p>
+                        </span>
+                        <div class="w-1/2 ">
+                            <LineGraph/>
+                        </div>
+                        </div>
+                        <label for="" class="font-small text-sm"><span class="text-success font-semibold"><ion-icon name="arrow-up-outline"></ion-icon>24% increase</span> from last week</label>
                     </Widget>
                 </div>
                 <Widget class="col-span-6 col-start-13 max-h-72 overflow-y-scroll">
@@ -63,7 +77,7 @@
                 </Widget>
                 <Widget class="col-span-5 col-start-8 row-start-2 h-full">
                     <!-- <h1 class="h1-title self-start">Reminder</h1> -->
-                    <GlanceWidget icon="card" bgColor="bg-black" iconColor="text-secondary" :qty="4" work="Badges earned" hasButton/>
+                    <GlanceWidget icon="notifications" bgColor="bg-ddd" iconColor="text-gray-500" qty="Check assignments of students" work="Reminder" hasButton btnText="Done"/>
                 </Widget>
                 <Widget class="col-span-12 row-start-3">
                     <div class="flex justify-between items-start">
@@ -98,6 +112,7 @@ import Widget from '../../../components/Widget.vue'
 import Calendar from '../../../components/Calendar.vue'
 import CoursesTable from '../../../components/CoursesTable.vue'
 import ActivityLog from '../../../components/ActivityLog.vue'
+import LineGraph from '../../../components/LineGraph.vue'
 import { reactive, ref } from 'vue';
 import { useUserStore } from '../../../stores/user';
 import { useCoursesStore } from '../../../stores/courses';

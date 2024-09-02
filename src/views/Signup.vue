@@ -29,6 +29,7 @@ import { ref } from 'vue';
 import { RouterLink,useRouter,useRoute } from 'vue-router';
 import Illust from '../assets/login-img.svg';
 import { useUserStore } from '../stores/user';
+import { setCookie } from '../cookies';
 
 const username=ref("");
 const email=ref("");
@@ -53,19 +54,22 @@ function createAcc(){
         ]
     }
 
-    if(route.query.p == "Student"){
+    if(route.query.p == "student"){
         currentUser.query = "";
     }
-    if(password.length < 8){
+    if(username.value == "" || email.value == "" || password.value == ""){
+        err.value = true
+        alertMsg.value = "All fields are required"
+        return;
+    }
+    else if(password.length < 8){
         err.value = true
         alertMsg.value = "Password must be at least 8 characters long"
         return;
     }
-    if(username.value == "" || email.value == "" || password.value == ""){
-        alertMsg.value = "All fields are required"
-        return;
-    }
-    fetch(route.query.p == 'Student' ? "https://ascendapi-b810cfaf8c4a.herokuapp.com/students" : route.query.p == 'Instructor' ? "https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors": null,{
+    else {
+    
+    fetch(route.query.p == 'student' ? "https://ascendapi-b810cfaf8c4a.herokuapp.com/students" : route.query.p == 'instructor' ? "https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors": null,{
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -74,9 +78,11 @@ function createAcc(){
             body: JSON.stringify(user)
             }).then((response) => response.json())
             .then((data) => {
-                router.push(`/${route.query.p.toLowerCase}/${username.value}/dashboard`)
+                router.push(`/${route.query.p}/${username.value}/dashboard`)
                 
                 currentUser.getUserData(user)
+                setCookie('id', user.id,4)
                 }).catch(err => alert("Select your profession first."))
             }
+        }
 </script>

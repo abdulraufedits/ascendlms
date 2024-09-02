@@ -30,7 +30,7 @@ const props = defineProps({
             default: "Assignments completed"
         },
         qty: {
-            type: Number,
+            type: [Number, String],
             default: 999
         },
         bgColor: {
