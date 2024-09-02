@@ -7,9 +7,10 @@
                     </RouterLink>
                 <h1 class=" text-3xl bold text-grey font-big font-bold">Create a new account</h1>
                 <form action="" class="flex flex-col gap-4" @submit.prevent="createAcc">
-                    <input autocomplete="username" type="fname" class="input-field" placeholder="username" v-model="username">
-                    <input autocomplete="email" type="email" class="input-field" placeholder="email address" v-model="email">
-                    <input autocomplete="password" type="password" class="input-field" placeholder="password" v-model="password">
+                    <div v-if="err" class="text-red flex items-center gap-x-1 text-sm"><ion-icon name="alert-circle-outline"></ion-icon>{{ alertMsg }}</div>
+                    <input autocomplete="username" type="fname" class="input-field" placeholder="username" v-model="username" :class="err ? 'err' : ''">
+                    <input autocomplete="email" type="email" class="input-field" placeholder="email address" v-model="email" :class="err ? 'err' : ''">
+                    <input autocomplete="password" type="password" class="input-field" placeholder="password" v-model="password" :class="err ? 'err' : ''">
                     <input type="submit" value="Sign up" class="cta font-big text-white font-medium cursor-pointer hover:bg-gray-900 transition-colors duration-300">
                     <p class="font-small text-center -mt-2">Already have an account? <RouterLink to="/login" class=" text-primary">Login</RouterLink></p>
                 </form>
@@ -27,29 +28,55 @@
 import { ref } from 'vue';
 import { RouterLink,useRouter,useRoute } from 'vue-router';
 import Illust from '../assets/login-img.svg';
-import Student from '../stores/classes/Student';
+import { useUserStore } from '../stores/user';
 
 const username=ref("");
 const email=ref("");
 const password=ref("");
 let err = ref(false);
+const alertMsg = ref("");
 
 const router = useRouter()
 const route = useRoute()
+const currentUser = useUserStore()
 
 function createAcc(){
+    var user = {
+        username: username.value,
+        img: "https://api.dicebear.com/9.x/fun-emoji/svg?seed=Milo",
+        email: email.value,
+        password: password.value,
+        designation: route.query.p,
+        query: "",
+        achievements: [
+
+        ]
+    }
+
+    if(route.query.p == "Student"){
+        currentUser.query = "";
+    }
+    if(password.length < 8){
+        err.value = true
+        alertMsg.value = "Password must be at least 8 characters long"
+        return;
+    }
+    if(username.value == "" || email.value == "" || password.value == ""){
+        alertMsg.value = "All fields are required"
+        return;
+    }
     fetch(route.query.p == 'Student' ? "https://ascendapi-b810cfaf8c4a.herokuapp.com/students" : route.query.p == 'Instructor' ? "https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors": null,{
             method: "POST",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json;charset=UTF-8",
             },
-            body: JSON.stringify(new Student(username.value,email.value,password.value))
+            body: JSON.stringify(user)
             }).then((response) => response.json())
             .then((data) => {
-                router.push(`/student/${username.value}/dashboard`)
+                router.push(`/${route.query.p.toLowerCase}/${username.value}/dashboard`)
+                
                 currentUser.getUserData(user)
-                setCookie('id', user.id, 2)
                 }).catch(err => alert("Select your profession first."))
             }
 </script>

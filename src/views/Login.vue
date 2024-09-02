@@ -169,9 +169,15 @@ if(!usersCookie ){
 const email=ref("");
 const password=ref("");
 let err = ref(false);
+const alertMsg = ref("")
 const router = useRouter()
 
 function valid(eml,pass){
+    if(pass.length < 8){
+        err.value = true
+        alertMsg.value = "Password must be at least 8 characters long"
+        return;
+    }
     fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/students")
     .then(res => res.json()).then(data => {
         data.forEach(user => {
@@ -251,80 +257,81 @@ function valid(eml,pass){
                             }
                     })
                 }
-            )}).catch(err => console.log(err))
-        return;    
+            )}).catch(err => console.log(err))  
         } else {
-                student.value = false;
-                console.log('student gets false')
-            }
-        })
-    }).catch(err => console.log(err))
-    if(!student.value){
-        fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors")
-    .then(res => res.json()).then(data => {
-        data.forEach(user => {
-            if(user.email == eml && user.password == pass){
                 
-                localStorage.setItem('isAuthenticated', 'true')
-                router.push(`/instructor/${user.username}/dashboard`)
-                currentUser.getUserData(user)
-                setCookie('id', user.id, 2)
-                fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/courses")
-                .then(res => res.json()).then(courses => {
-                    courses.forEach(course => {
-                        course.mentors.forEach(mnt => {
-                            if(mnt.id == mnt.id){
-                                const lecs = []
-                                const assigns = []
-                                const quizs = []
-                                course.lectureNotes.forEach(lec => {
-                                        lecs.push({
-                                                    id: lec.id,
-                                                    lectureName:lec.lectureName,
-                                                    courseName: lec.courseName,
-                                                    createdOn: lec.createdOn,
-                                                    students: lec.students
-                                                })
-                                })
-                                course.assignments.forEach(assign => {
-                                        assigns.push({
-                                                    id: assign.id,
-                                                    assignmentName: assign.assignmentName,
-                                                    courseName: assign.courseName,
-                                                    uploadedOn: assign.dueDate, // API needs to be changed
-                                                    dueDate: assign.dueDate,
-                                                    students: assign.students
-                                                })
-                                })
-                                course.quizzes.forEach(quiz => {  
-                                        quizs.push({
-                                                    id: quiz.id,
-                                                    quizName: quiz.quizName,
-                                                    courseName: quiz.courseName,
-                                                    uploadedOn: quiz.dueDate,
-                                                    dueDate: quiz.dueDate,
-                                                    students: quiz.students
-                                                })
-                                })
+                console.log('student gets false')
+                fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors")
+                .then(res => res.json()).then(data => {
+                    data.forEach(user => {
+                        if(user.email == eml && user.password == pass){
+                            
+                            localStorage.setItem('isAuthenticated', 'true')
+                            router.push(`/instructor/${user.username}/dashboard`)
+                            currentUser.getUserData(user)
+                            setCookie('id', user.id, 2)
+                            fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/courses")
+                            .then(res => res.json()).then(courses => {
+                                courses.forEach(course => {
+                                    course.mentors.forEach(mnt => {
+                                        if(mnt.id == mnt.id){
+                                            const lecs = []
+                                            const assigns = []
+                                            const quizs = []
+                                            course.lectureNotes.forEach(lec => {
+                                                    lecs.push({
+                                                                id: lec.id,
+                                                                lectureName:lec.lectureName,
+                                                                courseName: lec.courseName,
+                                                                createdOn: lec.createdOn,
+                                                                students: lec.students
+                                                            })
+                                            })
+                                            course.assignments.forEach(assign => {
+                                                    assigns.push({
+                                                                id: assign.id,
+                                                                assignmentName: assign.assignmentName,
+                                                                courseName: assign.courseName,
+                                                                uploadedOn: assign.dueDate, // API needs to be changed
+                                                                dueDate: assign.dueDate,
+                                                                students: assign.students
+                                                            })
+                                            })
+                                            course.quizzes.forEach(quiz => {  
+                                                    quizs.push({
+                                                                id: quiz.id,
+                                                                quizName: quiz.quizName,
+                                                                courseName: quiz.courseName,
+                                                                uploadedOn: quiz.dueDate,
+                                                                dueDate: quiz.dueDate,
+                                                                students: quiz.students
+                                                            })
+                                            })
 
-                                currentCourses.getCoursesData({
-                                    id: course.id,
-                                    courseName: course.courseName,
-                                    courseDesc: course.courseDesc,
-                                    category: course.category,
-                                    lectureNotes: lecs,
-                                    assignments: assigns,
-                                    quizzes: quizs,
-                                    announcements: course.announcements,
-                                })
-                    }}
-                        )})
-            })} else {
-                err.value = true
+                                            currentCourses.getCoursesData({
+                                                id: course.id,
+                                                courseName: course.courseName,
+                                                courseDesc: course.courseDesc,
+                                                category: course.category,
+                                                lectureNotes: lecs,
+                                                assignments: assigns,
+                                                quizzes: quizs,
+                                                announcements: course.announcements,
+                                            })
+                                }
+                            })
+                        })
+                        })
+                } else {
+                    err.value = true
+                    alertMsg.value = "Email address or password does not match"
+                }
+            })
+            }).catch(err => console.log(err))
+
             }
         })
-    }).catch(err => console.log(err))
-}
+    })
 }
 
 </script>
@@ -339,8 +346,9 @@ function valid(eml,pass){
                     </RouterLink>
                 <h1 class="text-3xl bold text-grey font-big font-bold">Login to your account</h1>
                 <form action="" class="flex flex-col gap-4" @submit.prevent="valid(email,password)">
+                     <div v-if="err" class="text-red flex items-center gap-x-1 text-sm"><ion-icon name="alert-circle-outline"></ion-icon>{{ alertMsg }}</div>
                     <input autocomplete="email" type="email" class="input-field" placeholder="email address" v-model="email" :class="err ? 'err' : ''">
-                    <input autocomplete="new-password" type="password" class="input-field" placeholder="password" v-model="password" >
+                    <input autocomplete="new-password" type="password" class="input-field" placeholder="password" v-model="password" :class="err ? 'err' : ''">
                     <RouterLink to="/" class=" text-primary font-small text-right -mt-2">Forgot password?</RouterLink>
                     <input type="submit" value="Login" class="cta font-big text-white font-medium cursor-pointer hover:bg-gray-900 transition-colors duration-300">
                     <p class="font-small text-center -mt-2">Don't have an account? <RouterLink to="/pre-signup" class=" text-primary">Sign up</RouterLink></p>
@@ -355,7 +363,7 @@ function valid(eml,pass){
     </div>
 </template>
 
-<style scoped>
+<style>
     .err{
         border: 2px solid red;
     }

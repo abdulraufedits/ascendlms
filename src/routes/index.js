@@ -25,7 +25,6 @@ import InstructorAnnouncements from "../views/authorized-views/instructor-views/
 import InstructorRewards from "../views/authorized-views/instructor-views/InstructorRewards.vue";
 import InstructorCourseDetails from "../views/authorized-views/instructor-views/InstructorCourseDetails.vue";
 import AdminLayout from "../views/authorized-views/admin-views/AdminLayout.vue";
-import { data } from "autoprefixer";
 
 
 const router = createRouter({
@@ -65,7 +64,7 @@ const router = createRouter({
         },
         {
             path: '/admin/login',
-            name: 'Login',
+            name: 'Admin Login',
             component: () => import('../views/AdminLogin.vue')
         },
         {
