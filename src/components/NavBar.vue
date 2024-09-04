@@ -1,17 +1,11 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 
-const props = defineProps({
-    showNav: {
-        type: Boolean,
-        default: true
-    }
-})
 </script>
 
 <template>
-<header v-show="showNav" class="py-4 md:py-6  font-small" >
-        <div class="container px-4 mx-auto sm:px-6 lg:px-8">
+<header class="py-4 md:py-6  font-small" >
+        <div class="container px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div class="flex items-center justify-between">
                 <div class="flex-shrink-0">
                     <RouterLink to="/" class="flex items-center font-extrabold font-big rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">

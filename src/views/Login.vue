@@ -93,16 +93,9 @@ if(!usersCookie ){
                 }
             )}).catch(err => console.log(err))  
         } else {
-                student.value = false;
-                console.log('student gets false')
-            }
-        })
-    }).catch(err => console.log(err))
-    if(student.value == false){
-        console.log('instructor check start') 
-        fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors")
-    .then(res => res.json()).then(data => {
-        data.forEach(user => {
+            fetch("https://ascendapi-b810cfaf8c4a.herokuapp.com/instructors")
+        .then(res => res.json()).then(data => {
+            data.forEach(user => {
             if(user.id == usersCookie){
                 
                 localStorage.setItem('isAuthenticated', 'true')
@@ -163,7 +156,10 @@ if(!usersCookie ){
             }
         })
     }).catch(err => console.log(err))
-}
+            }
+        })
+    }).catch(err => console.log(err))
+    
 }
 
 const email=ref("");

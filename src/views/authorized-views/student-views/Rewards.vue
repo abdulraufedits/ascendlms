@@ -1,6 +1,4 @@
 <template>
-    <div class="flex">
-        <SideMenu isActivePage="Rewards" v-show="sideBarState"/>
         <main class="w-full">
             <StudentHeader :username="user.username" title="Rewards"  subtitle="Rewards"/>
                 <section class="flex flex-col gap-10 px-10 py-8">
@@ -35,12 +33,10 @@
                         <RewardsTable :achievements="useUserStore().sort(sortType,user.achievements)"/>
                 </section>
         </main>
-    </div>
 </template>
 
 <script setup>
 import Glance from '../../../components/Glance.vue';
-import SideMenu from '../../../components/SideMenu.vue'
 import StudentHeader from '../../../components/StudentHeader.vue'
 import { ref,reactive } from 'vue';
 import Tab from '../../../components/Tab.vue';
@@ -59,10 +55,7 @@ const props = defineProps({
         default: 1
     }
 })
-const sideBarState = ref(true);
-if(window.innerWidth < 1024){
-    sideBarState.value =  false;
-}
+
 const sortType = ref("All")
 
 </script>

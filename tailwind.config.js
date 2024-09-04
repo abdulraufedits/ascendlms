@@ -27,6 +27,9 @@ export default {
       },
       boxShadow: {
         "material": "inset 0px -1.5px 0px #050505"
+      },
+      aspectRatio: {
+        "din": '4/3'
       }
     },
     gridTemplateColumns:{

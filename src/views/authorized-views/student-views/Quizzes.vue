@@ -1,6 +1,4 @@
 <template>
-    <div class="flex">
-        <SideMenu isActivePage="Quizzes" v-show="sideBarState"/>
         <main class="w-full">
             <StudentHeader :username="user.username" title="Quizzes"  subtitle="Courses / Quizzes"/>
             <section class="flex px-10 pt-8">
@@ -13,13 +11,10 @@
             <TableControls/>
             <QuizzesTable :quizzes="courses.sort(sortType,userCourses.coursess, 'quizzes')"/>
         </main>
-    </div>
-
 </template>
 
 <script setup>
 import StudentHeader from '../../../components/StudentHeader.vue'
-import SideMenu from '../../../components/SideMenu.vue'
 import Tab from '../../../components/Tab.vue'
 import { ref ,reactive} from 'vue';
 import { useCoursesStore } from '../../../stores/courses';
@@ -33,10 +28,6 @@ const props = defineProps({
         default: "NOName"
     }
 })
-const sideBarState = ref(true);
-if(window.innerWidth < 1024){
-    sideBarState.value =  false;
-}
 const courses = reactive(useCoursesStore())
 const userCourses = reactive({
     coursess: courses.courses
@@ -44,7 +35,6 @@ const userCourses = reactive({
 
 const user = reactive(useUserStore().users[0])
 
-const coursesView = ref("grid")
 const sortType = ref("All")
 </script>
 

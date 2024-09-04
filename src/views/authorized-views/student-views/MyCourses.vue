@@ -1,6 +1,4 @@
 <template>
-    <div class="flex">
-        <SideMenu isActivePage="My Courses" v-show="sideBarState"/>
     <main class="w-full">
         <StudentHeader :username="user.username" title="My Courses"  subtitle="Courses / My Courses"/>
         <section class="flex flex-col gap-4 px-10 py-8">
@@ -18,14 +16,11 @@
             <CoursesTable v-if="coursesView === 'list'" :courses="courses.courses"/>
         </section>
     </main>
-    </div>
-
 </template>
 
 <script setup>
 import CourseCard from '../../../components/CourseCard.vue';
 import CoursesTable from '../../../components/CoursesTable.vue'
-import SideMenu from '../../../components/SideMenu.vue';
 import StudentHeader from '../../../components/StudentHeader.vue';
 import { ref, reactive } from 'vue';
 import { useCoursesStore } from '../../../stores/courses';
@@ -47,10 +42,6 @@ const props = defineProps({
     }
 })
 
-const sideBarState = ref(true);
-if(window.innerWidth < 1024){
-    sideBarState.value =  false;
-}
 
 const coursesView = ref("grid")
 

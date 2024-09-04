@@ -1,8 +1,6 @@
 <template>
-    <div class="flex">
-        <SideMenu isActivePage="My Courses" v-show="sideBarState"/>
     <main class="w-full">
-        <StudentHeader :username="user.username" :title="$route.params.filter" subtitle="Courses / My Courses / UX Laws"/>
+        <StudentHeader :username="user.username" :title="$route.params.filter" :subtitle="`Courses / My Courses / ${$route.params.filter}`"/>
         <section class="flex flex-col gap-6 px-10 py-8">
             <div class=" rounded-lg h-72 bg-[url(/src/assets/courses/uxlaws.png)] bg-cover bg-no-repeat"></div>
             <div class="flex justify-between items-center">
@@ -52,11 +50,9 @@
             <TableControls/>
             <CourseTable :courses="courses.contentFilter(userCourses.coursess, sortType)" :type="sortType" />
     </main>
-    </div>
 </template>
 
 <script setup>
-import SideMenu from '../../../components/SideMenu.vue';
 import StudentHeader from '../../../components/StudentHeader.vue';
 import CourseTab from '../../../components/CourseTab.vue';
 import { useUserStore } from '../../../stores/user'
@@ -72,14 +68,8 @@ const userCourses = reactive({
 })
 
 const user = reactive(useUserStore().users[0])
-const coursesView = ref('list')
 const sortType = ref("content")
 
-
-const sideBarState = ref(true);
-if(window.innerWidth < 1024){
-    sideBarState.value =  false;
-}
 
 // const props = defineProps({
 //     course: {

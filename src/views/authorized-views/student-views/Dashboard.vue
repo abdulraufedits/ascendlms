@@ -1,6 +1,4 @@
 <template>
-    <div class="flex">
-    <SideMenu isActivePage="Dashboard" v-show="sideBarState"/>
     <main class="w-full">
         <StudentHeader :username="user.username" :title="`Hello, ${user.username} 👋`" />
         <section class="flex flex-col gap-4 px-10 py-8">
@@ -58,7 +56,6 @@
             </section>
         </section>
     </main>
-    </div>
 </template>
 
 <script setup>
@@ -68,7 +65,6 @@ import ColoredListItem from '../../../components/ColoredListItem.vue';
 import ActivityLog from '../../../components/ActivityLog.vue';
 import CoursesTable from '../../../components/CoursesTable.vue';
 import Calendar from '../../../components/Calendar.vue';
-import SideMenu from '../../../components/SideMenu.vue';
 import StudentHeader from '../../../components/StudentHeader.vue';
 import { reactive, ref } from 'vue';
 import { useUserStore } from '../../../stores/user';
@@ -112,9 +108,5 @@ const badgesEarned = ref(()=>{
     return n
 })
 
-const sideBarState = ref(true);
-if(window.innerWidth < 1024){
-    sideBarState.value =  false;
-}
 
 </script>
