@@ -40,27 +40,37 @@ const router = createRouter({
         {
             path: '/about',
             name: 'About',
-            component: About
+            component: () => import('../views/About.vue')
+        },
+        {
+            path: '/services',
+            name: 'Services',
+            component: () => import('../views/Services.vue')
+        },
+        {
+            path: '/pricing',
+            name: 'Pricing',
+            component: () => import('../views/Pricing.vue')
         },
         {
             path: '/contact',
             name: 'Contact',
-            component: Contact
+            component: () => import('../views/Contact.vue')
         },
         {
             path: '/login',
             name: 'Login',
-            component: Login
+            component: () => import('../views/Login.vue')
         },
         {
             path: '/signup',
             name: 'Sign up',
-            component: Signup
+            component: () => import('../views/Signup.vue')
         },
         {
             path: '/pre-signup',
             name: 'Pre-signup',
-            component: CreateAccount
+            component: () => import('../views/CreateAccount.vue')
         },
         {
             path: '/admin/login',
@@ -79,7 +89,7 @@ const router = createRouter({
                         dashboard: Dashboard,
                         mycourses: MyCourses,
                         trash: Trash,
-                        logout: Logout
+                        logout: () => import('../views/authorized-views/Logout.vue')
                     }
                 },
                 {

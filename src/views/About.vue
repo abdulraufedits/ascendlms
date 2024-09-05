@@ -1,10 +1,10 @@
 <template>
-    <NavBar/>
+    <NavBar activePage="about"/>
     <section class="pt-12 lg:pt-16">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 flex flex-col gap-y-32">
             <div class="lg:flex justify-between w-full items-center">
                 <div class=" space-y-8 ">
-                <h1 class="text-4xl lg:text-8xl uppercase">We're bringing the power of education to your fingertips</h1>
+                <h1 class="text-4xl lg:text-8xl">We're bringing the power of education to your fingertips.</h1>
                 <p class="text-lg font-medium font-small">Ascend is the world's most customisable and trusted eLearning solution that empowers educators to improve our world.</p>
             </div>
             <span class="flex lg:justify-end w-full">
@@ -44,7 +44,7 @@ import NavBar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
 </script>
 
-<style scoped>
+<style>
 .sect-label {
     font-family: 'Helvetica Now Display';
     text-transform: uppercase;

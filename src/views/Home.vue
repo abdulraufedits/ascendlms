@@ -2,7 +2,7 @@
     <NavBar/>
     <section class="pt-12 pb-12 sm:pb-16 lg:pt-16">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 flex flex-col gap-y-32">
-            <div class="flex flex-col items-center max-w-lg mx-auto lg:max-w-full lg:gap-y-12 lg:gap-x-16">
+            <div class="flex flex-col max-w-lg mx-auto lg:max-w-full lg:gap-y-12 lg:gap-x-16">
                     <div class=" text-center lg:text-left flex flex-col gap-4 items-center lg:items-start sm:w-3/4 max-lg:pb-8">
                         <h1 class=" font-big font-bold leading-tight text-gray-900 text-5xl sm:leading-tight lg:leading-tight lg:text-8xl font-pj">Your All-in-One Learning Solution.</h1>
                         <p class="text-lg text-gray-600 font-small w-9/12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula massa in enim luctus. Rutrum arcu.</p>
@@ -28,7 +28,7 @@
             <div class="simple-section">
                 <h1 class="text-5xl">Your LMS, your way</h1>
                 <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula massa in enim luctus. Rutrum arcu.</p>
-                <div class="grid grid-cols-16 grid-rows-4 w-full gap-4">
+                <div class="grid grid-cols-16 grid-rows-4 w-full gap-4 max-lg:flex max-lg:flex-col">
                     <Widget class="col-span-10 row-span-3 !block">
                         <h1 class="text-2xl">Customizable widgets</h1>
                         <p class="subtitle">lorem ipsum</p>

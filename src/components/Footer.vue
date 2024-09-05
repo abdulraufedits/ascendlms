@@ -30,19 +30,19 @@
 
                 <ul class="mt-3 space-y-4">
                     <li>
-                        <a href="#" title="" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> About </a>
+                        <RouterLink to="/about" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> About </RouterLink>
                     </li>
 
                     <li>
-                        <a href="#" title="" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Features </a>
+                        <RouterLink to="/services" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Services </RouterLink>
                     </li>
 
                     <li>
-                        <a href="#" title="" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Works </a>
+                        <RouterLink to="/pricing" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Pricing </RouterLink>
                     </li>
 
                     <li>
-                        <a href="#" title="" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Career </a>
+                        <RouterLink to="/careers" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Career </RouterLink>
                     </li>
                 </ul>
             </div>
@@ -52,19 +52,19 @@
 
                 <ul class="mt-3 space-y-4">
                     <li>
-                        <a href="#" title="" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Customer Support </a>
+                        <RouterLink to="#" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Customer Support </RouterLink>
                     </li>
 
                     <li>
-                        <a href="#" title="" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Delivery Details </a>
+                        <RouterLink to="#" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> FAQ </RouterLink>
                     </li>
 
                     <li>
-                        <a href="#" title="" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Terms & Conditions </a>
+                        <RouterLink to="#" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Terms & Conditions </RouterLink>
                     </li>
 
                     <li>
-                        <a href="#" title="" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Privacy Policy </a>
+                        <RouterLink to="#" class="flex text-base text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600"> Privacy Policy </RouterLink>
                     </li>
                 </ul>
             </div>
@@ -81,5 +81,7 @@
 </template>
 
 <script setup>
+
+import { RouterLink } from 'vue-router';
 
 </script>
