@@ -1,0 +1,1 @@
+import{Y as s}from"./index-ej2lLSjj.js";const r=s("student",{state:()=>({students:[{}]}),getters:{},actions:{getStudentData(t){crs.id-1!=0?this.students.push(t):this.students[0]=t}}}),u=s("instructor",{state:()=>({instructors:[{}]}),getters:{},actions:{getInstructorData(t){crs.id-1!=0?this.instructors.push(t):this.instructors[0]=t}}});export{u as a,r as u};
