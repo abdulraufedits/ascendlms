@@ -71,17 +71,4 @@ const user = reactive(useUserStore().users[0])
 const sortType = ref("content")
 
 
-// const props = defineProps({
-//     course: {
-//         type: Object,
-//         default: {
-//             courseName: "",
-//             courseDesc: "",
-//             percentage: 0,
-//             lecsCount: 0,
-//             assignmentCount: 0,
-//             quizCount: 0,
-//         }
-//     }
-// })
 </script>

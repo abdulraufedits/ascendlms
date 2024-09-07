@@ -1,9 +1,4 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import About from "../views/About.vue";
-import Contact from "../views/Contact.vue";
-import Login from "../views/Login.vue";
-import Signup from "../views/Signup.vue";
 import Dashboard from "../views/authorized-views/student-views/Dashboard.vue";
 import MyCourses from "../views/authorized-views/student-views/MyCourses.vue";
 import Assignments from "../views/authorized-views/student-views/Assignments.vue";
@@ -11,13 +6,11 @@ import NotFound from '../views/NotFound.vue'
 import Quizzes from "../views/authorized-views/student-views/Quizzes.vue";
 import Announcements from "../views/authorized-views/student-views/Announcements.vue";
 import Rewards from "../views/authorized-views/student-views/Rewards.vue";
-import CreateAccount from "../views/CreateAccount.vue";
 import StudentLayout from "../views/authorized-views/student-views/StudentLayout.vue";
 import CourseDetails from "../views/authorized-views/student-views/CourseDetails.vue";
 import Trash from "../views/authorized-views/student-views/Trash.vue";
 
 import InstructorLayout from "../views/authorized-views/instructor-views/InstructorLayout.vue";
-import Logout from "../views/authorized-views/Logout.vue";
 import InstructorDashboard from "../views/authorized-views/instructor-views/InstructorDashboard.vue";
 import InstructorAssignments from "../views/authorized-views/instructor-views/InstructorAssignments.vue";
 import InstructorQuizzes from "../views/authorized-views/instructor-views/InstructorQuizzes.vue";
@@ -34,7 +27,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'Home',
-            component: Home,
+            component: () => import('../views/Home.vue'),
             meta: { toTop: true, smoothScroll: true }
         },
         {
@@ -102,10 +95,10 @@ const router = createRouter({
                         rewards: Rewards,
                         details: CourseDetails
                     },
-                    meta: { requiresAuth: true },
                     children: [
                         {
                             path: ':course',
+                            props: (route) => ({user: route.params.user, page: route.params.page, filter: route.params.filter, course: route.params.course }),
                             name: 'Coursefilter',
                             component: CourseDetails,
                         }
@@ -137,7 +130,8 @@ const router = createRouter({
                     children: [
                         {
                             path: ':course',
-                            name: 'Coursefilter',
+                            props: (route) => ({user: route.params.user, page: route.params.page, filter: route.params.filter, course: route.params.course }),
+                            name: 'Coursefilter-instrcutor',
                             component: InstructorCourseDetails,
                         }
                     ]
