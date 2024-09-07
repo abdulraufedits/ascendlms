@@ -33,8 +33,8 @@
         </div>
         <div class="bg-black text-white py-48 px-8 w-full flex flex-col justify-center items-center gap-y-12 mt-32">
             <h1 class="lg:text-5xl text-4xl text-white">The best way to learn is together.</h1>
-                <button class="bg-white text-black font-small text-lg font-semibold rounded-xl px-6 py-4">Get Started for free</button>
-            </div>
+            <button class="bg-white text-black font-small text-lg font-semibold rounded-xl px-6 py-4">Get Started for free</button>
+        </div>
     </section>
     <Footer/>
 </template>
