@@ -1,0 +1,1 @@
+import{N as e}from"./NavBar-DkDOObmp.js";import{c as a,a as o,F as s,b as t,o as c}from"./index-B5EhxOgZ.js";import"./logo-CqzVxDT_.js";const r=t("div",null,[t("h1",{class:"text-4xl text-blue"},"It's contact")],-1),i={__name:"Contact",setup(n){return(l,_)=>(c(),a(s,null,[o(e),r],64))}};export{i as default};
